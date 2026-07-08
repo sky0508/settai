@@ -1,18 +1,18 @@
 ---
 name: settai-navi
 status: active
-next_action: 京橋の店 母集団収集(research agent 稼働中)→ venues seed 化。並行で ①画像+ui-spec を Claude Design に渡し UI 実装 ②暗黙知9軸ヒアリング(判定ロジック)は後日
+next_action: plan.md 作成(v1=探索フロー: 探索→店舗詳細→軽量記録)。並行で ①暗黙知9軸ヒアリング(判定ロジックの重み確定) ②京橋 venues seed 化。UI 完成系は design/handoff が正
 due:
-last_touched: 2026-07-08
+last_touched: 2026-07-09
 ---
 
 # 接待ナビ（settai-navi） — ステータス管理
 
-最終更新: 2026-07-08
+最終更新: 2026-07-09
 
 ## 現在のフェーズ
 
-**要件精緻化フェーズ（Phase 0.5）— 暗黙知ヒアリング待ち**
+**要件精緻化フェーズ（Phase 0.5）— UI完成系取込み済み → plan.md ＆ 暗黙知ヒアリング待ち**
 
 判定ロジックの中核（接待の店選びの暗黙知）を、センスの良い社員へのヒアリングで言語化・要件化する。現行の spec は「個室有無」「競合ビールNG」しか拾えておらず、格式の釣り合い等の高価値な暗黙知が未言語化のため。
 
@@ -88,6 +88,33 @@ last_touched: 2026-07-08
 - **9画面のモック生成済み**（desktop 3 + mobile 5 + home）→ `design/mockimage/`（`desktop-*` / `mobile-*`）。
 - **UI 仕様書 `design/ui-spec.md` 作成**（Claude Design 手渡し用。画像＋この仕様書で UI 実装依頼）。
 - 次: Sora が画像＋ui-spec.md を Claude Design に渡す。未モック（設定=会社/競合ルール編集・お気に入り・ゲスト一覧トップ）と来客必須/任意（→任意で確定）は ui-spec 末尾に明記。
+
+### 2026-07-08〜09 UI完成系ハンドオフ取込み + 要件を UI と整合（B案）
+- **検索フロー UI を /image で反復生成 → v3 で確定**（`design/mockimage/` v1=search-patterns / v2 / v3）:
+  - v2 base で「お店を探す」ベース確定: 003フィルターパネル＋009リッチ店カードの合体。**格式=自動判定ピル**（バー廃止）／**競合ビール除外=手動ポップアップ**（4社チェック＋「選択を除外/選択以外を除外」の2モード）／サブタブ「条件から探す・ゲストから探す」。
+  - **左ナビ 4→5タブに変更**: お店を探す / ゲスト管理 / お気に入り / 設定 / ダッシュボード。
+  - v3 最終4枚（`design/mockimage/v3/`）: base_search / base_beer-popup / dashboard(商談前進率KPI削除・よく使われる店TOP5追加) / favorites(格式=役員クラスのみ＋シーン別＋格式/シーン切替・チーム共有=社内ナレッジ)。
+- **Claude Design ハンドオフを取込み** → `design/handoff/`（`project/Settai Navi.dc.html` 一式＋uploads）。**これが UI 完成系（north-star）の正**。settai-navi は独立 git repo（origin: `github.com/sky0508/settai.git`）で commit/push はこのディレクトリ内。
+- **UI ⇄ 要件のギャップ分析 → B案で確定**（UI=ビジョン／v1=薄く）。spec/design をブラッシュアップ（commit `317be55`）:
+  - spec §0 新設（フェーズ方針・完成系5タブ・v1=探索フロー）。各機能に **【v1】/【拡大】タグ**。
+  - **格式=自動判定に更新**（旧「手タグ S/A/B で確定」を **db-schema.md 準拠の予算・役職から導出**へ。手タグは override のみ）← 前回セッションの決定を上書き。
+  - **競合ビール=自動NG(相手企業)主＋手動popup補助の二層**。**店舗詳細を v1 に格上げ**（1画面主義→探索フロー）。records に業務成果(商談前進/関係深化/次アポ/特になし)。
+  - ゲスト管理・お気に入り・ダッシュボード・接待予定・学習は【拡大】（UI に存在するが v1 では作らない）。
+- 次: plan.md（v1探索フロー実装計画）→ 暗黙知9軸ヒアリング。
+
+### 2026-07-09 京橋 venues seed 実体化（data/）＋ DB型を db-schema.md へ深掘り
+- **店DBの型と京橋 seed を in-repo で実体化**（`data/`）:
+  - `data/schema.ts` — Venue/BrandRule/DiningRecord の TS 型
+  - `data/venues.seed.json` — **京橋・八重洲・日本橋の接待店 30件**（research agent(sonnet) が公式サイト裏取り。検証済み・エラーなし。格式S5/A18/B7・予算7,800〜36,300円・個室あり27/30・ジャンル12種）
+  - `data/brand-rules.seed.json` — ビール4社ルール16行 / `data/README.md`
+- **⚠️ enrichment 再現性シグナル**: ビール系統 `confirmed=1 / unknown=29`。公式サイトから提供銘柄を確実に取れる店はほぼ皆無 → spec §8-2「確実率≥40%」は**現手法では未達**。ビール自動化の一次情報源を再設計する材料（安全側設計で unknown→注意なので実害なし）。
+- **DB型を `db-schema.md`（ロジック逆算）に深掘り**（Sora 作成。`data/schema.ts` の初版を上書きする正典）:
+  - 格式=**単価導出**（`formality_grade` 廃止 → `budget_bench` で S/A/B 写像 ＋ `formality_override` nullable 例外のみ）
+  - 個室4列化（`has_private_room`/`private_room_type`{＋unknown}/`seat_style`/`soundproof`）
+  - soft属性（雰囲気・酒品揃え・老舗/受賞・予約困難度）は **DB非搭載**（`tags` は v1 空・拡張口のみ／記録で補完）
+  - `settai_records` 拡張（rating/went_well/reflection/reservation_ok/business_outcome/share_scope）＝黒子力・堅牢性・重複回避の唯一の源
+  - 規則（role_purpose_matrix / genre_scene_fit / budget_bench / food_ng_severity）は DB でなく **config(TS定数)**。数値は暗黙知ヒアリングで確定
+- **要リコンサイル（次セッション最優先の1つ）**: `data/schema.ts` と `venues.seed.json` は旧型（formalityGrade 必須・tags 充填・個室1列）のまま → **db-schema.md §5① に合わせて更新が必要**（formalityGrade→override 化・個室4列・tags 空寄せ・records 拡張）。30件の手タグ格式の扱い（override へ残すか破棄か）は要判断。
 
 ## メモ
 
