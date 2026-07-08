@@ -15,7 +15,10 @@
 | [`status.md`](./status.md) | 現況・次アクション・**暗黙知9軸（A〜I）**・セッションログ |
 | [`docs/spec.md`](./docs/spec.md) | 要件定義（何を・なぜ） |
 | [`docs/design.md`](./docs/design.md) | 設計仕様（構成・データモデル・判定ロジック・UI） |
+| [`docs/recommendation-logic.md`](./docs/recommendation-logic.md) | **おすすめロジック（判定フロー）** — フロー図付き。まず読むならここ |
+| [`docs/db-schema.md`](./docs/db-schema.md) | DB 型設計 v1（ロジック逆算。venues / guests / brand_rules / settai_records）|
 | [`docs/research/settai-venue-selection-research.md`](./docs/research/settai-venue-selection-research.md) | 接待の店選びリサーチ（9軸マッピング・ヒアリング設問への反映提案） |
+| [`docs/research/data-availability-matrix.md`](./docs/research/data-availability-matrix.md) | 要件 × データ可用性マトリクス（取れる/取れない仕分け）|
 | [`docs/feedback-20260708.md`](./docs/feedback-20260708.md) | 忖度なしレビュー |
 | [`design/ui-spec.md`](./design/ui-spec.md) | UI 仕様書（実装手渡し用） |
 | [`design/mockimage/`](./design/mockimage/) | UI モック（desktop / mobile / パターン比較 A〜D） |
