@@ -1,0 +1,21 @@
+[
+  { "id": "br-kirin-kirin",     "company": "キリン",   "affiliation": "kirin",   "effect": "prefer", "label": "キリン系" },
+  { "id": "br-kirin-asahi",     "company": "キリン",   "affiliation": "asahi",   "effect": "ng",     "label": "アサヒ系" },
+  { "id": "br-kirin-suntory",   "company": "キリン",   "affiliation": "suntory", "effect": "ng",     "label": "サントリー系" },
+  { "id": "br-kirin-sapporo",   "company": "キリン",   "affiliation": "sapporo", "effect": "ng",     "label": "サッポロ系" },
+
+  { "id": "br-asahi-asahi",     "company": "アサヒ",   "affiliation": "asahi",   "effect": "prefer", "label": "アサヒ系" },
+  { "id": "br-asahi-kirin",     "company": "アサヒ",   "affiliation": "kirin",   "effect": "ng",     "label": "キリン系" },
+  { "id": "br-asahi-suntory",   "company": "アサヒ",   "affiliation": "suntory", "effect": "ng",     "label": "サントリー系" },
+  { "id": "br-asahi-sapporo",   "company": "アサヒ",   "affiliation": "sapporo", "effect": "ng",     "label": "サッポロ系" },
+
+  { "id": "br-suntory-suntory", "company": "サントリー", "affiliation": "suntory", "effect": "prefer", "label": "サントリー系" },
+  { "id": "br-suntory-kirin",   "company": "サントリー", "affiliation": "kirin",   "effect": "ng",     "label": "キリン系" },
+  { "id": "br-suntory-asahi",   "company": "サントリー", "affiliation": "asahi",   "effect": "ng",     "label": "アサヒ系" },
+  { "id": "br-suntory-sapporo", "company": "サントリー", "affiliation": "sapporo", "effect": "ng",     "label": "サッポロ系" },
+
+  { "id": "br-sapporo-sapporo", "company": "サッポロ",  "affiliation": "sapporo", "effect": "prefer", "label": "サッポロ系" },
+  { "id": "br-sapporo-kirin",   "company": "サッポロ",  "affiliation": "kirin",   "effect": "ng",     "label": "キリン系" },
+  { "id": "br-sapporo-asahi",   "company": "サッポロ",  "affiliation": "asahi",   "effect": "ng",     "label": "アサヒ系" },
+  { "id": "br-sapporo-suntory", "company": "サッポロ",  "affiliation": "suntory", "effect": "ng",     "label": "サントリー系" }
+]
