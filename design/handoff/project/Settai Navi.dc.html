@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..600,0..1,0" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #f6f3ec; -webkit-font-smoothing: antialiased; }
+  a { color: #a37f2b; text-decoration: none; }
+  a:hover { color: #8a6a1f; }
+  input, select, textarea, button { font-family: inherit; }
+  select { -webkit-appearance: none; appearance: none; background-repeat: no-repeat; background-position: right 13px center; }
+  ::placeholder { color: #adb2bd; }
+  .ms { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; display: inline-block; vertical-align: middle; }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#f6f3ec;font-family:'Noto Sans JP',sans-serif;color:#1f2d47;display:flex;">
+
+  <!-- ===================== DESKTOP SIDEBAR ===================== -->
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <aside style="width:246px;flex-shrink:0;background:linear-gradient(180deg,#1b2c49,#101c30);color:#fff;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;">
+    <div style="padding:30px 26px 24px;display:flex;align-items:center;gap:12px;">
+      <div style="width:42px;height:46px;flex-shrink:0;background:linear-gradient(150deg,#e6c987,#b98f3f);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);display:flex;align-items:center;justify-content:center;">
+        <span class="ms" style="font-size:22px;color:#17253f;font-variation-settings:'FILL' 1;">temple_buddhist</span>
+      </div>
+      <div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:25px;color:#f0e4cb;letter-spacing:1px;">接待ナビ</div>
+    </div>
+    <nav style="padding:14px 14px;display:flex;flex-direction:column;gap:4px;flex:1;">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+        <div onClick="{{ item.onClick }}" style="{{ item.deskRowStyle }}">
+          <span style="{{ item.deskBarStyle }}"></span>
+          <span class="ms" style="{{ item.deskIconStyle }}">{{ item.icon }}</span>
+          <span style="font-size:15px;font-weight:{{ item.weight }};">{{ item.label }}</span>
+        </div>
+      </sc-for>
+    </nav>
+    <div style="padding:16px 22px;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:12px;">
+      <div style="width:38px;height:38px;border-radius:50%;background:#26385a;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="ms" style="font-size:21px;color:#c9d2e2;">person</span></div>
+      <div style="min-width:0;"><div style="font-size:13.5px;font-weight:500;color:#eef2f8;">田中 一郎</div><div style="font-size:11px;color:#8492ac;">株式会社セッタイ</div></div>
+    </div>
+  </aside>
+  </sc-if>
+
+  <!-- ===================== MAIN COLUMN ===================== -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- MOBILE HEADER -->
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ true }}">
+    <header style="position:sticky;top:0;z-index:20;background:#fbf8f2;border-bottom:1px solid #e9e2d5;display:flex;align-items:center;height:58px;padding:0 14px;">
+      <div style="width:44px;">
+        <sc-if value="{{ showBack }}" hint-placeholder-val="{{ true }}"><span onClick="{{ goBack }}" class="ms" style="font-size:25px;color:#1f2d47;cursor:pointer;">arrow_back_ios_new</span></sc-if>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:9px;">
+        <div style="width:26px;height:29px;background:linear-gradient(150deg,#e6c987,#b98f3f);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:14px;color:#17253f;font-variation-settings:'FILL' 1;">temple_buddhist</span></div>
+        <span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px;color:#17253f;">接待ナビ</span>
+      </div>
+      <div style="width:44px;text-align:right;"><span class="ms" style="font-size:23px;color:#8a93a4;">notifications</span></div>
+    </header>
+    </sc-if>
+
+    <main style="flex:1;width:100%;">
+
+      <!-- ============ SCREEN: お店を探す ============ -->
+      <sc-if value="{{ isSearch }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1180px;margin:0 auto;padding:clamp(18px,2.8vw,36px);">
+        <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(24px,3vw,32px);margin:0 0 16px;color:#17253f;">お店を探す</h1>
+        <!-- tabs -->
+        <div style="display:flex;gap:26px;border-bottom:1px solid #e6dfd2;margin-bottom:22px;">
+          <div onClick="{{ noop }}" style="padding:0 2px 12px;font-size:15px;font-weight:700;color:#a37f2b;border-bottom:2.5px solid #c2a15a;cursor:pointer;">条件から探す</div>
+          <div onClick="{{ goCompanyList }}" style="padding:0 2px 12px;font-size:15px;font-weight:500;color:#9aa0ab;cursor:pointer;">ゲストから探す</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:{{ searchCols }};gap:22px;align-items:start;">
+          <!-- filter card -->
+          <div style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 22px rgba(20,35,63,0.05);padding:22px 20px;">
+            <div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:17px;color:#17253f;margin-bottom:18px;">検索条件</div>
+
+            <div style="font-size:13px;font-weight:700;color:#3a4661;margin-bottom:8px;">エリア</div>
+            <select defaultValue="東京都（銀座・新橋）" style="width:100%;border:1.5px solid #dfe3ea;border-radius:10px;padding:12px 14px;font-size:14px;color:#22314f;outline:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%2398a2b3%22 stroke-width=%222%22><path d=%22M3 5l4 4 4-4%22/></svg>');margin-bottom:18px;">
+              <option>東京都（銀座・新橋）</option><option>東京都（丸の内・日本橋）</option><option>東京都（赤坂・六本木）</option>
+            </select>
+
+            <div style="font-size:13px;font-weight:700;color:#3a4661;margin-bottom:9px;">ゲストの役職</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+              <sc-for list="{{ roleChips }}" as="c" hint-placeholder-count="3"><span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}<sc-if value="{{ c.on }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:15px;margin-left:5px;font-variation-settings:'FILL' 1;">check_circle</span></sc-if></span></sc-for>
+            </div>
+
+            <div style="font-size:13px;font-weight:700;color:#3a4661;margin-bottom:9px;">接待の目的</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+              <sc-for list="{{ purposeChips }}" as="c" hint-placeholder-count="3"><span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}<sc-if value="{{ c.on }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:15px;margin-left:5px;font-variation-settings:'FILL' 1;">check_circle</span></sc-if></span></sc-for>
+            </div>
+
+            <div style="font-size:13px;font-weight:700;color:#3a4661;margin-bottom:9px;">ジャンル</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+              <sc-for list="{{ genreChips }}" as="c" hint-placeholder-count="6"><span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}<sc-if value="{{ c.on }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:15px;margin-left:5px;font-variation-settings:'FILL' 1;">check_circle</span></sc-if></span></sc-for>
+            </div>
+
+            <div style="font-size:13px;font-weight:700;color:#3a4661;margin-bottom:9px;">ご予算</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:11px;">
+              <input type="text" defaultValue="15,000" style="flex:1;min-width:0;border:1.5px solid #dfe3ea;border-radius:10px;padding:11px 12px;font-size:14px;color:#22314f;outline:none;text-align:center;">
+              <span style="color:#98a2b3;">〜</span>
+              <input type="text" defaultValue="30,000" style="flex:1;min-width:0;border:1.5px solid #dfe3ea;border-radius:10px;padding:11px 12px;font-size:14px;color:#22314f;outline:none;text-align:center;">
+              <span style="font-size:13px;color:#6f7a8f;flex-shrink:0;">円/人</span>
+            </div>
+            <div style="background:#faf3e2;border:1px solid #eddfba;border-radius:9px;padding:9px 12px;font-size:12.5px;color:#a37f2b;font-weight:500;margin-bottom:18px;">格式：A（予算・役職から自動判定）</div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <span style="font-size:14px;color:#3a4661;">個室あり</span>
+              <div onClick="{{ toggleRoom }}" style="{{ roomTrack }}"><div style="{{ roomKnob }}"></div></div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+              <span style="font-size:14px;color:#3a4661;">防音・静かな個室</span>
+              <div onClick="{{ toggleQuiet }}" style="{{ quietTrack }}"><div style="{{ quietKnob }}"></div></div>
+            </div>
+
+            <button onClick="{{ openBeer }}" style="width:100%;background:#fff;border:1.5px solid #d9be7d;color:#a37f2b;border-radius:11px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;" style-hover="background:#fdf8ec;"><span class="ms" style="font-size:19px;">delete</span>競合ビールを除外</button>
+            <button onClick="{{ noop }}" style="width:100%;background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:11px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(184,148,74,0.3);" style-hover="filter:brightness(0.96);">この条件で検索（156件）</button>
+          </div>
+
+          <!-- results -->
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <!-- featured -->
+            <sc-for list="{{ featured }}" as="r" hint-placeholder-count="1">
+              <div style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 22px rgba(20,35,63,0.05);padding:20px;">
+                <div style="display:flex;gap:20px;flex-wrap:wrap;">
+                  <div style="position:relative;width:260px;max-width:100%;height:150px;border-radius:12px;overflow:hidden;flex-shrink:0;background:linear-gradient(155deg,#3a2c1c,#1a130c);flex-grow:1;">
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:40px;color:rgba(230,201,135,0.28);">restaurant</span></div>
+                    <div style="position:absolute;top:0;left:16px;width:36px;height:48px;background:linear-gradient(#d8b871,#b98f3f);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);display:flex;align-items:flex-start;justify-content:center;padding-top:7px;"><span class="ms" style="font-size:19px;color:#fff;font-variation-settings:'FILL' 1;">workspace_premium</span></div>
+                  </div>
+                  <div style="flex:1;min-width:230px;">
+                    <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px;"><sc-for list="{{ r.tags }}" as="t" hint-placeholder-count="3"><span style="background:#f3ead2;color:#9a7a30;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:500;">{{ t }}</span></sc-for></div>
+                    <h2 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:26px;margin:0 0 8px;color:#17253f;">{{ r.name }}</h2>
+                    <div style="font-size:13.5px;color:#6f7a8f;display:flex;align-items:center;gap:5px;margin-bottom:10px;"><span class="ms" style="font-size:17px;color:#c2a15a;">place</span>{{ r.loc }}</div>
+                    <div style="display:flex;align-items:center;gap:11px;"><span style="font-size:19px;font-weight:700;color:#17253f;">{{ r.price }}</span><span style="background:#e4f0e6;color:#3d8a5c;border-radius:999px;padding:4px 13px;font-size:12.5px;font-weight:700;">予算内</span></div>
+                  </div>
+                </div>
+                <div style="height:1px;background:#f0ece3;margin:18px 0;"></div>
+                <div style="display:grid;grid-template-columns:{{ featBodyCols }};gap:24px;">
+                  <div>
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:13px;"><span class="ms" style="font-size:20px;color:#c2a15a;font-variation-settings:'FILL' 1;">thumb_up</span><span style="font-weight:700;font-size:15px;color:#17253f;">おすすめの理由</span></div>
+                    <div style="display:flex;flex-direction:column;gap:11px;"><sc-for list="{{ r.reasons }}" as="rs" hint-placeholder-count="5"><div style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:#4d5772;line-height:1.5;"><span class="ms" style="font-size:18px;color:#4aa46e;flex-shrink:0;margin-top:1px;">check_circle</span><span style="text-wrap:pretty;">{{ rs }}</span></div></sc-for></div>
+                  </div>
+                  <div style="border-left:1px solid #f0ece3;padding-left:22px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                      <div><div style="font-size:13px;color:#6f7a8f;font-weight:500;">マッチ度</div><div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:34px;color:#c2a15a;line-height:1;">{{ r.score }}<span style="font-size:18px;">%</span></div></div>
+                      <div style="{{ r.ring }}"><div style="width:56px;height:56px;border-radius:50%;background:#fff;"></div></div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:11px;"><sc-for list="{{ r.bars }}" as="b" hint-placeholder-count="3"><div><div style="display:flex;justify-content:space-between;font-size:12.5px;color:#55617a;margin-bottom:5px;"><span>{{ b.label }}</span><span style="font-weight:700;">{{ b.val }}%</span></div><div style="height:7px;border-radius:4px;background:#ece9e0;overflow:hidden;"><div style="{{ b.fill }}"></div></div></div></sc-for></div>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+
+            <!-- compact results -->
+            <sc-for list="{{ results }}" as="r" hint-placeholder-count="2">
+              <div onClick="{{ r.onClick }}" style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 5px 16px rgba(20,35,63,0.04);padding:16px;display:flex;gap:16px;align-items:center;cursor:pointer;flex-wrap:wrap;" style-hover="box-shadow:0 10px 24px rgba(20,35,63,0.1);">
+                <div style="position:relative;width:150px;height:104px;border-radius:11px;overflow:hidden;flex-shrink:0;background:linear-gradient(155deg,#3a2c1c,#1a130c);">
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:30px;color:rgba(230,201,135,0.26);">restaurant</span></div>
+                  <div style="position:absolute;top:0;left:10px;width:26px;height:34px;background:rgba(255,255,255,0.85);clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%);display:flex;align-items:flex-start;justify-content:center;padding-top:4px;font-weight:700;font-size:13px;color:#6f7a8f;">{{ r.rank }}</div>
+                </div>
+                <div style="flex:1;min-width:180px;">
+                  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:7px;"><sc-for list="{{ r.tags }}" as="t" hint-placeholder-count="3"><span style="background:#f3ead2;color:#9a7a30;border-radius:999px;padding:3px 11px;font-size:11.5px;font-weight:500;">{{ t }}</span></sc-for></div>
+                  <div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px;color:#17253f;">{{ r.name }}</div>
+                  <div style="font-size:12.5px;color:#6f7a8f;display:flex;align-items:center;gap:5px;margin-top:5px;"><span class="ms" style="font-size:16px;color:#c2a15a;">place</span>{{ r.loc }}</div>
+                  <div style="display:flex;align-items:center;gap:9px;margin-top:7px;"><span style="font-size:16px;font-weight:700;color:#17253f;">{{ r.price }}</span><span style="background:#e4f0e6;color:#3d8a5c;border-radius:999px;padding:3px 11px;font-size:11.5px;font-weight:700;">予算内</span></div>
+                </div>
+                <div style="width:180px;flex-shrink:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                    <div><div style="font-size:11.5px;color:#6f7a8f;">マッチ度</div><div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:26px;color:#c2a15a;line-height:1;">{{ r.score }}<span style="font-size:14px;">%</span></div></div>
+                    <div style="{{ r.ring }}"><div style="width:42px;height:42px;border-radius:50%;background:#fff;"></div></div>
+                  </div>
+                  <div><div style="display:flex;justify-content:space-between;font-size:11.5px;color:#55617a;margin-bottom:4px;"><span>ゲストの好みとの一致</span><span style="font-weight:700;">{{ r.topBar }}%</span></div><div style="height:6px;border-radius:4px;background:#ece9e0;overflow:hidden;"><div style="{{ r.topFill }}"></div></div></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: ダッシュボード ============ -->
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1180px;margin:0 auto;padding:clamp(18px,2.8vw,36px);">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px;">
+          <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(24px,3vw,32px);margin:0;color:#17253f;">ダッシュボード</h1>
+          <button onClick="{{ goSearch }}" style="margin-left:auto;background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:11px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 6px 16px rgba(184,148,74,0.3);"><span class="ms" style="font-size:19px;">search</span>お店を探す</button>
+        </div>
+
+        <!-- stat cards -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-bottom:20px;">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+            <div style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 22px rgba(20,35,63,0.05);padding:22px 24px;display:flex;align-items:center;gap:18px;">
+              <div style="width:56px;height:56px;border-radius:50%;background:#f4ead4;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="ms" style="font-size:27px;color:#bf9540;">{{ s.icon }}</span></div>
+              <div>
+                <div style="font-size:13px;color:#6f7a8f;">{{ s.label }}</div>
+                <div style="display:flex;align-items:baseline;gap:4px;margin:3px 0 4px;"><sc-if value="{{ s.star }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:26px;color:#e0aa33;font-variation-settings:'FILL' 1;">star</span></sc-if><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:32px;color:#17253f;line-height:1;">{{ s.val }}</span></div>
+                <div style="font-size:12px;color:#3d8a5c;font-weight:500;display:flex;align-items:center;gap:3px;">{{ s.delta }}<span class="ms" style="font-size:15px;">trending_up</span></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- two columns -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-bottom:20px;">
+          <div style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 22px rgba(20,35,63,0.05);padding:22px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><span class="ms" style="font-size:21px;color:#c2a15a;">event</span><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;color:#17253f;">今後の接待予定</span></div>
+            <div style="display:flex;flex-direction:column;">
+              <sc-for list="{{ upcoming }}" as="u" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #f2efe8;flex-wrap:wrap;">
+                  <div style="text-align:center;flex-shrink:0;width:42px;"><div style="font-weight:700;font-size:15px;color:#17253f;">{{ u.date }}</div><div style="font-size:11px;color:#9aa0ab;">{{ u.dow }}</div></div>
+                  <div style="flex:1;min-width:120px;"><div style="font-size:14px;font-weight:500;color:#22314f;">{{ u.name }} 様</div><div style="font-size:11.5px;color:#9aa0ab;">{{ u.company }}</div></div>
+                  <div style="width:38px;height:38px;border-radius:8px;background:linear-gradient(155deg,#3a2c1c,#1a130c);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="ms" style="font-size:18px;color:rgba(230,201,135,0.4);">restaurant</span></div>
+                  <div style="font-size:13px;color:#3a4661;flex-shrink:0;">{{ u.store }}</div>
+                  <span style="{{ u.badge }}">{{ u.status }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 22px rgba(20,35,63,0.05);padding:22px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><span class="ms" style="font-size:21px;color:#c2a15a;">history_edu</span><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;color:#17253f;">最近の接待記録</span></div>
+            <div style="display:flex;flex-direction:column;">
+              <sc-for list="{{ recent }}" as="r" hint-placeholder-count="4">
+                <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f2efe8;">
+                  <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:3px;"><span style="width:11px;height:11px;border-radius:50%;background:{{ r.dot }};"></span></div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+                      <div style="font-size:13px;color:#9aa0ab;">{{ r.date }} {{ r.dow }}</div>
+                      <div style="display:flex;align-items:center;gap:3px;"><span class="ms" style="font-size:16px;color:#e0aa33;font-variation-settings:'FILL' 1;">star</span><b style="font-size:14px;color:#17253f;">{{ r.rating }}</b></div>
+                    </div>
+                    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:2px;"><span style="font-size:14px;font-weight:500;color:#22314f;">{{ r.name }} 様</span><span style="font-size:13px;color:#55617a;">{{ r.store }}</span></div>
+                    <div style="font-size:11.5px;color:#9aa0ab;">{{ r.company }} ・ {{ r.genre }}</div>
+                    <div style="font-size:12.5px;color:#6f7a8f;margin-top:5px;line-height:1.5;text-wrap:pretty;">{{ r.comment }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <!-- top5 -->
+        <div style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 22px rgba(20,35,63,0.05);padding:22px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span class="ms" style="font-size:22px;color:#c2a15a;font-variation-settings:'FILL' 1;">workspace_premium</span><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;color:#17253f;">よく使われる店 TOP5</span></div>
+          <div style="overflow-x:auto;">
+            <div style="min-width:560px;">
+              <div style="display:grid;grid-template-columns:56px 2fr 1fr 1fr 1fr 1fr;padding:10px 8px;font-size:12px;color:#9aa0ab;border-bottom:1px solid #ece6da;"><span>順位</span><span>店舗名</span><span>エリア</span><span>利用回数</span><span>平均予算</span><span>平均評価</span></div>
+              <sc-for list="{{ top5 }}" as="t" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:56px 2fr 1fr 1fr 1fr 1fr;align-items:center;padding:12px 8px;border-bottom:1px solid #f2efe8;font-size:13.5px;color:#3a4661;">
+                  <span style="{{ t.rankStyle }}">{{ t.rank }}</span>
+                  <span style="display:flex;align-items:center;gap:10px;"><span style="width:34px;height:34px;border-radius:7px;background:linear-gradient(155deg,#3a2c1c,#1a130c);flex-shrink:0;display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:16px;color:rgba(230,201,135,0.4);">restaurant</span></span><b style="color:#17253f;font-weight:500;">{{ t.name }}</b></span>
+                  <span>{{ t.area }}</span><span>{{ t.count }}</span><span>{{ t.avg }}</span>
+                  <span style="display:flex;align-items:center;gap:4px;"><span class="ms" style="font-size:16px;color:#e0aa33;font-variation-settings:'FILL' 1;">star</span>{{ t.rating }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: お気に入り ============ -->
+      <sc-if value="{{ isFavorite }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1300px;margin:0 auto;padding:clamp(18px,2.8vw,36px);">
+        <div style="display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:20px;">
+          <div>
+            <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(24px,3vw,32px);margin:0;color:#17253f;">お気に入り</h1>
+            <div style="font-size:13.5px;color:#6f7a8f;margin-top:5px;">保存したお店を、格式とシーンで管理</div>
+          </div>
+          <div style="margin-left:auto;display:flex;background:#efe9dd;border-radius:11px;padding:4px;">
+            <sc-for list="{{ favTabs }}" as="t" hint-placeholder-count="2"><span onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</span></sc-for>
+          </div>
+        </div>
+
+        <!-- filter bar -->
+        <div style="background:#fff;border-radius:14px;border:1px solid #eee6d8;box-shadow:0 5px 16px rgba(20,35,63,0.04);padding:14px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px;">
+          <sc-for list="{{ favFilters }}" as="f" hint-placeholder-count="4">
+            <div style="min-width:150px;flex:1;"><div style="font-size:11px;color:#9aa0ab;margin-bottom:3px;">{{ f.label }}</div><select defaultValue="{{ f.value }}" style="width:100%;border:1.5px solid #e2dccf;border-radius:9px;padding:9px 12px;font-size:13px;color:#3a4661;outline:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 fill=%22none%22 stroke=%22%2398a2b3%22 stroke-width=%222%22><path d=%22M3 4l3 3 3-3%22/></svg>');"><option>{{ f.value }}</option></select></div>
+          </sc-for>
+          <div style="width:42px;height:42px;border:1.5px solid #e2dccf;border-radius:9px;display:flex;align-items:center;justify-content:center;align-self:flex-end;cursor:pointer;"><span class="ms" style="font-size:20px;color:#8a93a4;">tune</span></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:28px;">
+          <sc-for list="{{ favCats }}" as="cat" hint-placeholder-count="3">
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:13px;">
+                <span class="ms" style="font-size:21px;color:#c2a15a;font-variation-settings:'FILL' 1;">{{ cat.icon }}</span>
+                <h2 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:18px;margin:0;color:#17253f;">{{ cat.title }}</h2>
+                <a href="#" onClick="{{ noop }}" style="margin-left:auto;font-size:13px;color:#a37f2b;display:flex;align-items:center;gap:2px;">すべて見る<span class="ms" style="font-size:16px;">chevron_right</span></a>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;">
+                <sc-for list="{{ cat.items }}" as="it" hint-placeholder-count="4">
+                  <div onClick="{{ goSearch }}" style="background:#fff;border-radius:14px;border:1px solid #eee6d8;box-shadow:0 5px 16px rgba(20,35,63,0.05);overflow:hidden;cursor:pointer;display:flex;" style-hover="box-shadow:0 10px 24px rgba(20,35,63,0.11);">
+                    <div style="width:96px;flex-shrink:0;background:linear-gradient(155deg,#3a2c1c,#1a130c);display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:26px;color:rgba(230,201,135,0.3);">restaurant</span></div>
+                    <div style="flex:1;min-width:0;padding:13px 14px;">
+                      <div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:15px;color:#17253f;line-height:1.3;">{{ it.name }}</div>
+                      <div style="font-size:11.5px;color:#9aa0ab;margin-top:3px;">{{ it.genre }}</div>
+                      <div style="font-size:13px;font-weight:700;color:#a37f2b;margin-top:2px;">{{ it.price }}</div>
+                      <div style="font-size:11.5px;color:#6f7a8f;margin-top:6px;line-height:1.5;text-wrap:pretty;">{{ it.desc }}</div>
+                      <span style="{{ it.badge }}">{{ it.status }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: 店舗詳細 ============ -->
+      <sc-if value="{{ isStoreDetail }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1080px;margin:0 auto;padding:clamp(16px,3vw,36px);">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+          <span onClick="{{ goSearch }}" class="ms" style="font-size:20px;color:#8a93a4;cursor:pointer;">home</span>
+          <span class="ms" style="font-size:16px;color:#c3ccd8;">chevron_right</span>
+          <a href="#" onClick="{{ goSearch }}" style="font-size:13.5px;">お店を探す</a>
+          <span class="ms" style="font-size:16px;color:#c3ccd8;">chevron_right</span>
+          <span style="font-size:13.5px;color:#3a4661;font-weight:500;">銀座 いし橋</span>
+          <div style="margin-left:auto;display:flex;gap:10px;">
+            <button style="background:#fff;border:1px solid #e2dccf;border-radius:10px;padding:9px 15px;font-size:13px;color:#3a4661;display:flex;align-items:center;gap:6px;cursor:pointer;"><span class="ms" style="font-size:18px;">ios_share</span>共有</button>
+            <button style="background:#fff;border:1px solid #e2dccf;border-radius:10px;padding:9px 15px;font-size:13px;color:#3a4661;display:flex;align-items:center;gap:6px;cursor:pointer;"><span class="ms" style="font-size:18px;">favorite</span>お気に入り</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;align-items:start;">
+          <div>
+            <div style="position:relative;width:100%;height:300px;border-radius:16px;overflow:hidden;background:#e7e0d3;"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="store-hero" shape="rect" placeholder="店内の写真" hint-size="100%,100%"></x-import></div>
+            <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;"><sc-for list="{{ galleryThumbs }}" as="g" hint-placeholder-count="5"><div style="width:82px;height:62px;border-radius:9px;background:linear-gradient(155deg,#3a2c1c,#1a130c);"></div></sc-for></div>
+            <div style="margin-top:22px;background:#fff;border:1px solid #eee6d8;border-radius:14px;padding:18px 20px;">
+              <div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;color:#17253f;margin-bottom:13px;">競合ドリンク確認</div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span style="background:#f5ecd6;color:#8a6a1f;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;"><span class="ms" style="font-size:17px;">sports_bar</span>サッポロビール系</span>
+                <span style="display:flex;align-items:center;gap:6px;font-size:13.5px;color:#c07a1e;font-weight:500;"><span class="ms" style="font-size:18px;">warning</span>キリンのお客様には注意</span>
+                <span style="margin-left:auto;font-size:11.5px;color:#9aa0ab;background:#f2f0ea;border-radius:6px;padding:4px 9px;">確信度：推定</span>
+              </div>
+            </div>
+            <div style="margin-top:16px;background:#fff;border:1px solid #eee6d8;border-radius:14px;padding:18px 20px;">
+              <div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;color:#17253f;margin-bottom:10px;">おすすめ理由</div>
+              <p style="font-size:14px;line-height:1.85;color:#4d5772;margin:0;text-wrap:pretty;">旬の魚がちょうど最盛期を迎えており、今の時期ならではの味わいをお楽しみいただけます。落ち着いた個室で静かに過ごせるため、日本酒がお好きな役員の方のご接待に最適です。</p>
+            </div>
+          </div>
+          <div>
+            <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(26px,3.4vw,34px);margin:0;color:#14233f;">銀座 いし橋</h1>
+            <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:14px;">
+              <div style="font-size:14px;color:#55617a;display:flex;align-items:center;gap:6px;"><span class="ms" style="font-size:18px;color:#c2a15a;">restaurant</span>日本料理・懐石</div>
+              <div style="font-size:14px;color:#55617a;display:flex;align-items:center;gap:6px;"><span class="ms" style="font-size:18px;color:#c2a15a;">payments</span>¥22,000〜/人</div>
+              <div style="margin-left:auto;display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #eee6d8;border-radius:14px;padding:10px 18px;"><span style="width:44px;height:44px;border-radius:50%;background:#2e9e5b;color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;">OK</span><div><div style="font-size:11px;color:#8a93a4;">マッチ度</div><div><b style="font-size:24px;color:#2e9e5b;font-family:'Noto Serif JP',serif;">92</b> <span style="font-size:12px;color:#8a93a4;">/ 100</span></div></div></div>
+            </div>
+            <div style="margin-top:18px;background:#fff;border:1px solid #eee6d8;border-radius:14px;padding:20px 22px;">
+              <div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;color:#17253f;margin-bottom:16px;">スコア内訳</div>
+              <div style="display:flex;flex-direction:column;gap:15px;"><sc-for list="{{ scores }}" as="s" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:14px;"><span style="width:88px;font-size:13.5px;color:#3a4661;flex-shrink:0;">{{ s.label }}</span><div style="flex:1;height:9px;border-radius:5px;background:#eceae4;overflow:hidden;"><div style="{{ s.barStyle }}"></div></div><span style="width:34px;text-align:right;font-size:14px;font-weight:700;color:#14233f;font-family:'Noto Serif JP',serif;">{{ s.val }}</span></div></sc-for></div>
+            </div>
+            <div style="margin-top:16px;background:#fff;border:1px solid #eee6d8;border-radius:14px;padding:16px 8px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px;">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#3a4661;"><span class="ms" style="font-size:19px;color:#c2a15a;">meeting_room</span>個室あり</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#3a4661;"><span class="ms" style="font-size:19px;color:#c2a15a;">place</span>銀座駅 徒歩5分</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#3a4661;"><span class="ms" style="font-size:19px;color:#c2a15a;">event</span>要予約</div>
+            </div>
+            <button onClick="{{ goRecord }}" style="width:100%;margin-top:18px;background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:13px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 8px 20px rgba(184,148,74,0.3);"><span class="ms" style="font-size:22px;">edit_note</span>予約メモを作成する</button>
+            <p style="font-size:11.5px;color:#9aa0ab;margin-top:14px;line-height:1.7;">※ スコア・情報は独自のロジックに基づく推定値です。<br>※ 最新の営業状況・内容は店舗にご確認ください。</p>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: 接待を記録する ============ -->
+      <sc-if value="{{ isRecord }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:880px;margin:0 auto;padding:clamp(16px,3vw,40px);">
+        <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 4px;color:#14233f;">接待を記録する</h1>
+        <div style="width:56px;height:3px;background:#c2a15a;border-radius:2px;margin-bottom:26px;"></div>
+        <div style="background:#fff;border-radius:18px;border:1px solid #eee6d8;box-shadow:0 10px 30px rgba(20,35,63,0.06);padding:clamp(18px,2.6vw,32px);display:flex;flex-direction:column;gap:20px;">
+          <sc-for list="{{ recordFields }}" as="f" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><span style="width:96px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">{{ f.label }}</span><div style="flex:1;min-width:200px;display:flex;align-items:center;gap:11px;border:1.5px solid #dfe3ea;border-radius:11px;padding:13px 15px;background:#fbfbfc;"><span class="ms" style="font-size:20px;color:#c2a15a;">{{ f.icon }}</span><span style="flex:1;font-size:14.5px;color:#22314f;">{{ f.value }}</span><span class="ms" style="font-size:19px;color:#b6becb;">{{ f.trailing }}</span></div></div></sc-for>
+          <div style="height:1px;background:#f0ece3;"></div>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><span style="width:96px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">総合評価</span><div style="display:flex;gap:8px;"><sc-for list="{{ recordStars }}" as="st" hint-placeholder-count="5"><span onClick="{{ st.onClick }}" class="ms" style="{{ st.style }}">star</span></sc-for></div></div>
+          <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;"><span style="width:96px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;margin-top:8px;">良かった点</span><div style="display:flex;flex-wrap:wrap;gap:10px;"><sc-for list="{{ goodChips }}" as="c" hint-placeholder-count="5"><span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}<sc-if value="{{ c.selected }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:16px;margin-left:5px;font-variation-settings:'FILL' 1;">check_circle</span></sc-if></span></sc-for></div></div>
+          <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;"><span style="width:96px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;margin-top:8px;">反省点・<br>申し送り</span><textarea placeholder="例）料理の提供タイミングが良かった。次回は◯◯の話題を深掘りする。" style="flex:1;min-width:220px;min-height:96px;border:1.5px solid #dfe3ea;border-radius:11px;padding:14px 15px;font-size:14px;color:#22314f;outline:none;resize:vertical;line-height:1.7;"></textarea></div>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><span style="width:96px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">業務成果</span><div style="flex:1;min-width:260px;display:flex;border:1.5px solid #dfe3ea;border-radius:11px;overflow:hidden;"><sc-for list="{{ outcomes }}" as="o" hint-placeholder-count="4"><span onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</span></sc-for></div></div>
+          <button onClick="{{ goDashboard }}" style="width:100%;margin-top:6px;background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:13px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 8px 20px rgba(184,148,74,0.3);"><span class="ms" style="font-size:22px;">edit_document</span>記録する</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: 取引先一覧 ============ -->
+      <sc-if value="{{ isCompanyList }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1040px;margin:0 auto;padding:clamp(18px,2.8vw,36px);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap;">
+          <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(24px,3vw,32px);margin:0;color:#17253f;">ゲスト管理</h1>
+          <span style="font-size:13px;color:#8a93a4;font-weight:500;background:#efe9dd;border-radius:999px;padding:3px 12px;">取引先 4社</span>
+          <div style="margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;border:1.5px solid #e2dccf;border-radius:10px;padding:9px 14px;background:#fff;"><span class="ms" style="font-size:19px;color:#98a2b3;">search</span><input type="text" placeholder="会社名で検索" style="border:none;outline:none;font-size:13.5px;width:130px;color:#22314f;background:transparent;"></div>
+            <button style="background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-size:13.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 6px 16px rgba(184,148,74,0.26);"><span class="ms" style="font-size:19px;">add</span>取引先を追加</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ companies }}" as="c" hint-placeholder-count="4">
+            <div onClick="{{ c.onClick }}" style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 18px rgba(20,35,63,0.05);padding:18px 20px;display:flex;align-items:center;gap:18px;cursor:pointer;flex-wrap:wrap;" style-hover="box-shadow:0 10px 26px rgba(20,35,63,0.12);">
+              <div style="width:58px;height:58px;border-radius:14px;background:#14233f;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:24px;color:#e0c07a;">{{ c.initial }}</span></div>
+              <div style="flex:1;min-width:220px;">
+                <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;"><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:19px;color:#17253f;">{{ c.name }}</span><span style="font-size:11.5px;color:#7a8296;background:#f2efe8;border-radius:6px;padding:2px 9px;">{{ c.industry }}</span></div>
+                <div style="font-size:13px;color:#7a8296;margin-top:7px;display:flex;align-items:center;gap:6px;line-height:1.6;"><span class="ms" style="font-size:17px;color:#c2a15a;flex-shrink:0;">sticky_note_2</span><span style="text-wrap:pretty;">{{ c.memo }}</span></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:16px;margin-left:auto;"><div style="text-align:center;"><div style="display:flex;align-items:center;gap:5px;color:#3a4661;"><span class="ms" style="font-size:18px;color:#8a97ac;">group</span><b style="font-size:17px;font-family:'Noto Serif JP',serif;">{{ c.count }}</b></div><div style="font-size:11px;color:#9aa0ab;margin-top:2px;">担当者</div></div><span class="ms" style="font-size:24px;color:#c3ccd8;">chevron_right</span></div>
+            </div>
+          </sc-for>
+          <div style="border:1.5px dashed #d8bd78;border-radius:16px;padding:18px;text-align:center;color:#a37f2b;font-weight:700;font-size:14.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;background:#fdfaf2;" style-hover="background:#faf4e6;"><span class="ms" style="font-size:20px;">domain_add</span>取引先を追加</div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: 会社詳細 ============ -->
+      <sc-if value="{{ isCompanyDetail }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1040px;margin:0 auto;padding:clamp(16px,3vw,36px);">
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;"><a href="#" onClick="{{ goCompanyList }}" style="font-size:14px;color:#8a93a4;">取引先一覧</a><span class="ms" style="font-size:16px;color:#c3ccd8;">chevron_right</span><span style="font-size:14px;color:#3a4661;font-weight:500;">{{ activeCompany.name }}</span></div></sc-if>
+        <div style="background:#fff;border-radius:18px;border:1px solid #eee6d8;box-shadow:0 8px 24px rgba(20,35,63,0.06);padding:clamp(20px,2.6vw,30px);">
+          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+            <div style="width:64px;height:64px;border-radius:15px;background:#14233f;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:28px;color:#e0c07a;">{{ activeCompany.initial }}</span></div>
+            <div style="flex:1;min-width:200px;"><h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(22px,2.8vw,28px);margin:0;color:#14233f;">{{ activeCompany.name }}</h1><div style="display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;"><span style="font-size:12px;color:#7a8296;background:#f2efe8;border-radius:6px;padding:3px 11px;">{{ activeCompany.industry }}</span><span style="font-size:13px;color:#55617a;display:flex;align-items:center;gap:5px;"><span class="ms" style="font-size:17px;color:#c2a15a;">local_bar</span>取引ビール：{{ activeCompany.drink }}</span></div></div>
+            <button style="background:#fff;border:1px solid #e2dccf;border-radius:10px;padding:9px 15px;font-size:13px;color:#3a4661;display:flex;align-items:center;gap:6px;cursor:pointer;"><span class="ms" style="font-size:18px;">edit</span>編集</button>
+          </div>
+          <div style="margin-top:20px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:9px;"><span class="ms" style="font-size:19px;color:#c2a15a;">sticky_note_2</span><span style="font-size:14px;font-weight:700;color:#3a4661;">会社メモ</span></div><textarea defaultValue="{{ activeCompany.memo }}" style="width:100%;min-height:82px;border:1.5px solid #ece2cb;border-radius:12px;padding:14px 16px;font-size:14px;color:#3a4661;line-height:1.8;outline:none;resize:vertical;background:#fdfaf2;"></textarea></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin:26px 2px 14px;flex-wrap:wrap;"><span class="ms" style="font-size:22px;color:#14233f;">group</span><h2 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px;margin:0;color:#17253f;">担当者</h2><span style="font-size:12.5px;color:#8a93a4;font-weight:500;background:#efe9dd;border-radius:999px;padding:2px 11px;">{{ activeCompany.count }}名</span><button onClick="{{ goAddGuest }}" style="margin-left:auto;background:#fff;border:1px solid #d8bd78;color:#a37f2b;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;" style-hover="background:#faf4e6;"><span class="ms" style="font-size:18px;">person_add</span>担当者を追加</button></div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <sc-for list="{{ activeCompany.people }}" as="g" hint-placeholder-count="2">
+            <div onClick="{{ g.onClick }}" style="background:#fff;border-radius:14px;border:1px solid #eee6d8;box-shadow:0 5px 15px rgba(20,35,63,0.04);padding:16px 18px;display:flex;align-items:center;gap:16px;cursor:pointer;flex-wrap:wrap;" style-hover="box-shadow:0 10px 24px rgba(20,35,63,0.11);">
+              <div style="width:52px;height:52px;border-radius:50%;background:#eef1f6;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span class="ms" style="font-size:28px;color:#8a97ac;">person</span></div>
+              <div style="flex:1;min-width:180px;"><div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;"><span style="font-size:12.5px;color:#8a6a1f;font-weight:500;">{{ g.title }}</span><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:18px;color:#17253f;">{{ g.name }}</span><span style="font-size:12.5px;color:#7a8296;">様</span></div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;"><sc-for list="{{ g.likes }}" as="t" hint-placeholder-count="2"><span style="border:1px solid #e0d5b3;color:#8a6a1f;background:#fbf6ea;border-radius:7px;padding:4px 10px;font-size:12px;">{{ t }}</span></sc-for><sc-if value="{{ g.hasNg }}" hint-placeholder-val="{{ true }}"><span style="border:1px solid #e6b3b3;color:#c0504b;background:#fdf1f1;border-radius:7px;padding:4px 10px;font-size:12px;">NG：{{ g.ng }}</span></sc-if></div></div>
+              <div style="display:flex;align-items:center;gap:14px;margin-left:auto;"><div style="text-align:right;"><div style="font-size:11px;color:#9aa0ab;">直近の接待</div><div style="font-size:12.5px;color:#55617a;margin-top:3px;display:flex;align-items:center;gap:6px;justify-content:flex-end;">{{ g.last }}<sc-if value="{{ g.hasRating }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:3px;"><span class="ms" style="font-size:15px;color:#e0aa33;font-variation-settings:'FILL' 1;">star</span><b style="color:#14233f;">{{ g.rating }}</b></span></sc-if></div></div><span class="ms" style="font-size:22px;color:#c3ccd8;">chevron_right</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: 担当者カルテ ============ -->
+      <sc-if value="{{ isGuestKarte }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,36px);">
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:8px;margin-bottom:22px;flex-wrap:wrap;"><a href="#" onClick="{{ goCompanyList }}" style="font-size:14px;color:#8a93a4;">取引先一覧</a><span class="ms" style="font-size:16px;color:#c3ccd8;">chevron_right</span><a href="#" onClick="{{ goCompanyDetail }}" style="font-size:14px;color:#8a93a4;">{{ activeCompany.name }}</a><span class="ms" style="font-size:16px;color:#c3ccd8;">chevron_right</span><span style="font-size:14px;color:#3a4661;font-weight:500;">担当者カルテ</span></div></sc-if>
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ true }}"><div style="font-size:12px;letter-spacing:2px;color:#c2a15a;font-weight:700;margin-bottom:12px;">GUEST KARTE</div></sc-if>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;align-items:start;">
+          <div style="background:#fff;border-radius:18px;border:1px solid #eee6d8;box-shadow:0 8px 24px rgba(20,35,63,0.06);padding:clamp(20px,2.5vw,30px);">
+            <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;"><div style="width:104px;height:104px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#e9edf3;"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="guest-avatar" shape="circle" placeholder="顔写真" hint-size="100%,100%"></x-import></div><div><div><span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(22px,2.6vw,27px);color:#14233f;">取締役 山田 太郎</span><span style="font-size:15px;color:#7a8296;margin-left:6px;">様</span></div><div style="font-size:15px;color:#7a8296;margin-top:6px;">株式会社サンプル商事</div></div></div>
+            <div style="height:1px;background:#ece6da;margin:22px 0;"></div>
+            <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;"><span class="ms" style="font-size:22px;color:#c2a15a;margin-top:2px;">favorite</span><span style="width:44px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;margin-top:3px;">好み</span><div style="display:flex;flex-wrap:wrap;gap:9px;"><sc-for list="{{ guest.likes }}" as="t" hint-placeholder-count="3"><span style="border:1px solid #d8bd78;color:#8a6a1f;background:#fbf6ea;border-radius:8px;padding:7px 13px;font-size:13.5px;">{{ t }}</span></sc-for></div></div>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;"><span class="ms" style="font-size:22px;color:#c98a8a;">cancel</span><span style="width:44px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">NG</span><span style="border:1px solid #e0a3a3;color:#c0504b;background:#fdf1f1;border-radius:8px;padding:7px 13px;font-size:13.5px;">貝類アレルギー</span></div>
+            <div style="height:1px;background:#ece6da;margin:18px 0;"></div>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;"><span class="ms" style="font-size:22px;color:#98a2b3;">account_balance_wallet</span><span style="width:78px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">予算目安</span><span style="font-size:14.5px;color:#3a4661;">15,000〜20,000円</span></div>
+            <div style="display:flex;align-items:center;gap:14px;"><span class="ms" style="font-size:22px;color:#98a2b3;">calendar_month</span><span style="width:78px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">接待頻度</span><span style="font-size:14.5px;color:#3a4661;">月1〜2回</span></div>
+            <button onClick="{{ goSearch }}" style="width:100%;margin-top:26px;background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:13px;padding:16px;font-size:15.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 8px 20px rgba(184,148,74,0.3);"><span class="ms" style="font-size:21px;">search</span>このゲストに合う店を探す</button>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px;"><span class="ms" style="font-size:22px;color:#14233f;">history</span><h2 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px;margin:0;color:#17253f;">接待履歴</h2></div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <sc-for list="{{ guest.history }}" as="h" hint-placeholder-count="3"><div style="background:#fff;border-radius:14px;border:1px solid #eee6d8;box-shadow:0 5px 15px rgba(20,35,63,0.04);padding:16px 18px;"><div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;"><div style="text-align:center;flex-shrink:0;"><div style="font-size:12px;color:#8a93a4;">{{ h.ym1 }}</div><div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:17px;color:#14233f;">{{ h.ym2 }}</div></div><div style="flex:1;min-width:150px;"><div style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:18px;color:#17253f;">{{ h.name }}</div></div><div style="display:flex;align-items:center;gap:5px;"><span class="ms" style="font-size:20px;color:#e0aa33;font-variation-settings:'FILL' 1;">star</span><b style="font-size:17px;color:#14233f;">{{ h.rating }}</b></div></div><div style="margin-top:12px;display:flex;align-items:center;gap:7px;font-size:13px;color:#5a6c8a;"><span class="ms" style="font-size:16px;color:#c2a15a;">thumb_up</span><b style="color:#8a6a1f;">良かった点：</b>{{ h.good }}</div><div style="margin-top:6px;display:flex;align-items:center;gap:7px;font-size:13px;color:#7a8296;"><span class="ms" style="font-size:16px;color:#98a2b3;">edit</span>反省メモ：{{ h.memo }}</div></div></sc-for>
+              <div onClick="{{ goRecord }}" style="border:1.5px dashed #d8bd78;border-radius:14px;padding:18px;text-align:center;color:#a37f2b;font-weight:700;font-size:14.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;background:#fdfaf2;" style-hover="background:#faf4e6;"><span class="ms" style="font-size:20px;">add</span>接待履歴を追加</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: 新しいゲストを追加 ============ -->
+      <sc-if value="{{ isAddGuest }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:640px;margin:0 auto;padding:clamp(16px,3vw,36px);">
+        <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;color:#14233f;text-align:center;">新しいゲストを追加</h1>
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:26px;"><div style="width:60px;height:1px;background:#d8bd78;"></div><span class="ms" style="font-size:14px;color:#c2a15a;">diamond</span><div style="width:60px;height:1px;background:#d8bd78;"></div></div>
+        <div style="background:#fff;border-radius:18px;border:1px solid #eee6d8;box-shadow:0 10px 30px rgba(20,35,63,0.06);padding:clamp(18px,2.6vw,28px);display:flex;flex-direction:column;gap:18px;">
+          <sc-for list="{{ addGuestFields }}" as="f" hint-placeholder-count="6"><label style="display:block;"><span style="font-size:14px;font-weight:700;color:#2d3a55;">{{ f.label }}</span><div style="margin-top:8px;position:relative;"><input type="text" placeholder="{{ f.placeholder }}" style="width:100%;border:1.5px solid #dfe3ea;border-radius:11px;padding:14px 15px;font-size:14.5px;color:#22314f;outline:none;background:#fff;"><sc-if value="{{ f.tag }}" hint-placeholder-val="{{ true }}"><span class="ms" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;color:#c3ccd8;">sell</span></sc-if></div><sc-if value="{{ f.hint }}" hint-placeholder-val="{{ true }}"><span style="font-size:11.5px;color:#9aa0ab;margin-top:5px;display:block;">入力して Enter で追加</span></sc-if></label></sc-for>
+        </div>
+        <div style="margin-top:16px;background:#faf3e2;border:1px solid #ecdcb6;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:13.5px;color:#8a6a1f;"><span class="ms" style="font-size:20px;color:#c2a15a;">info</span>すぐに探せます。詳細は後から追記できます。</div>
+        <button onClick="{{ goSearch }}" style="width:100%;margin-top:16px;background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:13px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(184,148,74,0.3);">追加してそのまま探す</button>
+      </div>
+      </sc-if>
+
+      <!-- ============ SCREEN: 設定 ============ -->
+      <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:720px;margin:0 auto;padding:clamp(18px,2.8vw,36px);">
+        <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(24px,3vw,32px);margin:0 0 22px;color:#17253f;">設定</h1>
+        <div style="background:#fff;border-radius:16px;border:1px solid #eee6d8;box-shadow:0 6px 18px rgba(20,35,63,0.05);overflow:hidden;">
+          <sc-for list="{{ settingsItems }}" as="s" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:14px;padding:17px 20px;border-bottom:1px solid #f0ece3;"><span class="ms" style="font-size:22px;color:#c2a15a;">{{ s.icon }}</span><span style="flex:1;font-size:14.5px;color:#3a4661;">{{ s.label }}</span><span class="ms" style="font-size:20px;color:#c3ccd8;">chevron_right</span></div></sc-for>
+        </div>
+        <div style="margin-top:18px;background:#14233f;border-radius:16px;padding:20px 22px;display:flex;align-items:center;gap:14px;color:#fff;"><span class="ms" style="font-size:30px;color:#cfa955;">workspace_premium</span><div style="flex:1;"><div style="font-weight:700;font-size:15px;color:#f4ede0;">プレミアムプラン</div><div style="font-size:12px;color:#9aa6bc;margin-top:2px;">有効期限 2026/12/31</div></div><span class="ms" style="font-size:22px;color:#cfa955;">chevron_right</span></div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ true }}"><div style="height:80px;"></div></sc-if>
+    </main>
+  </div>
+
+  <!-- ===================== MOBILE BOTTOM TAB ===================== -->
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ true }}">
+  <nav style="position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fbf8f2;border-top:1px solid #e9e2d5;display:flex;padding:8px 2px 10px;box-shadow:0 -4px 16px rgba(20,35,63,0.06);">
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5"><div onClick="{{ item.onClick }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;"><span class="ms" style="{{ item.mobileIconStyle }}">{{ item.icon }}</span><span style="{{ item.mobileLabelStyle }}">{{ item.mobileLabel }}</span></div></sc-for>
+  </nav>
+  </sc-if>
+
+  <!-- ===================== BEER MODAL ===================== -->
+  <sc-if value="{{ beerOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeBeer }}" style="position:fixed;inset:0;z-index:60;background:rgba(20,28,45,0.55);display:flex;align-items:center;justify-content:center;padding:20px;">
+    <div onClick="{{ stop }}" style="width:100%;max-width:400px;background:#fff;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,0.3);padding:26px 24px;">
+      <div style="display:flex;align-items:flex-start;justify-content:center;position:relative;margin-bottom:8px;"><h3 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:19px;margin:0;color:#17253f;">競合ビールを除外</h3><span onClick="{{ closeBeer }}" class="ms" style="position:absolute;right:0;top:0;font-size:22px;color:#b6becb;cursor:pointer;">close</span></div>
+      <p style="font-size:12.5px;color:#8a93a4;text-align:center;margin:0 0 18px;line-height:1.6;">競合となるビールメーカーを除外してお店を検索できます。</p>
+      <div style="display:flex;background:#f2efe8;border-radius:10px;padding:4px;margin-bottom:16px;">
+        <span onClick="{{ setBeerModeExclude }}" style="{{ beerModeAStyle }}">選択したメーカーを除外</span>
+        <span onClick="{{ setBeerModeKeep }}" style="{{ beerModeBStyle }}">選択した以外を除外</span>
+      </div>
+      <div style="border:1px solid #eee6d8;border-radius:12px;overflow:hidden;margin-bottom:20px;">
+        <sc-for list="{{ makers }}" as="m" hint-placeholder-count="4">
+          <div onClick="{{ m.onClick }}" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #f2efe8;cursor:pointer;">
+            <span style="{{ m.boxStyle }}"><sc-if value="{{ m.checked }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:16px;color:#fff;font-variation-settings:'FILL' 1;">check</span></sc-if></span>
+            <span style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:16px;color:{{ m.color }};width:96px;">{{ m.brand }}</span>
+            <span style="font-size:14px;color:#3a4661;">{{ m.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <button onClick="{{ closeBeer }}" style="width:100%;background:linear-gradient(180deg,#c9a860,#b8944a);color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(184,148,74,0.3);margin-bottom:10px;">適用する</button>
+      <div onClick="{{ closeBeer }}" style="text-align:center;font-size:14px;font-weight:700;color:#8a93a4;cursor:pointer;padding:4px;">キャンセル</div>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    var mobile = false;
+    try { mobile = window.innerWidth < 900; } catch (e) {}
+    this.state = {
+      view: 'search',
+      isMobile: mobile,
+      company: 0,
+      privateRoom: true,
+      quiet: true,
+      rating: 4,
+      good: { '料理': true, '個室': true },
+      outcome: '関係深化',
+      favTab: 'kakushiki',
+      roles: { '役員・経営層': true },
+      purposes: { '新規開拓': true },
+      genres: { '和食': true },
+      beerOpen: false,
+      beerMode: 'exclude',
+      makers: { 'アサヒ': true, 'サッポロ': true }
+    };
+    this._onResize = this._onResize.bind(this);
+  }
+  _onResize() { var m = false; try { m = window.innerWidth < 900; } catch (e) {} if (m !== this.state.isMobile) this.setState({ isMobile: m }); }
+  componentDidMount() { try { window.addEventListener('resize', this._onResize); } catch (e) {} }
+  componentWillUnmount() { try { window.removeEventListener('resize', this._onResize); } catch (e) {} }
+  go(v) { this.setState({ view: v }); try { window.scrollTo(0, 0); } catch (e) {} }
+  toggleKey(bag, key) { var o = Object.assign({}, this.state[bag]); o[key] = !o[key]; var s = {}; s[bag] = o; this.setState(s); }
+
+  ring(pct, size, thick) {
+    var deg = Math.round(pct * 3.6);
+    return 'width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:conic-gradient(#c2a15a 0deg ' + deg + 'deg,#ece7db ' + deg + 'deg 360deg);display:flex;align-items:center;justify-content:center;flex-shrink:0;';
+  }
+  bar(pct, gold) {
+    var c = gold ? '#c2a15a' : '#4aa46e';
+    return 'height:100%;width:' + pct + '%;background:' + c + ';border-radius:4px;';
+  }
+
+  renderVals() {
+    var self = this;
+    var view = this.state.view;
+    var isMobile = this.state.isMobile;
+    var GOLD = '#c2a15a';
+
+    var groups = {
+      search: 'search', storeDetail: 'search', record: 'search',
+      companyList: 'guest', companyDetail: 'guest', guestKarte: 'guest', addGuest: 'guest',
+      favorite: 'favorite', settings: 'settings', dashboard: 'dashboard'
+    };
+    var activeTab = groups[view];
+    var tabs = [
+      { key: 'search', icon: 'search', label: 'お店を探す', mobileLabel: '探す', home: 'search' },
+      { key: 'guest', icon: 'group', label: 'ゲスト管理', mobileLabel: 'ゲスト', home: 'companyList' },
+      { key: 'favorite', icon: 'favorite', label: 'お気に入り', mobileLabel: 'お気に入り', home: 'favorite' },
+      { key: 'settings', icon: 'settings', label: '設定', mobileLabel: '設定', home: 'settings' },
+      { key: 'dashboard', icon: 'monitoring', label: 'ダッシュボード', mobileLabel: '実績', home: 'dashboard' }
+    ];
+    var navItems = tabs.map(function (t) {
+      var active = activeTab === t.key;
+      return {
+        icon: t.icon, label: t.label, mobileLabel: t.mobileLabel, weight: active ? 700 : 500,
+        onClick: function () { self.go(t.home); },
+        deskRowStyle: 'position:relative;display:flex;align-items:center;gap:13px;padding:12px 16px 12px 18px;border-radius:11px;cursor:pointer;color:' + (active ? '#f0d9a0' : '#c4ccdb') + ';background:' + (active ? 'rgba(226,201,135,0.12)' : 'transparent') + ';',
+        deskBarStyle: 'position:absolute;left:2px;top:9px;bottom:9px;width:3px;border-radius:3px;background:' + (active ? '#d8b46a' : 'transparent') + ';',
+        deskIconStyle: 'font-size:22px;color:' + (active ? '#d8b46a' : '#93a0b8') + ';font-variation-settings:\'FILL\' ' + (active ? 1 : 0) + ';',
+        mobileIconStyle: 'font-size:24px;color:' + (active ? GOLD : '#98a2b3') + ';font-variation-settings:\'FILL\' ' + (active ? 1 : 0) + ';',
+        mobileLabelStyle: 'font-size:10px;font-weight:' + (active ? 700 : 500) + ';color:' + (active ? GOLD : '#98a2b3') + ';'
+      };
+    });
+
+    // chip helper
+    function chipSet(bag, list) {
+      return list.map(function (k) {
+        var on = !!self.state[bag][k];
+        return {
+          label: k, on: on,
+          onClick: function () { self.toggleKey(bag, k); },
+          style: 'display:inline-flex;align-items:center;cursor:pointer;font-size:13px;font-weight:500;border-radius:999px;padding:8px 14px;border:1.5px solid ' + (on ? '#d9be7d' : '#e2dccf') + ';color:' + (on ? '#a37f2b' : '#6f7a8f') + ';background:' + (on ? '#fbf6ea' : '#fff') + ';'
+        };
+      });
+    }
+    var roleChips = chipSet('roles', ['役員・経営層', '部長', '課長']);
+    var purposeChips = chipSet('purposes', ['新規開拓', '関係強化', '謝罪']);
+    var genreChips = chipSet('genres', ['和食', '寿司', '鉄板焼き', 'フレンチ', '中華', 'イタリアン', '焼肉']);
+
+    // toggles
+    function tog(on) {
+      return {
+        track: 'width:46px;height:26px;border-radius:999px;padding:3px;cursor:pointer;display:flex;background:' + (on ? GOLD : '#d3d8e0') + ';justify-content:' + (on ? 'flex-end' : 'flex-start') + ';transition:all .18s;',
+        knob: 'width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.25);'
+      };
+    }
+    var rt = tog(this.state.privateRoom), qt = tog(this.state.quiet);
+
+    // featured result
+    var feat = {
+      name: '銀座 いし橋', loc: '銀座駅 徒歩5分', price: '¥22,000〜/人', score: '92',
+      tags: ['和食', '懐石・会席', '日本料理'],
+      reasons: [
+        '銀座の名店として格式が高く、役員クラスの接待に最適',
+        '完全個室でプライバシーが確保され、静かな環境',
+        '旬の食材を活かした繊細な料理で特別感を演出',
+        '新規開拓の商談にふさわしい、信頼構築に最適な空間',
+        '過去の接待実績でも高評価を獲得'
+      ],
+      bars: [
+        { label: 'ゲストの好みとの一致', val: 92 },
+        { label: '目的との適合度', val: 90 },
+        { label: '過去の傾向との整合性', val: 88 }
+      ]
+    };
+    var featured = [{
+      name: feat.name, loc: feat.loc, price: feat.price, score: feat.score, tags: feat.tags, reasons: feat.reasons,
+      ring: self.ring(92, 72),
+      bars: feat.bars.map(function (b) { return { label: b.label, val: b.val, fill: self.bar(b.val) }; })
+    }];
+
+    var rawResults = [
+      { rank: 2, name: '鮨 さかい', loc: '銀座駅 徒歩3分', price: '¥18,000〜/人', score: 87, top: 88, tags: ['寿司', '江戸前寿司', '個室あり'] },
+      { rank: 3, name: '丸の内 輝（きらめき）', loc: '丸の内 徒歩4分', price: '¥16,000〜/人', score: 79, top: 80, tags: ['フレンチ', '夜景', '個室あり'] }
+    ];
+    var results = rawResults.map(function (r) {
+      return {
+        rank: r.rank, name: r.name, loc: r.loc, price: r.price, score: r.score, tags: r.tags, topBar: r.top,
+        ring: self.ring(r.score, 54), topFill: self.bar(r.top),
+        onClick: function () { self.go('storeDetail'); }
+      };
+    });
+
+    // dashboard
+    var stats = [
+      { icon: 'calendar_month', label: '今月の接待件数', val: '12', delta: '前月比 +2件' },
+      { icon: 'star', label: '平均満足度', val: '4.3', star: true, delta: '前月比 +0.2' },
+      { icon: 'storefront', label: '登録店舗', val: '156', delta: '前月比 +8店' }
+    ];
+    function statusBadge(s) {
+      var ok = s === '確定';
+      return 'flex-shrink:0;font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 11px;color:' + (ok ? '#3d8a5c' : '#a37f2b') + ';background:' + (ok ? '#e4f0e6' : '#f6ecd2') + ';';
+    }
+    var upcoming = [
+      { date: '5/20', dow: '(火)', name: '山田 太郎', company: '株式会社山田製作所', store: '銀座 浅田', status: '確定' },
+      { date: '5/27', dow: '(火)', name: '鈴木 一郎', company: '鈴木商事株式会社', store: '日本橋 藤本', status: '確定' },
+      { date: '6/3', dow: '(火)', name: '田中 花子', company: '田中ホールディングス', store: '赤坂 華蓮', status: '調整中' },
+      { date: '6/10', dow: '(火)', name: '佐藤 健', company: '佐藤コンサルティング', store: '麻布 かどわき', status: '調整中' }
+    ].map(function (u) { return Object.assign({}, u, { badge: statusBadge(u.status) }); });
+
+    function dotColor(r) { r = parseFloat(r); if (r >= 4) return '#4aa46e'; if (r >= 3) return '#e0aa33'; return '#d95757'; }
+    var recent = [
+      { date: '5/14', dow: '(水)', name: '高橋 和也', company: '高橋電機株式会社', store: '銀座 久兵衛', genre: '寿司', rating: '4.5', comment: '食材の質、接客ともに素晴らしく、大変ご満足いただけた。' },
+      { date: '5/7', dow: '(水)', name: '伊藤 直樹', company: '伊藤商事株式会社', store: '日本橋 藤本', genre: '日本料理', rating: '4.0', comment: '個室の雰囲気が良く、ゆっくりお話しできた。' },
+      { date: '4/28', dow: '(月)', name: '中村 圭介', company: '中村建設株式会社', store: '赤坂 華蓮', genre: '懐石・会席料理', rating: '3.5', comment: '料理は美味しかったが、提供のタイミングに改善の余地あり。' },
+      { date: '4/21', dow: '(月)', name: '小林 誠', company: '小林物流株式会社', store: '六本木 けやき坂', genre: '鉄板焼き', rating: '2.5', comment: '店内が騒がしく、話し声が聞き取りづらかった。' }
+    ].map(function (r) { return Object.assign({}, r, { dot: dotColor(r.rating) }); });
+
+    var medalColors = ['#d8b04a', '#b9bcc4', '#c88a52'];
+    var top5 = [
+      { rank: 1, name: '銀座 久兵衛', area: '銀座', count: '18回', avg: '¥33,000', rating: '4.6' },
+      { rank: 2, name: '日本橋 藤本', area: '日本橋', count: '15回', avg: '¥22,000', rating: '4.4' },
+      { rank: 3, name: '赤坂 華蓮', area: '赤坂', count: '12回', avg: '¥18,000', rating: '4.2' },
+      { rank: 4, name: '麻布 かどわき', area: '麻布十番', count: '10回', avg: '¥20,000', rating: '4.1' },
+      { rank: 5, name: '銀座 浅田', area: '銀座', count: '9回', avg: '¥25,000', rating: '4.0' }
+    ].map(function (t) {
+      var medal = medalColors[t.rank - 1];
+      return Object.assign({}, t, {
+        rankStyle: medal
+          ? 'width:26px;height:26px;border-radius:50%;background:' + medal + ';color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;'
+          : 'width:26px;text-align:center;font-weight:500;color:#8a93a4;'
+      });
+    });
+
+    // favorites
+    var favTabs = [
+      { key: 'kakushiki', label: '格式別' },
+      { key: 'scene', label: 'シーン別' }
+    ].map(function (t) {
+      var on = self.state.favTab === t.key;
+      return {
+        label: t.label,
+        onClick: function () { self.setState({ favTab: t.key }); },
+        style: 'cursor:pointer;font-size:13.5px;font-weight:700;border-radius:8px;padding:8px 20px;color:' + (on ? '#fff' : '#8a93a4') + ';background:' + (on ? 'linear-gradient(180deg,#c9a860,#b8944a)' : 'transparent') + ';'
+      };
+    });
+    var favFilters = [
+      { label: 'エリア', value: 'すべてのエリア' },
+      { label: 'ジャンル', value: 'すべてのジャンル' },
+      { label: '予算', value: 'すべての予算' },
+      { label: '並び順', value: '登録日 新しい順' }
+    ];
+    function favBadge(status) {
+      var used = status === '利用実績あり';
+      return 'display:inline-block;margin-top:9px;font-size:11px;font-weight:700;border-radius:6px;padding:3px 9px;color:' + (used ? '#3d8a5c' : '#a37f2b') + ';background:' + (used ? '#e4f0e6' : '#f6ecd2') + ';';
+    }
+    var favData = {
+      kakushiki: [
+        { title: 'S・役員クラス（重要接待）', icon: 'workspace_premium', items: [
+          { name: '銀座 しのはら', genre: '日本料理（懐石）', price: '¥30,000〜', desc: '役員との月次会食で利用。静かで品格ある空間。', status: '利用実績あり' },
+          { name: '赤坂 きた福', genre: '日本料理（会席・懐石）', price: '¥25,000〜', desc: '長年の取引先役員を接待。個室・サービスともに高評価。', status: '検討中' },
+          { name: '京都 吉兆 嵐山本店', genre: '日本料理（懐石）', price: '¥40,000〜', desc: '特別な会食やご招待に最適。景観・お料理ともに一級品。', status: '利用実績あり' },
+          { name: '東京會舘 本館 レストラン', genre: 'フランス料理', price: '¥25,000〜', desc: '格式と安心感のある老舗。役員接待の定番として優秀。', status: '利用実績あり' }
+        ] },
+        { title: 'A・部長クラス', icon: 'verified', items: [
+          { name: '日本橋 藤本', genre: '日本料理', price: '¥22,000〜', desc: '落ち着いた個室で商談向き。安定した満足度。', status: '利用実績あり' },
+          { name: '銀座 楽亭', genre: '日本料理（会席）', price: '¥20,000〜', desc: '格式とコスパのバランスが良く、部長クラスに好適。', status: '検討中' },
+          { name: '西麻布 くろ田', genre: '鉄板焼き', price: '¥18,000〜', desc: 'ライブ感のある鉄板で会話も弾む。', status: '利用実績あり' },
+          { name: '神楽坂 石かわ', genre: '日本料理（懐石）', price: '¥25,000〜', desc: '静謐な空間で特別感を演出できる名店。', status: '検討中' }
+        ] }
+      ],
+      scene: [
+        { title: '初回・顔合わせ向け', icon: 'group', items: [
+          { name: '神楽坂 和らく', genre: '日本料理', price: '¥10,000〜', desc: '落ち着いた個室で安心感あり。初回に最適。', status: '利用実績あり' },
+          { name: '麻布 柿沼', genre: '鮨', price: '¥15,000〜', desc: 'カウンターで会話がしやすく、関係構築に最適。', status: '検討中' },
+          { name: '白金 台所 見城亭', genre: '日本料理', price: '¥10,000〜', desc: '個室もあり、程よい格式で顔合わせに最適。', status: '検討中' },
+          { name: '代官山 ASO チェレステ', genre: 'イタリア料理', price: '¥8,000〜', desc: 'カジュアルながら上質な空間。初回ランチにも。', status: '利用実績あり' }
+        ] },
+        { title: '御礼・感謝', icon: 'volunteer_activism', items: [
+          { name: '日本橋 ゆかり', genre: '日本料理', price: '¥20,000〜', desc: '御礼の気持ちを伝える場にふさわしい名店。', status: '利用実績あり' },
+          { name: '青山 はせがわ', genre: '日本料理（懐石）', price: '¥18,000〜', desc: '繊細なお料理とおもてなしで感謝を伝えるのに最適。', status: '検討中' },
+          { name: 'ザ・リッツ・カールトン東京', genre: 'フランス料理', price: '¥25,000〜', desc: '特別感のある空間で感謝の会食に。', status: '利用実績あり' },
+          { name: '銀座 久兵衛', genre: '鮨', price: '¥30,000〜', desc: '長年のご支援への御礼に。安心と品格の名店。', status: '利用実績あり' }
+        ] }
+      ]
+    };
+    var favCats = (favData[this.state.favTab] || favData.kakushiki).map(function (cat) {
+      return { title: cat.title, icon: cat.icon, items: cat.items.map(function (it) { return Object.assign({}, it, { badge: favBadge(it.status) }); }) };
+    });
+
+    // store detail scores
+    var scores = [
+      { label: '格式', val: '9.2' }, { label: '予算適合', val: '9.0' },
+      { label: 'シーン適合', val: '8.8' }, { label: '特別感', val: '8.5' }
+    ].map(function (s) { return { label: s.label, val: s.val, barStyle: 'height:100%;width:' + (parseFloat(s.val) * 10) + '%;background:#14233f;border-radius:5px;' }; });
+    var galleryThumbs = [1, 2, 3, 4, 5];
+
+    var guest = {
+      likes: ['日本酒', '落ち着いた雰囲気', '個室希望'],
+      history: [
+        { ym1: '2026年', ym2: '5月', name: '銀座 いし橋', rating: '4.5', good: '個室が静か・日本酒が充実', memo: 'なし' },
+        { ym1: '2026年', ym2: '3月', name: '日本橋 藤本', rating: '4.0', good: '個室が静か・料理が上品', memo: '個室がやや騒がしかった' },
+        { ym1: '2026年', ym2: '1月', name: '神楽坂 石かわ', rating: '4.5', good: '料理の質', memo: 'なし' }
+      ]
+    };
+    var recordFields = [
+      { label: 'お店', icon: 'storefront', value: '銀座 いし橋', trailing: isMobile ? 'chevron_right' : '' },
+      { label: '日付', icon: 'calendar_month', value: '2026/07/07', trailing: isMobile ? 'chevron_right' : 'calendar_today' },
+      { label: 'ゲスト', icon: 'person', value: '山田 太郎 様', trailing: isMobile ? 'chevron_right' : '' },
+      { label: '同席者', icon: 'groups', value: '2名（部長クラス）', trailing: isMobile ? 'chevron_right' : '' }
+    ];
+    var recordStars = [1, 2, 3, 4, 5].map(function (i) {
+      var on = i <= self.state.rating;
+      return { onClick: function () { self.setState({ rating: i }); }, style: 'font-size:34px;cursor:pointer;color:' + (on ? '#e0aa33' : '#dcd6c8') + ';font-variation-settings:\'FILL\' ' + (on ? 1 : 0) + ';' };
+    });
+    var goodChips = ['料理', '個室', 'サービス', '話題', '店の格'].map(function (k) {
+      var sel = !!self.state.good[k];
+      return { label: k, selected: sel, onClick: function () { self.toggleKey('good', k); }, style: 'display:inline-flex;align-items:center;cursor:pointer;font-size:14px;font-weight:500;border-radius:999px;padding:9px 18px;border:1.5px solid ' + (sel ? '#d8bd78' : '#dfe3ea') + ';color:' + (sel ? '#a37f2b' : '#6a7285') + ';background:' + (sel ? '#fdf8ec' : '#fff') + ';' };
+    });
+    var outcomes = ['商談前進', '関係深化', '次アポ獲得', '特になし'].map(function (o, idx) {
+      var sel = self.state.outcome === o;
+      return { label: o, onClick: function () { self.setState({ outcome: o }); }, style: 'flex:1;text-align:center;cursor:pointer;font-size:13.5px;font-weight:' + (sel ? 700 : 500) + ';padding:13px 6px;color:' + (sel ? '#fff' : '#5a6c8a') + ';background:' + (sel ? '#14233f' : '#fff') + ';' + (idx > 0 ? 'border-left:1.5px solid #dfe3ea;' : '') };
+    });
+    var addGuestFields = [
+      { label: '氏名', placeholder: '例）山田 太郎' },
+      { label: '役職', placeholder: '例）部長' },
+      { label: '会社', placeholder: '例）株式会社セッタイ' },
+      { label: '好み（任意）', placeholder: '例）和食  接待向き  個室', tag: true, hint: true },
+      { label: 'NG・苦手（任意）', placeholder: '例）生もの  辛い料理  喫煙可', tag: true, hint: true },
+      { label: '予算目安', placeholder: '例）10,000円〜15,000円' }
+    ];
+    var settingsItems = [
+      { icon: 'business', label: '会社ルール・メーカー辞書' },
+      { icon: 'person', label: 'アカウント情報' },
+      { icon: 'notifications', label: '通知設定' },
+      { icon: 'help', label: 'ヘルプ・お問い合わせ' },
+      { icon: 'logout', label: 'ログアウト' }
+    ];
+
+    // companies
+    var rawCompanies = [
+      { name: '株式会社サンプル商事', industry: '総合商社', drink: 'サッポロ系', memo: '接待に慣れた先方。銀座エリアを好み、格式を重視。年末の忘年会は特に重要度が高い。', people: [
+        { name: '山田 太郎', title: '取締役', likes: ['日本酒', '個室希望'], ng: '貝類アレルギー', last: '2026年5月 銀座 いし橋', rating: '4.5' },
+        { name: '田中 次郎', title: '営業部長', likes: ['焼酎', '和食'], ng: 'なし', last: '2026年5月 銀座 いし橋', rating: '4.5' }
+      ] },
+      { name: 'キリンビバレッジ株式会社', industry: '飲料メーカー', drink: 'キリン', memo: '自社がキリン系。競合（アサヒ・サッポロ）系列色の強い店は避ける。ワイン中心の店だと安心。', people: [
+        { name: '佐藤 健', title: '部長', likes: ['ワイン', '賑やかな席'], ng: 'なし', last: '2026年4月 西麻布 くろ田', rating: '4.0' }
+      ] },
+      { name: '株式会社みらい物産', industry: '専門商社', drink: '特になし', memo: '女性役員が中心。カウンターの寿司店を好む。静かすぎる個室より活気のある店が好評。', people: [
+        { name: '鈴木 花子', title: '常務', likes: ['寿司', 'カウンター'], ng: '辛い料理', last: '2026年6月 銀座 鮨 さかい', rating: '5.0' },
+        { name: '伊藤 美咲', title: '経営企画室長', likes: ['イタリアン'], ng: 'なし', last: '接待履歴なし', rating: '' }
+      ] },
+      { name: 'アサヒ商事株式会社', industry: '食品商社', drink: 'アサヒ', memo: '新規開拓中の先方。まだ好みを把握できていないため、無難で外さない店から関係を作りたい。', people: [
+        { name: '高橋 誠', title: '課長', likes: ['焼肉', '個室希望'], ng: 'なし', last: '接待履歴なし', rating: '' }
+      ] }
+    ];
+    var companies = rawCompanies.map(function (c, ci) {
+      return {
+        name: c.name, industry: c.industry, drink: c.drink, memo: c.memo, count: c.people.length,
+        initial: c.name.replace(/株式会社|株式會社/g, '').charAt(0),
+        onClick: function () { self.setState({ company: ci, view: 'companyDetail' }); try { window.scrollTo(0, 0); } catch (e) {} },
+        people: c.people.map(function (p) {
+          return { name: p.name, title: p.title, likes: p.likes, ng: p.ng, last: p.last, rating: p.rating, hasRating: !!p.rating, hasNg: p.ng !== 'なし', onClick: function () { self.go('guestKarte'); } };
+        })
+      };
+    });
+    var activeCompany = companies[this.state.company] || companies[0];
+
+    // beer modal
+    var makerDefs = [
+      { key: 'キリン', brand: 'KIRIN', label: 'キリン', color: '#c8102e' },
+      { key: 'アサヒ', brand: 'Asahi', label: 'アサヒ', color: '#003a80' },
+      { key: 'サントリー', brand: 'SUNTORY', label: 'サントリー', color: '#3fa9d6' },
+      { key: 'サッポロ', brand: 'SAPPORO', label: 'サッポロ', color: '#1a1a1a' }
+    ];
+    var makers = makerDefs.map(function (m) {
+      var checked = !!self.state.makers[m.key];
+      return {
+        brand: m.brand, label: m.label, color: m.color, checked: checked,
+        onClick: function () { self.toggleKey('makers', m.key); },
+        boxStyle: 'width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:2px solid ' + (checked ? '#c2a15a' : '#cfd4dc') + ';background:' + (checked ? '#c2a15a' : '#fff') + ';'
+      };
+    });
+    function beerModeStyle(on) {
+      return 'flex:1;text-align:center;cursor:pointer;font-size:12.5px;font-weight:700;border-radius:8px;padding:9px 6px;color:' + (on ? '#fff' : '#8a93a4') + ';background:' + (on ? 'linear-gradient(180deg,#c9a860,#b8944a)' : 'transparent') + ';';
+    }
+
+    return {
+      isMobile: isMobile, isDesktop: !isMobile,
+      isSearch: view === 'search', isStoreDetail: view === 'storeDetail', isRecord: view === 'record',
+      isDashboard: view === 'dashboard', isFavorite: view === 'favorite', isSettings: view === 'settings',
+      isCompanyList: view === 'companyList', isCompanyDetail: view === 'companyDetail', isGuestKarte: view === 'guestKarte', isAddGuest: view === 'addGuest',
+      showBack: view === 'storeDetail' || view === 'record' || view === 'addGuest' || view === 'guestKarte' || view === 'companyDetail',
+      navItems: navItems,
+      searchCols: isMobile ? '1fr' : '300px 1fr',
+      featBodyCols: isMobile ? '1fr' : '1.4fr 1fr',
+      roleChips: roleChips, purposeChips: purposeChips, genreChips: genreChips,
+      roomTrack: rt.track, roomKnob: rt.knob, quietTrack: qt.track, quietKnob: qt.knob,
+      toggleRoom: function () { self.setState({ privateRoom: !self.state.privateRoom }); },
+      toggleQuiet: function () { self.setState({ quiet: !self.state.quiet }); },
+      featured: featured, results: results,
+      stats: stats, upcoming: upcoming, recent: recent, top5: top5,
+      favTabs: favTabs, favFilters: favFilters, favCats: favCats,
+      scores: scores, galleryThumbs: galleryThumbs, guest: guest,
+      recordFields: recordFields, recordStars: recordStars, goodChips: goodChips, outcomes: outcomes,
+      addGuestFields: addGuestFields, settingsItems: settingsItems,
+      companies: companies, activeCompany: activeCompany,
+      beerOpen: this.state.beerOpen, makers: makers,
+      beerModeAStyle: beerModeStyle(this.state.beerMode === 'exclude'),
+      beerModeBStyle: beerModeStyle(this.state.beerMode === 'keep'),
+      setBeerModeExclude: function () { self.setState({ beerMode: 'exclude' }); },
+      setBeerModeKeep: function () { self.setState({ beerMode: 'keep' }); },
+      openBeer: function () { self.setState({ beerOpen: true }); },
+      closeBeer: function () { self.setState({ beerOpen: false }); },
+      stop: function (e) { if (e && e.stopPropagation) e.stopPropagation(); },
+      goSearch: function () { self.go('search'); },
+      goRecord: function () { self.go('record'); },
+      goDashboard: function () { self.go('dashboard'); },
+      goCompanyList: function () { self.go('companyList'); },
+      goCompanyDetail: function () { self.go('companyDetail'); },
+      goAddGuest: function () { self.go('addGuest'); },
+      goBack: function () {
+        if (view === 'guestKarte' || view === 'addGuest') self.go('companyDetail');
+        else if (view === 'companyDetail') self.go('companyList');
+        else self.go('search');
+      },
+      noop: function (e) { if (e && e.preventDefault) e.preventDefault(); }
+    };
+  }
+}
+</script>
+</body>
+</html>
