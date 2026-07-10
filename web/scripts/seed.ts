@@ -5,13 +5,18 @@ import { eq } from 'drizzle-orm';
 import { venues, brandRules } from '../src/lib/db/schema';
 import kyobashiSeed from '../../data/venues.seed.json';
 import ginzaSeed from '../../data/venues.ginza.seed.json';
+import okinawaSeed from '../../data/venues.okinawa.seed.json';
 import brandRulesSeed from '../../data/brand-rules.seed.json';
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
-// 京橋/八重洲/日本橋 30件 + 銀座 20件 = 50件（ginza は _flag 等の追加キーがあるが下で明示マップするので無視される）
-const venuesSeed = [...kyobashiSeed, ...(ginzaSeed as typeof kyobashiSeed)];
+// 京橋/八重洲/日本橋 30件 + 銀座 20件 + 沖縄(名護/那覇) 30件 = 80件（追加キーは下で明示マップするので無視される）
+const venuesSeed = [
+  ...kyobashiSeed,
+  ...(ginzaSeed as typeof kyobashiSeed),
+  ...(okinawaSeed as typeof kyobashiSeed),
+];
 
 async function seed() {
   console.log(`▶ seeding venues... (${venuesSeed.length}件)`);
