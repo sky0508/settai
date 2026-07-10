@@ -17,7 +17,7 @@ const GRADE_LABEL: Record<string, { icon: string; title: string }> = {
   B: { icon: 'coffee',            title: 'B — カジュアル' },
 };
 const SCENE_TAGS = ['会食向き', '隠れ家', '個室完備', '静か', '華やか', '眺望', '日本酒充実'];
-const AREAS = ['すべて', '京橋', '八重洲', '日本橋'];
+const AREAS = ['すべて', '京橋', '日本橋', '銀座', '八重洲', '東銀座', '六本木', '赤坂', '四ツ谷', '那覇', '名護'];
 const GENRES = ['すべて', '日本料理', '寿司', '鉄板焼き', 'フレンチ', '中華', 'イタリアン', '焼肉'];
 const SORTS = [
   { key: 'budget_asc',  label: '予算: 安い順' },
