@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { db } from '@/lib/db/client';
 import { companies, guests, records, venues, users } from '@/lib/db/schema';
 import { eq, desc, inArray } from 'drizzle-orm';
-import { deleteGuest, updateCompanyMemo, updateCompanyAddress, deleteCompany } from './actions';
+import { deleteGuest, updateCompanyMemo, updateCompanyStation, deleteCompany } from './actions';
 import DeleteButton from '@/components/ui/DeleteButton';
 
 export default async function CompanyPage({ params }: { params: Promise<{ companyId: string }> }) {
@@ -42,7 +42,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ compan
     }
   }
 
-  // 社内ナレッジとしての過去すべての会食履歴 (この会社に対する)
+  // 社内ナレッジとしての過去すべての接待履歴 (この会社に対する)
   const allCompanyRecords = await db
     .select({
       id: records.id,
@@ -102,61 +102,15 @@ export default async function CompanyPage({ params }: { params: Promise<{ compan
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* この会社でお店を探す（本社所在地を動線の拠点にセット） */}
-            <Link
-              href={`/search?company=${encodeURIComponent(company.name)}${company.address ? `&base=${encodeURIComponent(company.address)}` : ''}`}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-bold text-white cursor-pointer"
-              style={{ background: 'linear-gradient(135deg, #c2a15a 0%, #b8944a 100%)' }}
-            >
-              <span className="material-symbols-outlined text-[18px]">search</span>
-              お店を探す
-            </Link>
-
-            {/* 会社削除ボタン */}
-            <form action={doDeleteCompany}>
-              <button
-                type="submit"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] border cursor-pointer transition-colors hover:bg-red-50"
-                style={{ background: '#fff', border: '1px solid #e2dccf', color: '#c0504b' }}
-              >
-                <span className="material-symbols-outlined text-[18px]">delete</span>
-                取引先を削除
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* 本社所在地（お店検索の拠点に使う） */}
-        <div className="mt-5">
-          <div className="flex items-center gap-1.5 mb-2">
-            <span className="material-symbols-outlined text-[19px]" style={{ color: '#c2a15a' }}>location_on</span>
-            <span className="text-[14px] font-bold" style={{ color: '#3a4661' }}>本社所在地</span>
-            <span className="text-[11px]" style={{ color: '#9aa0ab' }}>（お店探しの動線の拠点に使われます）</span>
-          </div>
-          <form
-            action={async (formData: FormData) => {
-              'use server';
-              const address = formData.get('address') as string;
-              await updateCompanyAddress(company.id, address, company.slug);
-            }}
-            className="flex flex-col sm:flex-row gap-2"
-          >
-            <input
-              type="text"
-              name="address"
-              defaultValue={company.address ?? ''}
-              placeholder="例: 東京都中野区中野4-10-2"
-              className="flex-1 text-[14px] outline-none"
-              style={{ border: '1.5px solid #ece2cb', borderRadius: 12, padding: '10px 14px', color: '#3a4661', background: '#fdfaf2' }}
-            />
+          {/* 会社削除ボタン */}
+          <form action={doDeleteCompany}>
             <button
               type="submit"
-              className="self-start flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[12.5px] font-bold cursor-pointer shrink-0"
-              style={{ background: '#14233f', color: '#fff' }}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] border cursor-pointer transition-colors hover:bg-red-50"
+              style={{ background: '#fff', border: '1px solid #e2dccf', color: '#c0504b' }}
             >
-              <span className="material-symbols-outlined text-[16px]">save</span>
-              住所を保存
+              <span className="material-symbols-outlined text-[18px]">delete</span>
+              取引先を削除
             </button>
           </form>
         </div>
@@ -196,6 +150,64 @@ export default async function CompanyPage({ params }: { params: Promise<{ compan
             >
               <span className="material-symbols-outlined text-[16px]">save</span>
               メモを保存
+            </button>
+          </form>
+        </div>
+
+        {/* 拠点情報編集フォーム（最適店検索・移動コスト計算に使用） */}
+        <div className="mt-5">
+          <div className="flex items-center gap-1.5 mb-2">
+            <span className="material-symbols-outlined text-[19px]" style={{ color: '#c2a15a' }}>location_on</span>
+            <span className="text-[14px] font-bold" style={{ color: '#3a4661' }}>拠点情報（移動コスト計算に使用）</span>
+          </div>
+          <form
+            action={async (formData: FormData) => {
+              'use server';
+              await updateCompanyStation(company.id, formData, company.slug);
+            }}
+            className="grid grid-cols-2 gap-3"
+          >
+            <div className="col-span-2">
+              <input
+                name="address"
+                type="text"
+                defaultValue={company.address ?? ''}
+                placeholder="住所（任意）"
+                className="w-full border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+              />
+            </div>
+            <div className="col-span-2">
+              <input
+                name="nearestStation"
+                type="text"
+                defaultValue={company.nearestStation ?? ''}
+                placeholder="最寄駅（例: 東京）"
+                className="w-full border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+              />
+            </div>
+            <input
+              name="lat"
+              type="number"
+              step="0.0000001"
+              defaultValue={company.lat ?? ''}
+              placeholder="緯度"
+              className="border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+            />
+            <input
+              name="lng"
+              type="number"
+              step="0.0000001"
+              defaultValue={company.lng ?? ''}
+              placeholder="経度"
+              className="border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+            />
+            <button
+              type="submit"
+              className="col-span-2 self-start flex items-center gap-1.5 px-4 py-2 rounded-xl text-[12.5px] font-bold cursor-pointer"
+              style={{ background: '#14233f', color: '#fff' }}
+            >
+              <span className="material-symbols-outlined text-[16px]">save</span>
+              拠点情報を保存
             </button>
           </form>
         </div>
@@ -264,7 +276,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ compan
               </Link>
               <div className="flex items-center gap-3 ml-auto">
                 <div className="text-right">
-                  <div className="text-[11px]" style={{ color: '#9aa0ab' }}>直近の会食</div>
+                  <div className="text-[11px]" style={{ color: '#9aa0ab' }}>直近の接待</div>
                   <div className="text-[12.5px] flex items-center gap-1.5 justify-end mt-0.5" style={{ color: '#55617a' }}>
                     {recent?.date ?? '—'}
                     {recent?.rating != null && (

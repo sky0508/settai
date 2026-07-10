@@ -29,8 +29,9 @@ const FIELD_MASK = [
   'places.userRatingCount',
 ].join(',');
 
-const AREA_TOKENS = ['銀座', '京橋', '日本橋', '八重洲', '丸の内', '有楽町'];
+const AREA_TOKENS = ['銀座', '京橋', '日本橋', '八重洲', '丸の内', '有楽町', '沖縄', '那覇', '名護'];
 const DRY_RUN = process.argv.includes('--dry-run');
+const ONLY_OKINAWA = process.argv.includes('--okinawa'); // 沖縄の店だけに絞る
 
 const apiKey = process.env.GOOGLE_PLACES_API_KEY;
 if (!apiKey && !DRY_RUN) {
@@ -113,9 +114,13 @@ async function main() {
       photoUrl: venues.photoUrl,
     })
     .from(venues)
-    .where(dsql`coalesce(jsonb_array_length(${venues.photos}), 0) < 3`);
+    .where(
+      ONLY_OKINAWA
+        ? dsql`coalesce(jsonb_array_length(${venues.photos}), 0) < 3 and ${venues.address} like '沖縄県%'`
+        : dsql`coalesce(jsonb_array_length(${venues.photos}), 0) < 3`,
+    );
 
-  console.log(`▶ ${targets.length}件の写真（各最大3枚）を Places → Cloudinary で補完します${DRY_RUN ? '（dry-run）' : ''}`);
+  console.log(`▶ ${targets.length}件の写真（各最大3枚）を Places → Cloudinary で補完します${ONLY_OKINAWA ? '【沖縄限定】' : ''}${DRY_RUN ? '（dry-run）' : ''}`);
 
   let saved = 0;
   const misses: { slug: string; why: string }[] = [];

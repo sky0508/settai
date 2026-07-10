@@ -8,6 +8,7 @@ import {
   jsonb,
   numeric,
   unique,
+  uniqueIndex,
 } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
@@ -17,6 +18,11 @@ export const users = pgTable('users', {
   name: text('name').notNull(),
   companyName: text('company_name'),
   role: text('role').default('user').notNull(), // admin, user
+  // 自社拠点（最適店検索の起点。admin ロール行に保存）
+  officeAddress: text('office_address'),
+  officeNearestStation: text('office_nearest_station'),
+  officeLat: numeric('office_lat'),
+  officeLng: numeric('office_lng'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -30,8 +36,12 @@ export const companies = pgTable('companies', {
   industry: text('industry').notNull(),
   initial: text('initial').notNull(),
   drinkAffiliation: text('drink_affiliation').notNull().default('none'), // kirin/asahi/suntory/sapporo/none
-  address: text('address'),                       // 本社所在地。お店検索の「相手の拠点（動線）」に使う
   memo: text('memo'),
+  // 企業拠点（本社所在地。お店検索の「相手の拠点（動線）」＆最適店検索の起点に使う）
+  address: text('address'),
+  nearestStation: text('nearest_station'),
+  lat: numeric('lat'),
+  lng: numeric('lng'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -229,3 +239,18 @@ export const scheduleResponses = pgTable('schedule_responses', {
 }, (t) => ({
   participantSlotUnique: unique('schedule_responses_participant_slot_unique').on(t.participantId, t.slotId),
 }));
+
+// ============================================
+// E: 最適店検索の駅間ルートキャッシュ（okinawa 1050 移植）
+// ============================================
+export const stationRoutes = pgTable('station_routes', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  fromStation: text('from_station').notNull(),
+  toStation: text('to_station').notNull(),
+  minutes: integer('minutes').notNull(),
+  transfers: integer('transfers'),
+  source: text('source').notNull(), // 'ekispert' | 'heuristic'
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (table) => [
+  uniqueIndex('station_routes_from_to_idx').on(table.fromStation, table.toStation),
+]);

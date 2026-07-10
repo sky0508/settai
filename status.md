@@ -10,6 +10,63 @@ last_touched: 2026-07-10
 
 最終更新: 2026-07-10
 
+## 2026-07-10 okinawa 1050「最適店検索（移動時間）」を settai に移植＋E2E 検証完了
+
+承認 plan: `~/.claude/plans/users-sorasasaki-work-os-02-projects-se-purring-toucan.md`
+
+旧 repo `sk2410yu/okinawa-2026-be-v1` の branch **1050**「参加者から最適な場所を探す」機能を settai に移植。**自社（admin ユーザーの拠点）＋ゲスト企業の最寄り駅から、各店への平均移動時間で店をランク**。駅すぱあと API（`EKISPERT_API_KEY`）or 座標ヒューリスティック（haversine/25km/h）で算出し `station_routes` にキャッシュ。
+
+**移植方法**: okinawa の履歴は merge せず（漏洩コミット非継承の維持）、**機能ぶんのファイルのみツリー移植**。1050 の `.env`/`.env.local`/`check-db.ts` は持ち込まず、migration は 0001 衝突を避けて **0002 を再生成**。スコープ = 機能に絞る（map/venues 等の無関係手直しは非採用）。
+
+**変更**:
+- 新規: `web/src/app/search/optimal/*`（最適店検索 UI＋`findOptimalVenues`）, `web/src/app/settings/office/*`（自社拠点設定）, `web/src/lib/travel/*`（ekispert/heuristic/score/cache/types＋tests）, `web/src/app/{error,global-error}.tsx`
+- マージ: `schema.ts`（users に office 列、companies に住所/最寄駅/座標、`station_routes` 表）, `guests/[companyId]/{actions,page}.tsx`（企業拠点入力フォーム）, `settings/page.tsx`（自社拠点導線）, `search/SearchClient.tsx`（「参加者から最適な場所を探す」リンク）
+- migration `web/drizzle/0002_breezy_the_stranger.sql`（Neon は既に 1050 適用済みで no-op＝履歴整合のみ）
+
+**E2E 検証済み**: `/guests/asahi` の拠点フォームでアサヒに拠点登録 → `/search/optimal` で参加企業追加 → 「平均○分相当・自社○分（概算）・アサヒ○分（概算）」で店をランキング表示（駅すぱあとキー無し＝座標概算）。会食含む全ルート 200（非後退）。秘密混入なし・`.env` は追跡外。
+
+**残**: `EKISPERT_API_KEY`（Sora 用意で「概算」→実移動時間に。無くても動く）。push は未（Sora 判断）。
+
+---
+
+## 2026-07-10 沖縄の実店舗 30 件を seed 投入（名護15 / 那覇15）
+
+京橋・銀座と同じ方式で、接待・会食でも使える沖縄の店 30 件を DB 投入。
+
+- **内訳**: 名護 15（会食寄り8 + 居酒屋7）／那覇 15（会食寄り8 + 居酒屋7）。formality S7 / A6 / B17。夜予算 2,000〜30,000 円。
+- **選定**: sonnet リサーチ agent 4 本並列（エリア×性格で分担）。食べログ・ヒトサラ・ホットペッパー・公式サイト等で住所/電話/個室を裏取り。ミックス方針（個室ありの郷土料理・鉄板・寿司を軸に、三線ライブ系の人気沖縄居酒屋も混在）。
+- **データ**: `data/venues.okinawa.seed.json`（30件）。`beerAffiliation` は enum に orion が無いため全 `unknown`。OHANA の夜予算のみソース無 → 推定 15,000〜25,000。
+- **座標**: Nominatim で backfill 完了（**30件すべて lat/lng 済み・NULL 0**）。ビル名付き住所は `backfill-coords-clean.ts` で建物名除去→再ジオコーディング、名護「城」地区の2件のみ市中心座標を手当て。
+- **配線**: `web/scripts/seed.ts` に okinawa seed 読込追加（京橋30+銀座20+沖縄30）。slug 冪等。commit `0c83c64` push 済み。
+- **エリアフィルタ対応（同日追記）**: 那覇の15件は district 単位（久茂地/松山/牧志…）で入れていたが、rule-engine のエリア絞り込みは `v.area` 完全一致のため `'那覇'` フィルタに一致しなかった → **DB・seed JSON とも `area='那覇'` に正規化**（district は住所に残る）。`FilterPanel.tsx` の `AREAS` に `名護`・`那覇`（＋抜けていた `銀座`）を追加。
+- **地図の全国クラスタ対応（同日追記）**: `/map` は全ピンの平均座標＋zoom13 固定で、東京+沖縄の2クラスタだと中心が海上になりピンが1つも見えないバグ → `MapClient.tsx` に `FitToPins`（fitBounds）を追加し、常に登録ピン全体が収まるよう自動ズーム。
+- **残**: 写真（Stage 3 = Google Places + Cloudinary）は API キー必要のため未実行。地図・検索カードはこの時点で写真なしで表示可。
+
+---
+
+## 2026-07-10 「会食を作る」タブ = 日程調整（LettuceMeet 型）Phase 1 実装＋E2E 検証完了
+
+承認 plan: `~/.claude/plans/users-sorasasaki-work-os-02-projects-se-purring-toucan.md`
+
+**確定仕様（ブレスト済み）**: LettuceMeet 型（時間グリッドをドラッグ塗り、○△×表ではない）／全員ログイン不要（トークン方式：参加者 `/s/<publicToken>`＋主催者 `/host/<adminToken>`）／候補=日付×時間スロット／回答UI=レスポンシブ ハイブリッド（PC ドラッグ塗り／スマホ タップ）／フロー=日程先決め→後で店→2段階メール通知。左サイドバー＆BottomNav に **「会食を作る」タブ（`/schedules`）** 新設。
+
+**モックアップ**: `design/schedule/mockups.html`（4画面・グリッド実操作可・Sora 承認済み）。
+
+**実装（Phase 1 縦スライス = 作成→回答→確定）**:
+- DB 4テーブル追加（`schedule_polls`/`schedule_slots`/`schedule_participants`/`schedule_responses`）＝migration `web/drizzle/0001_cultured_killmonger.sql`、Neon 適用済み。確定時に既存 `reservations` 行を生成→ダッシュボード「今後の接待予定」に自動表示。
+- 主要ファイル: `web/src/app/schedules/*`, `web/src/app/s/[publicToken]/*`, `web/src/app/host/[adminToken]/page.tsx`, `web/src/components/schedule/{AvailabilityGrid,CopyButton}.tsx`, `web/src/components/layout/AppChrome.tsx`（公開/host は素シェル）, `web/src/lib/schedule/{time,tokens}.ts`。
+- **TZ 規約**: スロットは JST 実インスタントで保存（`Date.UTC(...) - 9h`）・表示は +9h して UTC getter（`web/src/lib/schedule/time.ts`）。既存 `reservations.scheduledAt` の local 表示と日付一致を担保（当初 wall-clock UTC ラベル方式で +1 日ズレ→修正済み）。
+
+**E2E 検証済み（localhost dev）**: 作成→参加者2名がドラッグ塗り回答（email で upsert）→host ヒートマップで重なり集計＋最有力枠→確定→ダッシュボードに **7/15(水) 調整中** 正表示。
+
+**残（plan の後続 Phase・未 commit）**:
+- Phase2: 確定後の店紐付け（`host/[adminToken]/venue`・既存 `searchVenues` 再利用・`attachVenue` で reservation を confirmed+venue 更新）
+- Phase3: カレンダー（.ics util + Route Handler + Google Maps/Calendar リンク・画面上表示）
+- Phase4: Resend メール2段（🔴要 Sora の API キー＋検証済み送信ドメイン。キー無しは no-op で画面ボタンにフォールバック）
+- 未決 UX: 確定操作（推奨枠ワンボタン採用済／セルクリック確定は未）／BottomNav 7タブ目の収まり
+
+---
+
 > **正 repo = `github.com/sky0508/settai`（= work-os 配下 `02_projects/settai-navi/`）に一本化（2026-07-10、前回決定を逆転）**。
 > 設計docs・実コード(`web/`)・データ・スクリプトを全てこのリポに集約。今後の開発は全てここで行う。
 > 旧 `sk2410yu/okinawa-2026-be-v1` の実装は `web/` として取込み済み（git履歴は引き継がず新規スタート＝漏洩コミットを持ち込まないため）。

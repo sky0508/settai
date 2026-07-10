@@ -1,11 +1,12 @@
 import Link from 'next/link';
 
 const MENU = [
-  { icon: 'storefront', label: 'プレミアム店舗の追加', href: '/venues/new', desc: '会食店を新規に自社DBへ追加' },
+  { icon: 'storefront', label: 'プレミアム店舗の追加', href: '/venues/new', desc: '接待店を新規に自社DBへ追加' },
+  { icon: 'business_center', label: '自社拠点', href: '/settings/office', desc: '最適な場所を探す機能で使用する移動元の拠点' },
   { icon: 'business', label: '会社ルール・メーカー辞書', href: '/settings/rules', desc: 'ビール4社の競合ルールを管理' },
   { icon: 'sell', label: 'タグマスタ管理', href: '/settings/tags', desc: '店舗や好みの分析用タグ辞書を整備' },
   { icon: 'person', label: 'アカウント情報', href: '/settings/account', desc: 'プロフィール・パスワード変更' },
-  { icon: 'notifications', label: '通知設定', href: '/settings/notify', desc: '会食前リマインダーなど' },
+  { icon: 'notifications', label: '通知設定', href: '/settings/notify', desc: '接待前リマインダーなど' },
   { icon: 'help', label: 'ヘルプ・お問い合わせ', href: '/settings/help', desc: '使い方・要望送信' },
   { icon: 'logout', label: 'ログアウト', href: '/settings/logout', desc: null },
 ];

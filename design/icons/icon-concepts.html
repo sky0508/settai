@@ -1,0 +1,227 @@
+<title>会食ナビ — アイコン案 5</title>
+<style>
+  :root{
+    --navy:#17253f; --gold:#c2a15a; --gold-lt:#e6c987; --gold-dk:#b98f3f;
+    --cream:#f0e4cb; --paper:#f6f3ec; --ink:#1d2942;
+    --taupe:#6f6553; --line:#e2d8c4;
+    --serif:'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif;
+    --sans:system-ui,-apple-system,'Hiragino Kaku Gothic ProN',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0}
+  .wrap{max-width:1120px;margin:0 auto;padding:56px 24px 80px;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;margin:0 0 14px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,46px);margin:0 0 10px;letter-spacing:.01em;text-wrap:balance}
+  .lede{max-width:60ch;color:var(--taupe);font-size:15px;margin:0}
+  .brandline{display:flex;align-items:center;gap:16px;margin:28px 0 0;padding:18px 22px;background:var(--navy);border-radius:16px;width:fit-content}
+  .brandline svg{width:44px;height:44px;border-radius:11px}
+  .brandline .wm{font-family:var(--serif);font-weight:600;font-size:27px;color:var(--cream);letter-spacing:.06em}
+
+  .rec{margin:34px 0 8px;padding:16px 20px;border:1px solid var(--line);border-left:4px solid var(--gold);background:#fbf8f1;border-radius:0 12px 12px 0;font-size:14px;color:#4a4436}
+  .rec b{color:var(--navy)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;margin-top:26px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:16px}
+  .card.pick{border-color:var(--gold);box-shadow:0 0 0 3px rgba(194,161,90,.16)}
+  .top{display:flex;gap:18px;align-items:center}
+  .hero{width:112px;height:112px;border-radius:26px;flex:0 0 auto;overflow:hidden;box-shadow:0 6px 18px rgba(23,37,63,.16)}
+  .hero svg{display:block;width:100%;height:100%}
+  .meta{min-width:0}
+  .num{font-family:var(--serif);font-size:13px;color:var(--gold-dk);font-weight:700;letter-spacing:.08em}
+  .name{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--navy);margin:2px 0 4px;line-height:1.25}
+  .tag{font-size:12.5px;color:var(--taupe)}
+
+  .sizes{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .chip{display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--line)}
+  .chip.dark{background:var(--navy);border-color:#28374f}
+  .chip.lite{background:var(--paper)}
+  .chip svg{display:block;border-radius:8px}
+  .s56{width:76px;height:76px}.s56 svg{width:52px;height:52px}
+  .s28{width:48px;height:48px}.s28 svg{width:28px;height:28px}
+  .s16{width:36px;height:36px}.s16 svg{width:16px;height:16px}
+  .sizecap{font-size:11px;color:#a99f8c;letter-spacing:.04em;margin-left:2px}
+
+  .desc{font-size:13.5px;color:#453f34;margin:0}
+  .use{font-size:12px;color:var(--taupe);border-top:1px dashed var(--line);padding-top:12px}
+  .use b{color:var(--navy);font-weight:600}
+  .foot{margin-top:40px;font-size:12.5px;color:var(--taupe);max-width:70ch}
+  .foot code{background:#efe9dc;padding:1px 6px;border-radius:5px;font-size:12px}
+</style>
+
+<!-- ===== 全アイコンの実体（symbol） ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g1gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6c987"/><stop offset="1" stop-color="#b98f3f"/></linearGradient>
+    <linearGradient id="g2gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6c987"/><stop offset="1" stop-color="#b98f3f"/></linearGradient>
+    <linearGradient id="g3gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6c987"/><stop offset="1" stop-color="#b98f3f"/></linearGradient>
+    <linearGradient id="g4gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6c987"/><stop offset="1" stop-color="#b98f3f"/></linearGradient>
+    <linearGradient id="g5gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6c987"/><stop offset="1" stop-color="#b98f3f"/></linearGradient>
+  </defs>
+
+  <symbol id="ic1" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="112" fill="#17253f"/>
+    <polygon points="256,96 376,176 376,336 256,416 136,336 136,176" fill="url(#g1gold)"/>
+    <polygon points="256,96 376,176 376,336 256,416 136,336 136,176" fill="none" stroke="#f0e4cb" stroke-opacity="0.18" stroke-width="3"/>
+    <g stroke="#17253f" stroke-width="19" stroke-linecap="round"><line x1="204" y1="308" x2="308" y2="204"/><line x1="188" y1="292" x2="292" y2="188"/></g>
+    <rect x="168" y="292" width="58" height="20" rx="10" fill="#17253f" transform="rotate(-46 197 302)"/>
+  </symbol>
+
+  <symbol id="ic2" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="112" fill="#17253f"/>
+    <path d="M256 56 C182 56 122 116 122 198 C122 292 214 344 256 452 C298 344 390 292 390 198 C390 116 330 56 256 56 Z" fill="url(#g2gold)"/>
+    <circle cx="256" cy="194" r="82" fill="#f0e4cb"/>
+    <path d="M204 196 L308 196 Q256 250 204 196 Z" fill="#17253f"/>
+    <g stroke="#17253f" stroke-width="15" stroke-linecap="round"><line x1="300" y1="146" x2="240" y2="206"/><line x1="284" y1="134" x2="224" y2="194"/></g>
+  </symbol>
+
+  <symbol id="ic3" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="112" fill="#f0e4cb"/>
+    <rect x="14" y="14" width="484" height="484" rx="99" fill="none" stroke="#b98f3f" stroke-opacity="0.28" stroke-width="2"/>
+    <g stroke="#b98f3f" stroke-width="9" stroke-linecap="round"><line x1="256" y1="150" x2="256" y2="120"/><line x1="300" y1="168" x2="322" y2="146"/><line x1="212" y1="168" x2="190" y2="146"/></g>
+    <g transform="translate(196,262) rotate(18)"><path d="M-58 0 L58 0 L34 104 Q0 120 -34 104 Z" fill="url(#g3gold)" stroke="#17253f" stroke-width="7" stroke-linejoin="round"/><ellipse cx="0" cy="0" rx="58" ry="13" fill="#17253f"/><ellipse cx="0" cy="-1" rx="46" ry="9" fill="#efd8a0"/></g>
+    <g transform="translate(316,262) rotate(-18)"><path d="M-58 0 L58 0 L34 104 Q0 120 -34 104 Z" fill="url(#g3gold)" stroke="#17253f" stroke-width="7" stroke-linejoin="round"/><ellipse cx="0" cy="0" rx="58" ry="13" fill="#17253f"/><ellipse cx="0" cy="-1" rx="46" ry="9" fill="#efd8a0"/></g>
+  </symbol>
+
+  <symbol id="ic4" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="112" fill="#17253f"/>
+    <circle cx="256" cy="256" r="176" fill="none" stroke="url(#g4gold)" stroke-width="20"/>
+    <circle cx="256" cy="256" r="150" fill="none" stroke="#f0e4cb" stroke-opacity="0.22" stroke-width="2"/>
+    <text x="256" y="262" text-anchor="middle" dominant-baseline="central" font-family="'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif" font-size="248" font-weight="600" fill="#f0e4cb">会</text>
+  </symbol>
+
+  <symbol id="ic5" viewBox="0 0 512 512">
+    <rect width="512" height="512" rx="112" fill="#f6f3ec"/>
+    <rect x="12" y="12" width="488" height="488" rx="101" fill="none" stroke="#17253f" stroke-opacity="0.10" stroke-width="3"/>
+    <g fill="#b98f3f"><rect x="250" y="46" width="12" height="30" rx="6"/><rect x="250" y="436" width="12" height="30" rx="6"/><rect x="436" y="250" width="30" height="12" rx="6"/><rect x="46" y="250" width="30" height="12" rx="6"/></g>
+    <circle cx="256" cy="256" r="182" fill="#fffdf7" stroke="url(#g5gold)" stroke-width="11"/>
+    <circle cx="256" cy="256" r="120" fill="none" stroke="#c2a15a" stroke-opacity="0.45" stroke-width="4"/>
+    <g stroke-linecap="round">
+      <line x1="176" y1="336" x2="336" y2="176" stroke="#17253f" stroke-width="16"/>
+      <line x1="156" y1="316" x2="316" y2="156" stroke="#17253f" stroke-width="16"/>
+      <line x1="306" y1="206" x2="336" y2="176" stroke="url(#g5gold)" stroke-width="16"/>
+      <line x1="286" y1="186" x2="316" y2="156" stroke="url(#g5gold)" stroke-width="16"/>
+    </g>
+    <circle cx="246" cy="246" r="15" fill="#17253f"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <p class="eyebrow">会食ナビ · Icon Concepts</p>
+  <h1>アプリアイコン 5 案</h1>
+  <p class="lede">現行のブランド（濃紺 × 金 × 生成り・明朝体・金の六角バッジ）を土台に、方向性の異なる 5 案を用意しました。それぞれ大サイズ・アプリタイル・ファビコン縮小・ダーク/ライト地で見え方を確認できます。</p>
+
+  <div class="brandline">
+    <svg><use href="#ic4"/></svg>
+    <span class="wm">会食ナビ</span>
+  </div>
+
+  <div class="rec">
+    <b>おすすめ：案4「会の印」</b> — 「会食」の一文字を印章に落とし込む方式。16px でも一目で読め、明朝体で格式が出て、接待/会食という主題に最も直球。ブランド継承を重んじるなら <b>案1</b>、"ナビ（探す）" の意味を出すなら <b>案2</b> が対抗。
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="top">
+        <div class="hero"><svg><use href="#ic1"/></svg></div>
+        <div class="meta">
+          <div class="num">案 1</div>
+          <div class="name">継承ヘックス</div>
+          <div class="tag">現ロゴの金の六角バッジを踏襲</div>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="chip dark s56"><svg><use href="#ic1"/></svg></div>
+        <div class="chip dark s28"><svg><use href="#ic1"/></svg></div>
+        <div class="chip lite s16"><svg><use href="#ic1"/></svg></div>
+        <span class="sizecap">56 / 28 / 16px</span>
+      </div>
+      <p class="desc">既存の六角バッジをそのまま活かし、中身を「箸＋箸置き」に。今のサイドバーからの違和感がゼロで、リブランドではなく“正統進化”に見える。</p>
+      <div class="use"><b>強み</b> ブランド継承・違和感なし　<b>弱み</b> 一番無難で新鮮味は控えめ</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="top">
+        <div class="hero"><svg><use href="#ic2"/></svg></div>
+        <div class="meta">
+          <div class="num">案 2</div>
+          <div class="name">ナビピン</div>
+          <div class="tag">地図ピン × お椀と箸</div>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="chip dark s56"><svg><use href="#ic2"/></svg></div>
+        <div class="chip dark s28"><svg><use href="#ic2"/></svg></div>
+        <div class="chip lite s16"><svg><use href="#ic2"/></svg></div>
+        <span class="sizecap">56 / 28 / 16px</span>
+      </div>
+      <p class="desc">“ナビ（お店を探す）” の意味を地図ピンで明示。ピンの中にお椀と箸を収め、会食 × 場所探しを 1 マークで表現。プロダクトの機能が伝わる。</p>
+      <div class="use"><b>強み</b> 意味が明快・地図機能と一致　<b>弱み</b> 要素が2つで小サイズはやや情報過多</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="top">
+        <div class="hero"><svg><use href="#ic3"/></svg></div>
+        <div class="meta">
+          <div class="num">案 3</div>
+          <div class="name">乾杯</div>
+          <div class="tag">盃を交わす（生成り地の明るい案）</div>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="chip dark s56"><svg><use href="#ic3"/></svg></div>
+        <div class="chip dark s28"><svg><use href="#ic3"/></svg></div>
+        <div class="chip lite s16"><svg><use href="#ic3"/></svg></div>
+        <span class="sizecap">56 / 28 / 16px</span>
+      </div>
+      <p class="desc">2 つの盃が触れ合う“乾杯”の瞬間。会食の目的＝人と人が集まることを象徴。唯一の明るい地色で、並べたとき一番華やか。</p>
+      <div class="use"><b>強み</b> 情緒・温度感・明るい　<b>弱み</b> 「探す道具」感は薄め・やや飲み会寄り</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card pick">
+      <div class="top">
+        <div class="hero"><svg><use href="#ic4"/></svg></div>
+        <div class="meta">
+          <div class="num">案 4 · おすすめ</div>
+          <div class="name">会の印</div>
+          <div class="tag">「会」を印章に</div>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="chip dark s56"><svg><use href="#ic4"/></svg></div>
+        <div class="chip dark s28"><svg><use href="#ic4"/></svg></div>
+        <div class="chip lite s16"><svg><use href="#ic4"/></svg></div>
+        <span class="sizecap">56 / 28 / 16px</span>
+      </div>
+      <p class="desc">「会食」の頭文字を金の印章に。明朝体で格式・和の信頼感が出て、16px でも潰れず読める。主題ドンピシャで、名前ともロックアップしやすい。</p>
+      <div class="use"><b>強み</b> 直球・可読性・格式　<b>弱み</b> 文字ものなので“絵”としての遊びは少ない</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="top">
+        <div class="hero"><svg><use href="#ic5"/></svg></div>
+        <div class="meta">
+          <div class="num">案 5</div>
+          <div class="name">円卓ナビ</div>
+          <div class="tag">皿を真上から × 箸のコンパス</div>
+        </div>
+      </div>
+      <div class="sizes">
+        <div class="chip dark s56"><svg><use href="#ic5"/></svg></div>
+        <div class="chip dark s28"><svg><use href="#ic5"/></svg></div>
+        <div class="chip lite s16"><svg><use href="#ic5"/></svg></div>
+        <span class="sizecap">56 / 28 / 16px</span>
+      </div>
+      <p class="desc">円卓（皿）を真上から見た構図に、箸を方位磁針の針に見立てた二重の意味。会食 × ナビを最も知的に表現した“凝った”案。</p>
+      <div class="use"><b>強み</b> コンセプトが最も練れている　<b>弱み</b> 情報量が多く 16px では要素が潰れやすい</div>
+    </div>
+
+  </div>
+
+  <p class="foot">すべて SVG（ベクター）で作成。実体は <code>design/icons/icon-1〜5.svg</code>。採用が決まれば、その 1 案を <code>favicon.ico</code> / <code>apple-touch-icon</code> / サイドバーのバッジ差し替えまで実装します（案4の「会」は本番では字形をパス化＝フォント非依存にします）。PNG 書き出しや配色違い（金地×紺文字の反転など）もこの案から派生できます。</p>
+</div>
