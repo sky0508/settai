@@ -1,6 +1,7 @@
 'use client';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { useEffect } from 'react';
 import L from 'leaflet';
 import Link from 'next/link';
 import 'leaflet/dist/leaflet.css';
@@ -47,6 +48,17 @@ function makeIcon(pin: Pin) {
   });
 }
 
+// 全ピンが画面に収まるよう自動でズーム・パンする（東京と沖縄など離れたクラスタでも全部見える）
+function FitToPins({ pins }: { pins: Pin[] }) {
+  const map = useMap();
+  useEffect(() => {
+    if (pins.length === 0) return;
+    const bounds = L.latLngBounds(pins.map((p) => [p.lat, p.lng] as [number, number]));
+    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+  }, [map, pins]);
+  return null;
+}
+
 export default function MapClient({ pins }: { pins: Pin[] }) {
   if (pins.length === 0) {
     return (
@@ -66,6 +78,7 @@ export default function MapClient({ pins }: { pins: Pin[] }) {
   return (
     <div className="rounded-2xl overflow-hidden border border-[#eee6d8] shadow-sm" style={{ height: 560 }}>
       <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%' }}>
+        <FitToPins pins={pins} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

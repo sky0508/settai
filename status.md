@@ -29,6 +29,21 @@ last_touched: 2026-07-10
 
 ---
 
+## 2026-07-10 沖縄の実店舗 30 件を seed 投入（名護15 / 那覇15）
+
+京橋・銀座と同じ方式で、接待・会食でも使える沖縄の店 30 件を DB 投入。
+
+- **内訳**: 名護 15（会食寄り8 + 居酒屋7）／那覇 15（会食寄り8 + 居酒屋7）。formality S7 / A6 / B17。夜予算 2,000〜30,000 円。
+- **選定**: sonnet リサーチ agent 4 本並列（エリア×性格で分担）。食べログ・ヒトサラ・ホットペッパー・公式サイト等で住所/電話/個室を裏取り。ミックス方針（個室ありの郷土料理・鉄板・寿司を軸に、三線ライブ系の人気沖縄居酒屋も混在）。
+- **データ**: `data/venues.okinawa.seed.json`（30件）。`beerAffiliation` は enum に orion が無いため全 `unknown`。OHANA の夜予算のみソース無 → 推定 15,000〜25,000。
+- **座標**: Nominatim で backfill 完了（**30件すべて lat/lng 済み・NULL 0**）。ビル名付き住所は `backfill-coords-clean.ts` で建物名除去→再ジオコーディング、名護「城」地区の2件のみ市中心座標を手当て。
+- **配線**: `web/scripts/seed.ts` に okinawa seed 読込追加（京橋30+銀座20+沖縄30）。slug 冪等。commit `0c83c64` push 済み。
+- **エリアフィルタ対応（同日追記）**: 那覇の15件は district 単位（久茂地/松山/牧志…）で入れていたが、rule-engine のエリア絞り込みは `v.area` 完全一致のため `'那覇'` フィルタに一致しなかった → **DB・seed JSON とも `area='那覇'` に正規化**（district は住所に残る）。`FilterPanel.tsx` の `AREAS` に `名護`・`那覇`（＋抜けていた `銀座`）を追加。
+- **地図の全国クラスタ対応（同日追記）**: `/map` は全ピンの平均座標＋zoom13 固定で、東京+沖縄の2クラスタだと中心が海上になりピンが1つも見えないバグ → `MapClient.tsx` に `FitToPins`（fitBounds）を追加し、常に登録ピン全体が収まるよう自動ズーム。
+- **残**: 写真（Stage 3 = Google Places + Cloudinary）は API キー必要のため未実行。地図・検索カードはこの時点で写真なしで表示可。
+
+---
+
 ## 2026-07-10 「会食を作る」タブ = 日程調整（LettuceMeet 型）Phase 1 実装＋E2E 検証完了
 
 承認 plan: `~/.claude/plans/users-sorasasaki-work-os-02-projects-se-purring-toucan.md`

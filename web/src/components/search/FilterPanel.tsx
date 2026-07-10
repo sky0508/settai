@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Combobox from '@/components/ui/Combobox';
 import type { SearchInput } from '@/lib/types';
 
-const AREAS = ['京橋', '八重洲', '日本橋'];
+const AREAS = ['京橋', '八重洲', '日本橋', '銀座', '名護', '那覇'];
 const ROLES = ['役員・経営層', '部長', '課長'];
 const PURPOSES = ['新規開拓', '関係強化', '謝罪', '御礼', '慰労'];
 const GENRES = [

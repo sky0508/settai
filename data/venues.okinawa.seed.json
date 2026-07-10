@@ -20,7 +20,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "完全個室", "鉄板焼", "佐賀牛", "少人数限定"],
+    "tags": [
+      "接待向き",
+      "完全個室",
+      "鉄板焼",
+      "佐賀牛",
+      "少人数限定"
+    ],
     "curationNote": "1日3組限定・完全個室2室のみの鉄板焼き店。目の前で佐賀牛や県産食材を焼き上げるプライベート空間で、要人接待や特別な会食に向く（夜予算は推定）。",
     "source": "https://teppanohana.jp/"
   },
@@ -45,7 +51,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "寿司", "地魚", "隠れ家"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "寿司",
+      "地魚",
+      "隠れ家"
+    ],
     "curationNote": "地元で長年愛される老舗寿司店。カウンター奥に個室3部屋を備え、夜は完全予約制のおまかせコースで落ち着いた会食に使える。",
     "source": "https://www.hotpepper.jp/strJ000721637/"
   },
@@ -70,7 +82,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "半個室完備", "焼肉", "県産和牛", "少人数個室"],
+    "tags": [
+      "接待向き",
+      "半個室完備",
+      "焼肉",
+      "県産和牛",
+      "少人数個室"
+    ],
     "curationNote": "市場直送の和牛を提供する焼肉店。全席半個室で、地元紙にも接待利用と紹介される落ち着いた大人の空間。",
     "source": "https://yambaru.keizai.biz/headline/583/"
   },
@@ -95,7 +113,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "リゾート内", "日本料理", "会席", "個室相談可"],
+    "tags": [
+      "接待向き",
+      "リゾート内",
+      "日本料理",
+      "会席",
+      "個室相談可"
+    ],
     "curationNote": "カヌチャリゾート内の本格和食レストラン。厚労大臣表彰歴のある料理長による会席と、団体向けの座敷個室も用意され、格式ある会食に対応できる。",
     "source": "https://www.kanucha.jp/restaurant/kanucha"
   },
@@ -120,7 +144,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "沖縄料理", "琉球古民家", "あぐー豚"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "沖縄料理",
+      "琉球古民家",
+      "あぐー豚"
+    ],
     "curationNote": "100年以上の琉球古民家を活かした沖縄料理店。あぐー豚しゃぶしゃぶや黒毛和牛コースが名物で、個室・掘りごたつ席もあり落ち着いた会食に向く。",
     "source": "https://ufuya.com/dinner.html"
   },
@@ -145,7 +175,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["座敷あり", "沖縄料理", "あぐー豚", "寿司", "古民家テラス"],
+    "tags": [
+      "座敷あり",
+      "沖縄料理",
+      "あぐー豚",
+      "寿司",
+      "古民家テラス"
+    ],
     "curationNote": "築80年ほどの民家を改装した沖縄料理店。あぐー豚しゃぶしゃぶと寿司を楽しめ、座敷スペースと庭のテラス席で少人数の会食に使える。",
     "source": "https://yambaru.keizai.biz/headline/606/"
   },
@@ -170,7 +206,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["半個室", "ステーキ", "名護湾", "県産黒毛和牛"],
+    "tags": [
+      "半個室",
+      "ステーキ",
+      "名護湾",
+      "県産黒毛和牛"
+    ],
     "curationNote": "世冨慶IC近く、海岸沿いに位置するステーキ専門店。全席BOX席の半個室でプライバシーを保ちながら県産黒毛和牛のステーキを楽しめる。",
     "source": "https://nagosteak.com/"
   },
@@ -195,7 +236,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["座敷あり", "沖縄料理", "しゃぶしゃぶ", "古民家"],
+    "tags": [
+      "座敷あり",
+      "沖縄料理",
+      "しゃぶしゃぶ",
+      "古民家"
+    ],
     "curationNote": "築70年超の琉球古民家を活かしたしゃぶしゃぶ・沖縄料理店。座敷席の落ち着いた雰囲気で、あぐー豚しゃぶしゃぶなどの限定コースを楽しめる。",
     "source": "https://matsu-no-kominka.gorp.jp/"
   },
@@ -220,7 +266,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["沖縄料理", "三線ライブ", "民謡", "泡盛", "人気店"],
+    "tags": [
+      "沖縄料理",
+      "三線ライブ",
+      "民謡",
+      "泡盛",
+      "人気店"
+    ],
     "curationNote": "民謡歌手が店主自ら毎日ライブを行う、海沿いのアットホームな民謡居酒屋。夕日を眺めながら沖縄家庭料理と泡盛を楽しめる。",
     "source": "https://yambaru.keizai.biz/headline/682/"
   },
@@ -245,7 +297,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["沖縄料理", "大衆居酒屋", "老舗", "掘りごたつ", "宴会"],
+    "tags": [
+      "沖縄料理",
+      "大衆居酒屋",
+      "老舗",
+      "掘りごたつ",
+      "宴会"
+    ],
     "curationNote": "名護市内の老舗沖縄料理居酒屋。山小屋風の木の温もりある店内で、約50種の飲み放題付きコースが手頃な価格で楽しめる。",
     "source": "https://www.hotpepper.jp/strJ000597180/"
   },
@@ -270,7 +328,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["しゃぶしゃぶ", "あぐー豚", "石垣牛", "人気店"],
+    "tags": [
+      "しゃぶしゃぶ",
+      "あぐー豚",
+      "石垣牛",
+      "人気店"
+    ],
     "curationNote": "県産やんばるあぐー・もとぶ牛・石垣牛のしゃぶしゃぶが名物。名護市居酒屋ネット予約数トップクラスの人気店。",
     "source": "https://hitosara.com/0006140095/"
   },
@@ -295,7 +358,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["島唄", "三線ライブ", "沖縄料理", "宴会", "泡盛"],
+    "tags": [
+      "島唄",
+      "三線ライブ",
+      "沖縄料理",
+      "宴会",
+      "泡盛"
+    ],
     "curationNote": "島唄ライブと沖縄料理が楽しめるエンターテインメント居酒屋。地元客・観光客どちらにも人気で貸切宴会にも対応。",
     "source": "https://hitosara.com/0031561581/"
   },
@@ -320,7 +389,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["民謡", "三線ライブ", "沖縄料理", "あぐー豚", "団体歓迎"],
+    "tags": [
+      "民謡",
+      "三線ライブ",
+      "沖縄料理",
+      "あぐー豚",
+      "団体歓迎"
+    ],
     "curationNote": "1日2回の民謡ライブ（19:00・20:30）を開催する民謡居酒屋。ゴーヤーちゃんぷるやあぐー豚しゃぶしゃぶなど沖縄料理が豊富。",
     "source": "https://tabelog.com/okinawa/A4702/A470201/47027664/"
   },
@@ -345,7 +420,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["炭火焼", "沖縄料理", "大衆居酒屋", "貸切可", "人気店"],
+    "tags": [
+      "炭火焼",
+      "沖縄料理",
+      "大衆居酒屋",
+      "貸切可",
+      "人気店"
+    ],
     "curationNote": "炭火焼きと沖縄料理が自慢の大衆酒場。名護市の居酒屋ネット予約ランキング上位常連で、団体貸切にも対応。",
     "source": "https://hitosara.com/0031479887/"
   },
@@ -370,7 +451,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["海鮮", "沖縄料理", "宴会コース", "人気店"],
+    "tags": [
+      "海鮮",
+      "沖縄料理",
+      "宴会コース",
+      "人気店"
+    ],
     "curationNote": "名護漁港直送の鮮魚と沖縄料理が楽しめる海鮮居酒屋。フェニックスパークホテル1Fで宴会コースも充実、名護バスターミナルから徒歩3分。",
     "source": "https://www.hotpepper.jp/strJ001292967/"
   },
@@ -379,7 +465,7 @@
     "slug": "kuninda-naha",
     "name": "琉球料理 くにんだ",
     "genre": "琉球料理",
-    "area": "松尾",
+    "area": "那覇",
     "address": "沖縄県那覇市松尾1-2-7 真喜屋ビル1F",
     "nearestStation": "県庁前",
     "walkMinutes": 6,
@@ -395,7 +481,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "琉球料理", "1日1組限定", "伝統料理"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "琉球料理",
+      "1日1組限定",
+      "伝統料理"
+    ],
     "curationNote": "琉球料理伝承人が手がける全11品の「うとぅいむち懐石」を個室で。1日1組限定プランもあり格式高い会食に最適。",
     "source": "https://kuninda.jp/"
   },
@@ -404,7 +496,7 @@
     "slug": "naha-miyachiku",
     "name": "宮崎牛専門店 那覇みやちく",
     "genre": "鉄板焼",
-    "area": "久茂地",
+    "area": "那覇",
     "address": "沖縄県那覇市久茂地2-3-1 琉球放送会館1F",
     "nearestStation": "県庁前",
     "walkMinutes": 5,
@@ -420,7 +512,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "宮崎牛", "鉄板焼", "県庁前徒歩5分"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "宮崎牛",
+      "鉄板焼",
+      "県庁前徒歩5分"
+    ],
     "curationNote": "宮崎牛の最高峰を目の前で焼き上げる専門店。半個室2室完備で目上のゲストとの会食にも安心。",
     "source": "https://rest.miyachiku.jp/naha/"
   },
@@ -429,7 +527,7 @@
     "slug": "teppanyaki-sawafuji",
     "name": "鉄板焼さわふじ",
     "genre": "鉄板焼",
-    "area": "久茂地",
+    "area": "那覇",
     "address": "沖縄県那覇市久茂地2-16-17 アーバンライフくもじ1F",
     "nearestStation": "美栄橋",
     "walkMinutes": 2,
@@ -445,7 +543,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室あり", "石垣牛", "鉄板焼", "美栄橋徒歩2分"],
+    "tags": [
+      "接待向き",
+      "個室あり",
+      "石垣牛",
+      "鉄板焼",
+      "美栄橋徒歩2分"
+    ],
     "curationNote": "石垣牛ステーキと沖縄県産の島野菜を鉄板焼で。個室もあり接待利用の定番として知られる。",
     "source": "https://teppanyaki-sawafuji.com/"
   },
@@ -454,7 +558,7 @@
     "slug": "echizen-omoromachi",
     "name": "越前",
     "genre": "日本料理",
-    "area": "おもろまち",
+    "area": "那覇",
     "address": "沖縄県那覇市おもろまち4-11-1 おもろシティコートGINOZA 1F",
     "nearestStation": "おもろまち",
     "walkMinutes": 6,
@@ -470,7 +574,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "日本料理", "蟹料理", "おもろまち"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "日本料理",
+      "蟹料理",
+      "おもろまち"
+    ],
     "curationNote": "北海道産の蟹料理やアグー豚しゃぶしゃぶを和モダンな空間で。落ち着いた個室で格式ある会食に対応する。",
     "source": "https://tabelog.com/okinawa/A4701/A470103/47029648/"
   },
@@ -479,7 +589,7 @@
     "slug": "sushi-isuke-naha",
     "name": "鮨いすけ",
     "genre": "寿司",
-    "area": "若狭",
+    "area": "那覇",
     "address": "沖縄県那覇市若狭3-1-1 GIBOビル1F",
     "nearestStation": "美栄橋",
     "walkMinutes": 11,
@@ -495,7 +605,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "江戸前寿司", "少人数向け", "高級店"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "江戸前寿司",
+      "少人数向け",
+      "高級店"
+    ],
     "curationNote": "全国から空輸で届く鮮魚を握る本格江戸前寿司。少人数の完全個室で重要な会食に使える名店。",
     "source": "https://www.hotpepper.jp/strJ001133087/"
   },
@@ -504,7 +620,7 @@
     "slug": "sushi-tsumugi-naha",
     "name": "鮨つむぎ",
     "genre": "寿司",
-    "area": "牧志",
+    "area": "那覇",
     "address": "沖縄県那覇市牧志2-17-46 ハチノスビル2F",
     "nearestStation": "美栄橋",
     "walkMinutes": 4,
@@ -520,7 +636,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "寿司", "美栄橋徒歩4分", "おまかせコース"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "寿司",
+      "美栄橋徒歩4分",
+      "おまかせコース"
+    ],
     "curationNote": "国際通り近くの隠れ家的な鮨店。完全個室（6名）を備え、要人接待にも対応できる。",
     "source": "https://sushi-tsumugi.foodre.jp/"
   },
@@ -529,7 +651,7 @@
     "slug": "tsukiji-aozora-sandaime-naha",
     "name": "琉球鮨 築地青空三代目 那覇本店",
     "genre": "寿司",
-    "area": "松山",
+    "area": "那覇",
     "address": "沖縄県那覇市松山1-15-14",
     "nearestStation": "県庁前",
     "walkMinutes": 6,
@@ -545,7 +667,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "寿司", "座敷", "松山"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "寿司",
+      "座敷",
+      "松山"
+    ],
     "curationNote": "那覇近海の魚と本州から空輸の魚を握る江戸前寿司。座敷個室が複数あり少人数〜宴会まで対応可能。",
     "source": "https://fayz800.gorp.jp/"
   },
@@ -554,7 +682,7 @@
     "slug": "heiketei-matsuyama",
     "name": "沖縄料理と海鮮居酒屋 平家亭 那覇松山",
     "genre": "沖縄料理",
-    "area": "松山",
+    "area": "那覇",
     "address": "沖縄県那覇市松山1-14-13 ホテルタイラ内",
     "nearestStation": "美栄橋",
     "walkMinutes": 8,
@@ -570,7 +698,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["個室完備", "沖縄料理", "海鮮", "大人数対応", "宴会"],
+    "tags": [
+      "個室完備",
+      "沖縄料理",
+      "海鮮",
+      "大人数対応",
+      "宴会"
+    ],
     "curationNote": "昭和60年創業の老舗海鮮居酒屋。5〜30名対応の個室が豊富で、社内懇親を兼ねた気取らない接待に向く。",
     "source": "https://tabelog.com/okinawa/A4701/A470101/47004347/party/"
   },
@@ -579,7 +713,7 @@
     "slug": "karakara-to-chibugwa",
     "name": "カラカラとちぶぐゎ～",
     "genre": "居酒屋",
-    "area": "久茂地",
+    "area": "那覇",
     "address": "沖縄県那覇市久茂地3-15-15 やまこ第2ビル1F",
     "nearestStation": "県庁前",
     "walkMinutes": 5,
@@ -595,7 +729,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["泡盛", "泡盛マイスター在籍", "沖縄料理", "地元人気店"],
+    "tags": [
+      "泡盛",
+      "泡盛マイスター在籍",
+      "沖縄料理",
+      "地元人気店"
+    ],
     "curationNote": "夫婦とも泡盛マイスターの資格を持ち、県内47酒造所の代表銘柄を揃える泡盛専門居酒屋。好みに合わせた1杯を選んでくれるので泡盛初心者にも安心。",
     "source": "https://tabelog.com/okinawa/A4701/A470101/47001586/"
   },
@@ -604,7 +743,7 @@
     "slug": "chinuman-kokusaidori-makishi",
     "name": "民謡島唄と沖縄料理 ちぬまん 国際通り牧志店",
     "genre": "沖縄料理",
-    "area": "牧志",
+    "area": "那覇",
     "address": "沖縄県那覇市牧志1-2-26",
     "nearestStation": "美栄橋",
     "walkMinutes": 3,
@@ -620,7 +759,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["三線ライブ", "沖縄料理", "国際通り", "個室あり", "人気店"],
+    "tags": [
+      "三線ライブ",
+      "沖縄料理",
+      "国際通り",
+      "個室あり",
+      "人気店"
+    ],
     "curationNote": "国際通り沿いで毎晩リクエストOK・飛び入り歓迎の島唄ライブを楽しめる沖縄料理居酒屋。掘りごたつ個室もあり団体利用もしやすい。",
     "source": "https://www.hotpepper.jp/strJ000601031/"
   },
@@ -629,7 +774,7 @@
     "slug": "mion-kokusaidori",
     "name": "島唄ライブおばぁの家♪ 海音（みおん）",
     "genre": "沖縄料理",
-    "area": "国際通り",
+    "area": "那覇",
     "address": "沖縄県那覇市牧志1-3-58 タキオンビルB1",
     "nearestStation": "美栄橋",
     "walkMinutes": 3,
@@ -645,7 +790,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["三線ライブ", "沖縄料理", "国際通り", "家庭料理", "人気店"],
+    "tags": [
+      "三線ライブ",
+      "沖縄料理",
+      "国際通り",
+      "家庭料理",
+      "人気店"
+    ],
     "curationNote": "料理歴50年の「おばぁ」が作る家庭料理と、1日5回開催の島唄ライブが名物。国際通りのド真ん中・ドンキ斜め向かいの好立地。",
     "source": "https://www.hotpepper.jp/strJ001028195/"
   },
@@ -654,7 +805,7 @@
     "slug": "orion-shimauta-live-izakaya",
     "name": "島唄ライブ沖縄民謡居酒屋 ORION",
     "genre": "沖縄料理",
-    "area": "松尾",
+    "area": "那覇",
     "address": "沖縄県那覇市松尾2-10-10 仲井間ビル2階",
     "nearestStation": "牧志",
     "walkMinutes": 9,
@@ -670,7 +821,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["三線ライブ", "沖縄料理", "国際通り", "牧志公設市場隣", "人気店"],
+    "tags": [
+      "三線ライブ",
+      "沖縄料理",
+      "国際通り",
+      "牧志公設市場隣",
+      "人気店"
+    ],
     "curationNote": "牧志公設市場隣、1日3公演の島唄ライブが名物。流行り曲を民謡風にアレンジする演奏で国際通りでも遅くまで盛り上がれる。",
     "source": "https://www.hotpepper.jp/strJ003498296/"
   },
@@ -679,7 +836,7 @@
     "slug": "uojimaya-kumoji",
     "name": "本マグロ炉端劇場 魚島屋 久茂地本店",
     "genre": "海鮮",
-    "area": "久茂地",
+    "area": "那覇",
     "address": "沖縄県那覇市久茂地3-15-19",
     "nearestStation": "県庁前",
     "walkMinutes": 5,
@@ -695,7 +852,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["海鮮", "炉端焼", "本マグロ", "劇場型居酒屋", "人気店"],
+    "tags": [
+      "海鮮",
+      "炉端焼",
+      "本マグロ",
+      "劇場型居酒屋",
+      "人気店"
+    ],
     "curationNote": "全国から仕入れる新鮮な魚介と本マグロが売りの劇場型炉端居酒屋。掘りごたつの団体席もあり賑やかな雰囲気。",
     "source": "https://www.hotpepper.jp/strJ001144523/"
   },
@@ -704,7 +867,7 @@
     "slug": "dachibin-naha-kumoji",
     "name": "抱瓶（だちびん） 那覇久茂地店",
     "genre": "沖縄料理",
-    "area": "久茂地",
+    "area": "那覇",
     "address": "沖縄県那覇市久茂地2-18-1",
     "nearestStation": "美栄橋",
     "walkMinutes": 2,
@@ -720,7 +883,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["泡盛", "沖縄料理", "個室完備", "古民家風", "人気店"],
+    "tags": [
+      "泡盛",
+      "沖縄料理",
+      "個室完備",
+      "古民家風",
+      "人気店"
+    ],
     "curationNote": "古民家風の内装で刺身・しゃぶしゃぶなど沖縄料理と泡盛を楽しめる人気店。個室・貸切スペースが充実し団体宴会にも対応。",
     "source": "https://www.hotpepper.jp/strJ000706394/"
   },
@@ -729,7 +898,7 @@
     "slug": "urizun-asato",
     "name": "古酒と琉球料理 うりずん",
     "genre": "琉球料理",
-    "area": "安里",
+    "area": "那覇",
     "address": "沖縄県那覇市安里388-5",
     "nearestStation": "安里",
     "walkMinutes": 3,
@@ -745,7 +914,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["泡盛", "老舗", "琉球料理", "どぅる天発祥", "人気店"],
+    "tags": [
+      "泡盛",
+      "老舗",
+      "琉球料理",
+      "どぅる天発祥",
+      "人気店"
+    ],
     "curationNote": "1972年創業、県内47酒造所の泡盛古酒が揃う老舗琉球料理店。名物「どぅる天」発祥の店として知られ、栄町市場近くの下町情緒も魅力。",
     "source": "https://www.hotpepper.jp/strJ000114092/"
   }
