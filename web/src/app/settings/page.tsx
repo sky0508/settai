@@ -54,7 +54,7 @@ export default function SettingsPage() {
         <span className="material-symbols-outlined text-[22px]" style={{ color: '#cfa955' }}>chevron_right</span>
       </div>
 
-      <p className="text-[11px] text-center mt-4" style={{ color: '#9aa0ab' }}>接待ナビ v1.0.0</p>
+      <p className="text-[11px] text-center mt-4" style={{ color: '#9aa0ab' }}>会食ナビ v1.0.0</p>
     </div>
   );
 }

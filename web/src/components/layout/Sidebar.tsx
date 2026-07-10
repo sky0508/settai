@@ -42,7 +42,7 @@ export function Sidebar() {
           className="font-serif font-bold text-[25px] tracking-wide"
           style={{ color: '#f0e4cb' }}
         >
-          接待ナビ
+          会食ナビ
         </span>
       </div>
 

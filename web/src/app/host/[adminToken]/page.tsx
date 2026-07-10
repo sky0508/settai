@@ -66,7 +66,7 @@ export default async function HostPage({ params }: Props) {
             <span className="w-8 h-9 flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(150deg,#e6c987,#b98f3f)', clipPath: 'polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)' }}>
               <span className="material-symbols-outlined text-[17px]" style={{ color: '#17253f', fontVariationSettings: "'FILL' 1" }}>temple_buddhist</span>
             </span>
-            <span className="font-serif font-bold text-[16px]" style={{ color: '#17253f' }}>接待ナビ ・ 主催者ページ</span>
+            <span className="font-serif font-bold text-[16px]" style={{ color: '#17253f' }}>会食ナビ ・ 主催者ページ</span>
           </div>
           <Link href="/schedules" className="text-[12.5px] font-bold" style={{ color: '#8a93a4' }}>← 会食一覧</Link>
         </div>
