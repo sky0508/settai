@@ -31,12 +31,14 @@ export function Sidebar() {
             clipPath: 'polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)',
           }}
         >
-          <span
-            className="material-symbols-outlined text-[22px]"
-            style={{ color: '#17253f', fontVariationSettings: "'FILL' 1" }}
-          >
-            temple_buddhist
-          </span>
+          {/* 箸＋箸置き（アプリアイコン=継承ヘックスと同図） */}
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <g stroke="#17253f" strokeWidth="2.3" strokeLinecap="round">
+              <line x1="8" y1="15.5" x2="15.5" y2="8" />
+              <line x1="10" y1="17.5" x2="17.5" y2="10" />
+            </g>
+            <rect x="4" y="15.6" width="7" height="2.4" rx="1.2" fill="#17253f" transform="rotate(-46 7.5 16.8)" />
+          </svg>
         </div>
         <span
           className="font-serif font-bold text-[25px] tracking-wide"
