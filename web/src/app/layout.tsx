@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   description: '接待の店選びを、もっとスマートに',
 };
 
+// DB/認証に依存するページは build 時 prerender せず request 時にレンダリング
+// （env ミスや DB 障害でビルドが落ちるのを防ぎ、ダッシュボード等を常に最新にする）
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
   children,
 }: {
