@@ -1,8 +1,13 @@
 // 日程調整の時刻ユーティリティ（サーバー・クライアント両用の純関数）
-// 方針: スロットは JST の wall-clock を「UTC ラベル」で保存し、読み出しも UTC getter で
-//       行う。これでサーバー実行環境の TZ（Vercel=UTC）に依存せず数字が往復する。
+// 方針: すべて JST(UTC+9・DST なし) の実インスタントとして扱う。
+//   - 保存: JST の wall-clock を表す「本当の UTC 瞬間」を timestamp に入れる
+//     （例: 7/15 19:00 JST → 2026-07-15T10:00:00Z）。
+//   - 表示: 瞬間に +9h して UTC getter で読む = JST の wall-clock。
+//   これで実行環境（Vercel=UTC / Mac=JST）に依存せず一貫し、既存ダッシュボードの
+//   local 表示（Sora の JST ブラウザ／サーバー）とも日付が一致する。
 
 export const DOW_JA = ['日', '月', '火', '水', '木', '金', '土'];
+const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
 
 export type SlotSeed = { startsAt: Date; sortIndex: number };
 
@@ -39,7 +44,8 @@ export function generateSlots(input: GenerateSlotsInput): SlotSeed[] {
     for (let min = startMin; min < endMin; min += slotMinutes) {
       const hh = Math.floor(min / 60);
       const mm = min % 60;
-      const startsAt = new Date(Date.UTC(day.y, day.mo - 1, day.d, hh, mm));
+      // JST wall-clock を表す実インスタント（UTC = wall-clock - 9h）
+      const startsAt = new Date(Date.UTC(day.y, day.mo - 1, day.d, hh, mm) - JST_OFFSET_MS);
       slots.push({ startsAt, sortIndex: sortIndex++ });
     }
   }
@@ -50,21 +56,26 @@ export function generateSlots(input: GenerateSlotsInput): SlotSeed[] {
 function toDate(v: Date | string): Date {
   return v instanceof Date ? v : new Date(v);
 }
+// 瞬間を +9h シフトして UTC getter で JST wall-clock を読む
+function jst(v: Date | string): Date {
+  return new Date(toDate(v).getTime() + JST_OFFSET_MS);
+}
+const pad = (n: number) => String(n).padStart(2, '0');
 
 export function fmtDate(v: Date | string): string {
-  const dt = toDate(v);
-  return `${dt.getUTCMonth() + 1}/${dt.getUTCDate()}`;
+  const d = jst(v);
+  return `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
 }
 export function fmtDow(v: Date | string): string {
-  return DOW_JA[toDate(v).getUTCDay()];
+  return DOW_JA[jst(v).getUTCDay()];
 }
 export function fmtTime(v: Date | string): string {
-  const dt = toDate(v);
-  return `${String(dt.getUTCHours()).padStart(2, '0')}:${String(dt.getUTCMinutes()).padStart(2, '0')}`;
+  const d = jst(v);
+  return `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
 }
 export function dateKey(v: Date | string): string {
-  const dt = toDate(v);
-  return `${dt.getUTCFullYear()}-${dt.getUTCMonth() + 1}-${dt.getUTCDate()}`;
+  const d = jst(v);
+  return `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`;
 }
 export function fmtFull(v: Date | string): string {
   return `${fmtDate(v)}(${fmtDow(v)}) ${fmtTime(v)}`;
