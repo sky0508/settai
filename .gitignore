@@ -1,1 +1,11 @@
 .DS_Store
+
+# Python
+scripts/__pycache__/
+*.pyc
+
+# web/ アプリの依存・ビルド・env（web/.gitignore でも無視されるが二重で担保）
+web/node_modules/
+web/.next/
+web/.env*
+web/tsconfig.tsbuildinfo

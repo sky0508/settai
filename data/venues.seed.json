@@ -20,34 +20,14 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室完備", "大人数対応可", "駅直結"],
+    "tags": [
+      "接待向き",
+      "個室完備",
+      "大人数対応可",
+      "駅直結"
+    ],
     "curationNote": "京橋駅直結・東京駅徒歩5分。22室の個室で少人数〜32名まで幅広く対応。すき焼き・ふぐ会席も",
     "source": "https://www.kitaohji.co.jp/kyobashi/"
-  },
-  {
-    "id": "v-02",
-    "slug": "kyobashi-takemoto",
-    "name": "京橋たけ本",
-    "genre": "日本料理",
-    "area": "京橋",
-    "address": "東京都中央区京橋2-11-5 パインセントラルビル1F",
-    "nearestStation": "宝町",
-    "walkMinutes": 1,
-    "budgetMin": 15000,
-    "budgetMax": 19000,
-    "photoUrl": null,
-    "websiteUrl": "https://www.k-takemoto.com/",
-    "phone": "03-6228-6909",
-    "requiresReservation": true,
-    "formalityGrade": "A",
-    "privateRoomType": "半個室",
-    "privateRoomNote": "カウンター6席のほか最大8名利用可の個室・テーブル席あり",
-    "beerAffiliation": "unknown",
-    "beerConfidence": "unknown",
-    "beerSourceUrl": null,
-    "tags": ["日本酒充実", "隠れ家", "カウンター", "少人数向き"],
-    "curationNote": "旬の食材を使ったおまかせコース（8品15,000円／9品19,000円）中心。落ち着いた少人数の接待向き",
-    "source": "https://www.k-takemoto.com/"
   },
   {
     "id": "v-03",
@@ -70,7 +50,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["すき焼き", "懐石", "駅近", "接待向き"],
+    "tags": [
+      "すき焼き",
+      "懐石",
+      "駅近",
+      "接待向き"
+    ],
     "curationNote": "京橋駅徒歩1分。トマトすき焼きが名物の懐石・会席店で個室完備、オフィス街での会食に便利",
     "source": "https://kyobashi-basara.com/"
   },
@@ -95,7 +80,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["全席個室", "接待向き", "祝い事にも"],
+    "tags": [
+      "全席個室",
+      "接待向き",
+      "祝い事にも"
+    ],
     "curationNote": "だししゃぶが名物の全席個室しゃぶしゃぶ店。黒毛和牛や毛蟹入りの上位コースは特別な接待にも",
     "source": "https://hyoki.jp/shop/kyobashi/"
   },
@@ -120,7 +109,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["個室充実", "接待向き", "駅直結"],
+    "tags": [
+      "個室充実",
+      "接待向き",
+      "駅直結"
+    ],
     "curationNote": "京橋駅直結。ソファ個室から円卓個室まで揃い、フカヒレ・北京ダックの本格中華コースで接待に定評",
     "source": "https://www.iwaen.co.jp/kyoubasi.html"
   },
@@ -145,7 +138,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["フレンチの名店", "記念日", "格上の接待"],
+    "tags": [
+      "フレンチの名店",
+      "記念日",
+      "格上の接待"
+    ],
     "curationNote": "日本フレンチ界の重鎮・井上旭氏の名店。価格帯・格式ともに高く、格上の相手との特別な会食向け",
     "source": "https://www.chezinno.jp/"
   },
@@ -170,7 +167,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["鮨と天ぷら", "個室あり", "カジュアル接待"],
+    "tags": [
+      "鮨と天ぷら",
+      "個室あり",
+      "カジュアル接待"
+    ],
     "curationNote": "老舗大将による鮨と天ぷらの両方が楽しめる。ミドル予算のカジュアルな接待向き",
     "source": "https://gfek620.gorp.jp/"
   },
@@ -195,7 +196,10 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["鮨と懐石の融合", "静か"],
+    "tags": [
+      "鮨と懐石の融合",
+      "静か"
+    ],
     "curationNote": "2023年開業。鮨と懐石を融合した月替わりコースが特徴で、落ち着いたカウンター接待に向く",
     "source": "https://koujitsu.co.jp/news/7501/"
   },
@@ -220,7 +224,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["個室完備", "黒毛和牛", "駅直結"],
+    "tags": [
+      "個室完備",
+      "黒毛和牛",
+      "駅直結"
+    ],
     "curationNote": "京橋駅5b出口直結。黒毛和牛サーロインや本ズワイガニかにしゃぶの上位会席コースが接待向き",
     "source": "https://www.higashiyama.group/kyobashi/"
   },
@@ -245,7 +253,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["近江牛", "個室あり", "宴会にも"],
+    "tags": [
+      "近江牛",
+      "個室あり",
+      "宴会にも"
+    ],
     "curationNote": "近江牛のしゃぶしゃぶ・すき焼きが名物。上位コース（近江・竜王）は接待にも使えるグレード",
     "source": "https://chiriri.co.jp/kyobashi/menu.php"
   },
@@ -270,7 +282,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["個室充実", "接待向き", "隠れ家", "黒毛和牛A5"],
+    "tags": [
+      "個室充実",
+      "接待向き",
+      "隠れ家",
+      "黒毛和牛A5"
+    ],
     "curationNote": "個室率が高く少人数の商談会食に向く。コースは11,000〜23,000円まで段階があり予算調整しやすい",
     "source": "https://gez8533.gorp.jp/"
   },
@@ -295,7 +312,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["ミシュラン二つ星", "隠れ家", "個室完備", "予約困難"],
+    "tags": [
+      "ミシュラン二つ星",
+      "隠れ家",
+      "個室完備",
+      "予約困難"
+    ],
     "curationNote": "ミシュラン二つ星「青山 海味」の2号店。格の高さが伝わる会食に。予約は早めに",
     "source": "https://sushi-umi.co.jp/shop/yaesu/"
   },
@@ -320,7 +342,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["全席個室", "接待向き", "出汁しゃぶ"],
+    "tags": [
+      "全席個室",
+      "接待向き",
+      "出汁しゃぶ"
+    ],
     "curationNote": "名物「出汁しゃぶ」の京都しゃぶしゃぶ店。全室個室で落ち着いて会食できる定番の接待先",
     "source": "https://hyoki.jp/shop/yaesu/"
   },
@@ -345,7 +371,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["日本酒充実", "個室あり", "ミッドタウン八重洲"],
+    "tags": [
+      "日本酒充実",
+      "個室あり",
+      "ミッドタウン八重洲"
+    ],
     "curationNote": "東京駅直結で移動が楽。日本酒好きの会食相手向き。酒場エリアと分かれた個室で商談にも使える",
     "source": "https://www.yaesu.tokyo-midtown.com/shop-restaurant/detail/30800"
   },
@@ -370,34 +400,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["老舗", "名物うな重", "ミシュランビブグルマン"],
+    "tags": [
+      "老舗",
+      "名物うな重",
+      "ミシュランビブグルマン"
+    ],
     "curationNote": "1947年創業、ミシュランビブグルマン。完全個室はないためカジュアルな少人数会食向き",
     "source": "https://www.unahashi.com/"
-  },
-  {
-    "id": "v-16",
-    "slug": "yaesu-daihanten",
-    "name": "八重洲大飯店",
-    "genre": "中華",
-    "area": "八重洲",
-    "address": "東京都中央区日本橋3-3-2",
-    "nearestStation": "東京",
-    "walkMinutes": 3,
-    "budgetMin": 11500,
-    "budgetMax": 18730,
-    "photoUrl": null,
-    "websiteUrl": "https://chuuka.com/",
-    "phone": "03-3273-8921",
-    "requiresReservation": true,
-    "formalityGrade": "A",
-    "privateRoomType": "半個室",
-    "privateRoomNote": "個室での宴会コース利用が中心（税・サ・個室料込み表記）。5名以上のコースが基本",
-    "beerAffiliation": "unknown",
-    "beerConfidence": "unknown",
-    "beerSourceUrl": null,
-    "tags": ["老舗中華", "北京料理", "宴会向き"],
-    "curationNote": "戦後創業・昭和42年から同所で営業する老舗北京料理店。5名以上の個室宴会コースが接待向き",
-    "source": "http://www.chuuka.com/bk-nk.html"
   },
   {
     "id": "v-17",
@@ -420,7 +429,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["料亭", "個室5室", "記念日", "接待向き", "予約困難"],
+    "tags": [
+      "料亭",
+      "個室5室",
+      "記念日",
+      "接待向き",
+      "予約困難"
+    ],
     "curationNote": "1867年創業・金沢の老舗料亭の東京店。加賀コース14,300円〜兼六36,300円まで格式に応じて選べる",
     "source": "https://www.asadayaihei.co.jp/nihonbashi/"
   },
@@ -445,7 +460,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["カウンター", "記念日", "揚げたて"],
+    "tags": [
+      "カウンター",
+      "記念日",
+      "揚げたて"
+    ],
     "curationNote": "完全予約制のカウンター天ぷら。個室ではないため少人数の関係構築会食向き",
     "source": "https://www.tempura-asanuma.com/"
   },
@@ -470,7 +489,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["黒毛和牛一頭買い", "きちんとカジュアル", "日本橋駅直結"],
+    "tags": [
+      "黒毛和牛一頭買い",
+      "きちんとカジュアル",
+      "日本橋駅直結"
+    ],
     "curationNote": "少しカジュアルにしたい会食向き。日本橋駅直結でアクセス良好、極上食べ放題コースが上限12,000円",
     "source": "https://yakiniku-tokori-yaesu.com/course/"
   },
@@ -495,7 +518,13 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["老舗", "格式高い", "接待向き", "個室充実", "著名店"],
+    "tags": [
+      "老舗",
+      "格式高い",
+      "接待向き",
+      "個室充実",
+      "著名店"
+    ],
     "curationNote": "3代目当主がメディア出演でも知られる老舗割烹。格式と知名度で格上接待にも安心して使える",
     "source": "http://nihonbashi-yukari.com/"
   },
@@ -520,7 +549,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["接待向き", "個室充実", "COREDO室町", "ワイン充実"],
+    "tags": [
+      "接待向き",
+      "個室充実",
+      "COREDO室町",
+      "ワイン充実"
+    ],
     "curationNote": "COREDO室町直結でアクセス抜群。シャンパン・ワインも充実し格式のある会食に向く",
     "source": "https://www.seamon-nihonbashi.jp/"
   },
@@ -545,7 +579,11 @@
     "beerAffiliation": "mixed",
     "beerConfidence": "confirmed",
     "beerSourceUrl": "https://nihonbasshi-kitazumi.owst.jp/",
-    "tags": ["黒毛和牛", "接待向き", "隠れ家"],
+    "tags": [
+      "黒毛和牛",
+      "接待向き",
+      "隠れ家"
+    ],
     "curationNote": "A5黒毛和牛の鉄板焼きが主役。ビールはサントリー・マスターズドリームやギネス等を用意。個室はないがカウンター越しの臨場感で会話が弾む",
     "source": "https://nihonbasshi-kitazumi.owst.jp/"
   },
@@ -570,7 +608,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["三越直結", "個室充実", "接待向き"],
+    "tags": [
+      "三越直結",
+      "個室充実",
+      "接待向き"
+    ],
     "curationNote": "銀座アスター運営。三越本店内という立地で買い物ついでの接待にも便利",
     "source": "https://www.n-shion.jp/"
   },
@@ -595,7 +637,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["隠れ家", "予約困難", "完全個室", "1日2組限定"],
+    "tags": [
+      "隠れ家",
+      "予約困難",
+      "完全個室",
+      "1日2組限定"
+    ],
     "curationNote": "1日2組限定という希少性が最大の強み。他の客と会いたくない重要な接待に最適",
     "source": "https://nihonbashi-yuzukou-tokyo.gorp.jp/"
   },
@@ -620,7 +667,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["老舗", "うなぎ", "座敷個室", "接待向き"],
+    "tags": [
+      "老舗",
+      "うなぎ",
+      "座敷個室",
+      "接待向き"
+    ],
     "curationNote": "昭和21年創業のうなぎ老舗。和の懐石とうなぎを組み合わせた「旬彩膳」は格式ある会食向け",
     "source": "https://www.idumoya.com/honten/"
   },
@@ -645,7 +697,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["フレンチ", "ワイン充実", "接待向き"],
+    "tags": [
+      "フレンチ",
+      "ワイン充実",
+      "接待向き"
+    ],
     "curationNote": "室町エリアで数少ない本格フレンチ。三越前駅直結でアクセスも良い",
     "source": "https://www.yuito-nihonbashi.com/gourmet/pontdorinno_1F.html"
   },
@@ -670,7 +726,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["京料理", "個室充実", "接待向き"],
+    "tags": [
+      "京料理",
+      "個室充実",
+      "接待向き"
+    ],
     "curationNote": "おばんざい主体の京料理で、格式張りすぎず柔らかい雰囲気の会食に向く",
     "source": "https://www.hannariya.jp/"
   },
@@ -695,7 +755,12 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["焼肉", "個室充実", "COREDO日本橋", "大人数対応"],
+    "tags": [
+      "焼肉",
+      "個室充実",
+      "COREDO日本橋",
+      "大人数対応"
+    ],
     "curationNote": "カジュアルながらA5黒毛和牛の高級焼肉。畏まりすぎない接待や若手同席の会食向け",
     "source": "https://g181338.gorp.jp/"
   },
@@ -720,7 +785,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["すき焼き", "老舗肉問屋", "個室あり"],
+    "tags": [
+      "すき焼き",
+      "老舗肉問屋",
+      "個室あり"
+    ],
     "curationNote": "大正8年創業の肉問屋直営で仕入れ力に強み。予算を抑えつつきちんと個室で会食したい時に",
     "source": "https://www.niku-sasaki.com/"
   },
@@ -745,7 +814,11 @@
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
-    "tags": ["新店", "江戸前天ぷら", "個室あり"],
+    "tags": [
+      "新店",
+      "江戸前天ぷら",
+      "個室あり"
+    ],
     "curationNote": "2025年10月開業の江戸前天ぷら専門店。コース17,000円〜と本格的で格上の会食にも対応",
     "source": "https://tempura-fujinami.jp/"
   }

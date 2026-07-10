@@ -1,20 +1,38 @@
 ---
 name: settai-navi
 status: active
-next_action: plan.md 作成(v1=探索フロー: 探索→店舗詳細→軽量記録)。並行で ①暗黙知9軸ヒアリング(判定ロジックの重み確定) ②京橋 venues seed 化。UI 完成系は design/handoff が正
+next_action: 【リポ一本化 2026-07-10】正 repo を `sky0508/settai`（work-os 配下 02_projects/settai-navi）に統合。web コードを settai/web に取込み・impl ネスト git 解消（okinawa は 05_archives/settai-okinawa-impl-backup に退避）。残: ①🔴Neon本番キーのローテ(okinawa履歴に漏洩・GitHub公開済) ②web/npm install→ローカル起動確認 ③本番Vercelデプロイ ④暗黙知9軸で rule-engine 重み確定 ⑤旧 okinawa GitHub repo の archive/削除判断
 due:
-last_touched: 2026-07-09
+last_touched: 2026-07-10
 ---
 
 # 接待ナビ（settai-navi） — ステータス管理
 
-最終更新: 2026-07-09
+最終更新: 2026-07-10
+
+> **正 repo = `github.com/sky0508/settai`（= work-os 配下 `02_projects/settai-navi/`）に一本化（2026-07-10、前回決定を逆転）**。
+> 設計docs・実コード(`web/`)・データ・スクリプトを全てこのリポに集約。今後の開発は全てここで行う。
+> 旧 `sk2410yu/okinawa-2026-be-v1` の実装は `web/` として取込み済み（git履歴は引き継がず新規スタート＝漏洩コミットを持ち込まないため）。
+> 旧 impl clone は `05_archives/settai-okinawa-impl-backup/`（okinawa .git・未push commit da033b6・未コミット変更ごと退避）にバックアップ。
+> ⚠️ **Neon 本番クレデンシャルが okinawa git履歴（GitHub push済 commit c02e2a8）に残存 → ローテ必須**（SORA-SETUP.md 段階1 Step1）。
+
+### 統合後の構成
+```
+02_projects/settai-navi/   ← git: sky0508/settai（唯一の正リポ）
+├── web/          Next.js 16 アプリ本体（旧 impl/web、source のみ・node_modules は npm install で再生成）
+├── data/         seed JSON（venues 系は impl の enriched 版を採用）＋ review-gallery.html
+├── docs/         spec / design / plan / db-schema / research 等
+├── design/       UI モック・handoff・schedule
+├── scripts/      Python（gallery生成・Places写真取得）
+├── status.md / README.md / SORA-SETUP.md
+```
+> ※ venues.seed.json は impl版(28店・座標/カナ/写真enriched)を採用。旧 settai版のみにあった2店（京橋たけ本・八重洲大飯店）はバックアップに温存＝要る場合は再投入。実DBは Neon 側に別途seed済みのため seed.json 差分は低リスク。
 
 ## 現在のフェーズ
 
-**要件精緻化フェーズ（Phase 0.5）— UI完成系取込み済み → plan.md ＆ 暗黙知ヒアリング待ち**
+**実装フェーズ — v1 コア実装済み（impl repo に先行）**
 
-判定ロジックの中核（接待の店選びの暗黙知）を、センスの良い社員へのヒアリングで言語化・要件化する。現行の spec は「個室有無」「競合ビールNG」しか拾えておらず、格式の釣り合い等の高価値な暗黙知が未言語化のため。
+要件精緻化（Phase 0.5）で止まっていた docs を実態が追い越していた。impl repo `sk2410yu/okinawa-2026-be-v1` の `web/` に **Next.js 16 + Neon + Leaflet + Cloudinary** で v1 コアが動作（探索・地図・記録・ゲスト/店 CRUD・ダッシュボード・お気に入り・設定）。残るは本物データ投入・env キー・デプロイ・暗黙知チューニング、そして**セキュリティ対応（クレデンシャル漏洩）**。
 
 接待の店選び支援ツール。相手企業ごとの制約（例: キリン→競合ビール専売の店はNG）と、新人のセンス不足による失礼を、NG理由付きのおすすめランキングで防ぐ。接待記録を評価・シチュエーション付きで蓄積し社内ナレッジ基盤へ育てる。
 
@@ -22,8 +40,8 @@ last_touched: 2026-07-09
 
 - [x] `docs/spec.md` — 要件定義（何を・なぜ）
 - [x] `docs/design.md` — 設計仕様（構成・データモデル・判定ロジック・UI）
-- [ ] `docs/plan.md` — 実装計画（Phase 1〜6 の詳細タスク）
-- [ ] `README.md` / `SETUP.md` — 運用手順・env セットアップ
+- [x] `docs/plan.md` — 実装計画（**impl repo 側に存在**）
+- [ ] `README.md` / `SETUP.md` — 運用手順・env セットアップ（web README は create-next-app 雛形のまま・要整備）
 - [x] `docs/research/settai-venue-selection-research.md` — 接待の店選び解像度上げリサーチ（2026-07-08, 9軸A〜Iへマッピング済み・ヒアリング設問への反映提案付き）
 
 ## 決定事項（ヒアリング済み）
@@ -39,12 +57,15 @@ last_touched: 2026-07-09
 
 ## 次のアクション
 
-1. **【最優先】センスの良い社員へ暗黙知ヒアリング** — 接待の店選びの暗黙知を、下記「暗黙知9軸」を叩き台に言語化する。各軸を `[発火条件（相手/会の属性）] × [店属性] → [効果] + [理由文]` の型に落とせる粒度まで聞き出す。
-   - 特に確認したい: どの軸が実際に効くか（重み）／新人がやらかす典型例／機械では拾えない判断基準（格式ランク付けの基準・「接待慣れした店」の見分け方）
-2. ヒアリング結果を spec.md（要件）/ design.md（判定ロジック・入力フォーム項目）に反映
-3. Sora が spec.md / design.md をレビュー（修正あれば反映）
-4. plan.md を詳細化
-5. 実装 Phase 1（web/ scaffold）着手
+> 2026-07-09 実装棚卸しで全面差し替え。旧「plan.md 作成→実装着手」は impl repo で既に完了済み。
+
+1. **⚠️【最優先・セキュリティ】Neon 本番クレデンシャルのローテ** — impl repo `web/check-db.ts` に接続文字列（`neondb_owner:npg_...@ep-silent-sea-...neon.tech`）がハードコード＆コミット済み。Neon ダッシュボードでパスワードローテ → `check-db.ts` を `.env` 読込に変更 or gitignore。（Sora 作業＝Neon ダッシュボード）
+2. **正 repo への一本化** — 設計docs（spec/design/status/暗黙知9軸）を impl repo `okinawa-2026-be-v1` へ集約。以後この work-os 側はポインタのみ。
+3. **本物の店データ投入** — 現状 DB はデモ中心（店14件）。docs 側 `data/venues.seed.json`（京橋30件）/`venues.ginza.seed.json`（銀座20件）を impl repo の DB スキーマ（`formalityGrade` 直持ち等）へ型変換して seed 投入。
+4. **env キー投入（Sora 停止点）** — `CLOUDINARY_CLOUD_NAME/API_KEY/API_SECRET`（店画像アップロード）、`NEXT_PUBLIC_GOOGLE_PLACES_API_KEY`（店登録 autofill）。未設定でもデモは動くが両機能はオフ（graceful degrade）。
+5. **Vercel デプロイ** — `vercel.json` はあり。Vercel に接続し `DATABASE_URL` 他 env を投入。
+6. **暗黙知9軸ヒアリング → rule-engine 重み確定** — `lib/rule-engine.ts` のスコア係数（+30/-45 等）は現状ハードコードの仮値。下記9軸ヒアリングで重みを確定し反映。
+7. **db-schema.md と実コードのリコンサイル** — `db-schema.md`（格式=予算導出・`formality_grade` 廃止）と実コード（`formalityGrade` 列を直持ち）が未整合。どちらを正にするか判断。
 
 ## 暗黙知9軸（ヒアリングの叩き台 / 2026-07-08 整理）
 
@@ -68,6 +89,63 @@ last_touched: 2026-07-09
 - "使うほど賢くなる"が本当に効くのは C（接待オペ適性）。一度使わないと分からない＝社内記録が効く一点突破の根拠。
 
 ## セッションログ
+
+### 2026-07-10 (続) 店舗写真を各3枚のギャラリー表示に
+- Sora「いい感じ・各店3枚くらい入れて」→ `venues` に **`photos`(jsonb string[]) 列を追加**（ALTER TABLE 直接適用＋schema.ts 更新。`photoUrl`=代表1枚目を維持し map/検索カード/ダッシュボードは無改修）。
+- `backfill-venue-photos.ts` を**最大3枚取得・配列保存**に改修（target=`jsonb_array_length(photos)<3`、public_id=`<slug>-0/1/2`）→ 再実行で **全57店が3枚ずつ**（avg 3.00）。
+- 店舗詳細に**写真ギャラリー**（ヒーロー＋サムネ3枚）を追加（`venues/[id]/page.tsx`）。実機確認済み（銀座小十）。
+- **commit + push 済み**: impl `main` `e8a811e`（`25a0a99..e8a811e`）。tsc clean。
+
+### 2026-07-10 実行: A(地図)完成 / B(写真)は Google 側ブロッカーで保留
+- Sora が env セットアップ完了（.env に Neon/Places/Cloudinary）。**DATABASE_URL はパスワードのみ貼られていた**ので既知ホスト（`ep-silent-sea-...-pooler`）と合成してフル接続文字列を復元→接続OK（ローテ有効）。
+- **seed 実行**: 49件 insert（`nihonbashi-yukari` はデモ既存でskip）→ 50スラッグ全て DB に存在。
+- **座標**: `backfill-venue-coords.ts`(Nominatim) は日本のビル名住所に弱く 49件中9件のみ成功（フォールバック正規表現がビル名終わりに不発）→ **`backfill-venue-photos.ts`(Places) が「店名+住所」検索で残りを補完 → lat/lng は 59/59 完了**。
+- **✅ A(地図)完成**: `/map` を実機確認、**59ピン**が京橋/銀座/日本橋にクラスタ表示（記録ゼロ=グレー・記録あり=緑「1」）。map 改修＋座標投入が効いた。スクショ取得済み。
+- **⚠️ B(写真)ブロッカー**: Places のレスポンスに **`photos` と `reviews` だけが来ない**（`*` field mask でも欠落・他60フィールドは取得可・**東京タワーでも0枚**・HTTP 200/エラー無し）。＝店固有でなく**キー/プロジェクト/請求先レベルで licensed content(写真・口コミ)が絞られている**。写真保存 0件。
+  - **Sora 確認事項（写真を出すため）**: ①GCP で **「Places API」(レガシー) も有効化**（New だけだと photos が落ちる事例あり）②請求先アカウントが有効な課金状態か（トライアルでない）③APIキーの API 制限で除外していないか（一時的に「制限なし」でテスト）。
+  - 代替案: 公式サイト(websiteUrl)の OG 画像取得に切替も可。
+- **住所不一致検出**: フラグはデモ店(六本木/新宿/赤坂)のみ＝全角半角差の誤検知。**対象50店(銀座/京橋/日本橋/八重洲)は不一致ゼロ＝正しい店にヒット**。
+- dev サーバー稼働中（localhost:3000）。**未 commit / push**。
+
+#### 追記: B(写真)解決 — 請求先リンクで解放 → 57/59 完了
+- 原因確定＝**トライアル状態の課金だと 200 でデータは返るが `photos`/`reviews` だけ落ちる**。Sora が有料請求先 `sora_billing` を作成し**プロジェクトに紐付け**→ 銀座小十で写真10枚返るのを確認。
+- `backfill-venue-photos.ts` 再実行 → **写真 57/59 を Cloudinary(`res.cloudinary.com/p9ee5aic/settai/<slug>.jpg`) に保存**。取得不可は2件のみ(`kyobashi-takemoto`/`yaesu-daihanten`＝Googleに写真なし)。
+- DB 最終: venues 59 / lat 59 / photo_url 57。
+- **✅ 実機確認**: `/venues/<id>`(銀座小十) で Cloudinary 実写真が表示。`/map` で59ピン。**A+B 完了**。
+- **写真取得不可の2件（京橋たけ本 `kyobashi-takemoto`・八重洲大飯店 `yaesu-daihanten`）を DB＋seed から削除** → DB 最終 = venues 57 / 座標 57 / 写真 57（全店に座標＋写真）。
+- **commit + push 完了**: impl `main` に `25a0a99`（`c02e2a8..25a0a99`）。push 前に `.env` 追跡外・旧クレデンシャル文字列除去・`SORA-SETUP.md` は gitignore を確認済み。
+- 残（別件）: ①本番 Vercel デプロイ ②暗黙知9軸で rule-engine 重み確定 ③db-schema.md リコンサイル ④店舗詳細中段の空白ボックス（既存UI・要調査）。
+
+### 2026-07-09 (夕) AB=「50店を Google で肉付けして地図に出す」実装（DB非依存分を完了・env 停止点で停止）
+- **ブレスト結論**: ゴールは A(地図ピン表示)＋B(既存50店のデータ自動取込)。新規発掘(C/D)はやらない。地図タイルは Leaflet+OSM でキー不要、**Google Places の役割は「データ」だけ**。「Google でどこまで取れるか」を Artifact でフィールド全カタログ化（座標/基本情報/写真/評価=✅、個室/正確な予算/ビール系列=✕）。承認 plan=`~/.claude/plans/users-sorasasaki-work-os-02-projects-se-eventual-hammock.md`。
+- **impl repo を clone → 実地インスペクション**（public repo・`/Users/sorasasaki/work-os/02_projects/settai-navi/impl`）。判明した重要事実:
+  - `scripts/backfill-venue-coords.ts` は **Google でなく Nominatim(OSM) で住所→座標**。**地図(A)は Google キー不要**で座標が入る。Google が要るのは写真(B)だけ。
+  - `map/page.tsx` は **「接待記録が1件以上ある店だけピン表示」** → 50店は記録ゼロなので座標入れても出ない → **map 改修は必須**（条件付きでなく確定）。
+  - `venues` テーブルは旧 seed 型とほぼ一致（`formalityGrade`/`privateRoomType` 1列/`lat`/`lng`/`photoUrl` 列あり）。`seed.ts` は京橋30件しか読まない。
+  - `check-db.ts` の Neon 本番接続文字列漏洩を実物確認（唯一のハードコード箇所）。
+- **実施したコード変更**（impl・型チェック clean・未 commit）:
+  - `check-db.ts` 漏洩削除→`dotenv` 読込 / `seed.ts` に銀座20件追加(計50) / `data/venues.ginza.seed.json` 複製 / `map/page.tsx`+`MapClient.tsx` を記録ゼロ店も座標あればピン表示(ニュートラル色) / `scripts/backfill-venue-photos.ts` 新規(Places→Cloudinary) / `PlaceAutocomplete.tsx` の React19 型エラー修正(既存バグ)
+  - `web/.env` 雛形 + `web/DATA_IMPORT.md` 手順書を用意。
+- **停止点（Sora）**: ①Neon パスワードローテ→新 `DATABASE_URL` ②(写真用)Places/Cloudinary キー。値が入れば seed→coords backfill→dev で50ピン、続けて photos backfill。
+- **⚠️ 未 commit / push なし**。impl の変更は `/Users/sorasasaki/work-os/02_projects/settai-navi/impl` に置いてあるだけ（Sora 確認後に commit/push 判断）。
+
+### 2026-07-09 実装状況の棚卸し — 実装が別 repo で大きく先行していたことが判明
+- **発見**: docs（この work-os / `sky0508/settai`）は「Phase 0.5 要件精緻化・実装未着手」で止まっていたが、**実装は別 repo `sk2410yu/okinawa-2026-be-v1` の `web/` で v1 コアが完成**していた（最終コミット 2026-07-09 16:29・1コミットに squash）。
+  - スタック: **Next.js 16 + Neon(Drizzle) + Leaflet + Cloudinary**。**11テーブル**（users/companies/guests/venues/brand_rules/records/favorites/reservations/tags/venue_tags/guest_tags）。当初 thin slice（venues+brand_rules）想定を超え、フライホイール（ゲスト/記録/お気に入り）まで実装済み。
+  - 画面: home / search / **map** / dashboard / guests(CRUD) / venues(CRUD) / record / favorites / settings / reservations。
+- **Sora の「残り4項目」認識 vs 実態**（← 大半すでに実装済み）:
+
+  | Sora の認識 | 実態 | 判定 |
+  |---|---|---|
+  | 地図の機能 | `map/` に Leaflet + OpenStreetMap。**APIキー不要**。記録のある店を件数・平均★色分けピン表示（`MapClient.tsx`/`map/page.tsx`） | ✅ ほぼ完成 |
+  | 検索のロジック | `lib/rule-engine.ts` に **9軸スコアリング**（格式/予算/ビール/個室/立地/シーン/履歴/NG食材）+ NG降順 + 4軸バー。作り込み済み | ✅ 完成（重みは仮値） |
+  | DBにデータを入れる | Neon プロビジョン済み + seed一式（seed/seed-guests/seed-real-records/seed-favorites/backfill-coords）+ デモ14件投入済み | ⚠️ 仕組み完成・本物データ薄 |
+  | 画像も入れる | `venues/actions.ts` に Cloudinary アップロード、`PlaceAutocomplete.tsx` に Google Places autofill。`photoUrl` 列あり | ⚠️ 配線済・envキー未設定でオフ |
+
+- **⚠️ セキュリティ**: impl repo `web/check-db.ts` に **Neon 本番接続文字列がハードコード＆コミット済み**（`neondb_owner:npg_AHBaiIeq30xS@ep-silent-sea-aotovmx5-...neon.tech/neondb`）→ **パスワードローテ必須**（次アクション1）。
+- **決定**: **正 repo = impl（`okinawa-2026-be-v1`）に一本化**。設計docs も将来そちらへ集約。work-os 側はポインタ降格。
+- **未整合として記録**: 実コードは `formalityGrade`（S/A/B）列を直持ち／`docs/db-schema.md` は「格式=予算導出・`formality_grade` 廃止」→ 逆方向。リコンサイル要（次アクション7）。
+- スコープ: 今回は status.md（＋memory）更新のみ。残作業は「次のアクション」に記録し着手せず。
 
 ### 2026-07-08 (夕) MVP スコープ & 店DBの型 確定 + 京橋 seed 収集開始
 - **ブレスト成果**（承認済み plan: `~/.claude/plans/serene-swimming-cupcake.md`）:
