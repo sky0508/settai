@@ -42,6 +42,9 @@ export default function GuestsList({ rows, guestRows }: { rows: CompanyRow[], gu
     const [q, setQ] = useState('');
     const [tab, setTab] = useState<'company' | 'person'>('company');
 
+    // 人物詳細は /guests/[会社slug]/[人物id] なので companyId → slug を引けるようにする
+    const slugByCompanyId = new Map(rows.map((c) => [c.id, c.slug]));
+
     const normQ = normalize(q);
     const filtered = rows.filter(c => {
         if (!normQ) return true;
@@ -166,6 +169,7 @@ export default function GuestsList({ rows, guestRows }: { rows: CompanyRow[], gu
 
             {tab === 'person' && filteredGuests.map(g => {
                 const doDelete = deleteGuestFromList.bind(null, g.companyId, g.id);
+                const slug = slugByCompanyId.get(g.companyId);
                 return (
                     <div
                         key={g.id}
@@ -178,26 +182,34 @@ export default function GuestsList({ rows, guestRows }: { rows: CompanyRow[], gu
                             padding: '16px 20px',
                         }}
                     >
-                        <div className="flex-1 min-w-[200px]">
-                            <div className="text-[12px] text-navy/60 font-bold mb-0.5">{g.companyName}</div>
-                            <div className="font-serif font-bold text-[18px]" style={{ color: '#17253f' }}>
-                                {g.name} <span className="text-[13px] font-normal text-navy/70 ml-2">{g.title}</span>
+                        <Link
+                            href={slug ? `/guests/${slug}/${g.id}` : '#'}
+                            className="flex items-center gap-4 flex-1 min-w-0 group"
+                        >
+                            <div className="flex-1 min-w-[200px]">
+                                <div className="text-[12px] text-navy/60 font-bold mb-0.5">{g.companyName}</div>
+                                <div className="font-serif font-bold text-[18px] group-hover:text-gold transition-colors" style={{ color: '#17253f' }}>
+                                    {g.name} <span className="text-[13px] font-normal text-navy/70 ml-2">{g.title}</span>
+                                </div>
+                                <div className="flex items-center gap-2 mt-2 flex-wrap">
+                                    {g.preferences.length > 0 && (
+                                        <span className="flex items-center gap-1 text-[11px] font-bold text-gold-dark bg-gold/10 px-2 py-0.5 rounded-sm">
+                                            <span className="material-symbols-outlined text-[14px]">restaurant_menu</span>
+                                            {g.preferences.join('・')}
+                                        </span>
+                                    )}
+                                    {g.ngFoods.length > 0 && (
+                                        <span className="flex items-center gap-1 text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-sm">
+                                            <span className="material-symbols-outlined text-[14px]">block</span>
+                                            {g.ngFoods.join('・')}
+                                        </span>
+                                    )}
+                                </div>
                             </div>
-                            <div className="flex items-center gap-2 mt-2 flex-wrap">
-                                {g.preferences.length > 0 && (
-                                    <span className="flex items-center gap-1 text-[11px] font-bold text-gold-dark bg-gold/10 px-2 py-0.5 rounded-sm">
-                                        <span className="material-symbols-outlined text-[14px]">restaurant_menu</span>
-                                        {g.preferences.join('・')}
-                                    </span>
-                                )}
-                                {g.ngFoods.length > 0 && (
-                                    <span className="flex items-center gap-1 text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-sm">
-                                        <span className="material-symbols-outlined text-[14px]">block</span>
-                                        {g.ngFoods.join('・')}
-                                    </span>
-                                )}
-                            </div>
-                        </div>
+                            <span className="material-symbols-outlined text-[22px] ml-auto group-hover:text-gold transition-colors" style={{ color: '#c3ccd8' }}>
+                                chevron_right
+                            </span>
+                        </Link>
 
                         {/* ゲスト削除ボタン */}
                         <form action={doDelete}>

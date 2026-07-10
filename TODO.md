@@ -1,4 +1,4 @@
-# 接待ナビ — TODO
+# 会食ナビ — TODO
 
 > リポ一本化（2026-07-10, `sky0508/settai` に統合）後の残タスク。
 > 現況の詳細は [`status.md`](./status.md)、セットアップ手順は [`SORA-SETUP.md`](./SORA-SETUP.md) が正。

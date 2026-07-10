@@ -21,7 +21,7 @@
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
     "tags": [
-      "接待向き",
+      "会食向き",
       "個室完備",
       "大人数対応可",
       "駅直結"
@@ -54,7 +54,7 @@
       "すき焼き",
       "懐石",
       "駅近",
-      "接待向き"
+      "会食向き"
     ],
     "curationNote": "京橋駅徒歩1分。トマトすき焼きが名物の懐石・会席店で個室完備、オフィス街での会食に便利",
     "source": "https://kyobashi-basara.com/"
@@ -82,10 +82,10 @@
     "beerSourceUrl": null,
     "tags": [
       "全席個室",
-      "接待向き",
+      "会食向き",
       "祝い事にも"
     ],
-    "curationNote": "だししゃぶが名物の全席個室しゃぶしゃぶ店。黒毛和牛や毛蟹入りの上位コースは特別な接待にも",
+    "curationNote": "だししゃぶが名物の全席個室しゃぶしゃぶ店。黒毛和牛や毛蟹入りの上位コースは特別な会食にも",
     "source": "https://hyoki.jp/shop/kyobashi/"
   },
   {
@@ -111,10 +111,10 @@
     "beerSourceUrl": null,
     "tags": [
       "個室充実",
-      "接待向き",
+      "会食向き",
       "駅直結"
     ],
-    "curationNote": "京橋駅直結。ソファ個室から円卓個室まで揃い、フカヒレ・北京ダックの本格中華コースで接待に定評",
+    "curationNote": "京橋駅直結。ソファ個室から円卓個室まで揃い、フカヒレ・北京ダックの本格中華コースで会食に定評",
     "source": "https://www.iwaen.co.jp/kyoubasi.html"
   },
   {
@@ -141,7 +141,7 @@
     "tags": [
       "フレンチの名店",
       "記念日",
-      "格上の接待"
+      "格上の会食"
     ],
     "curationNote": "日本フレンチ界の重鎮・井上旭氏の名店。価格帯・格式ともに高く、格上の相手との特別な会食向け",
     "source": "https://www.chezinno.jp/"
@@ -170,9 +170,9 @@
     "tags": [
       "鮨と天ぷら",
       "個室あり",
-      "カジュアル接待"
+      "カジュアル会食"
     ],
-    "curationNote": "老舗大将による鮨と天ぷらの両方が楽しめる。ミドル予算のカジュアルな接待向き",
+    "curationNote": "老舗大将による鮨と天ぷらの両方が楽しめる。ミドル予算のカジュアルな会食向き",
     "source": "https://gfek620.gorp.jp/"
   },
   {
@@ -200,7 +200,7 @@
       "鮨と懐石の融合",
       "静か"
     ],
-    "curationNote": "2023年開業。鮨と懐石を融合した月替わりコースが特徴で、落ち着いたカウンター接待に向く",
+    "curationNote": "2023年開業。鮨と懐石を融合した月替わりコースが特徴で、落ち着いたカウンター会食に向く",
     "source": "https://koujitsu.co.jp/news/7501/"
   },
   {
@@ -229,7 +229,7 @@
       "黒毛和牛",
       "駅直結"
     ],
-    "curationNote": "京橋駅5b出口直結。黒毛和牛サーロインや本ズワイガニかにしゃぶの上位会席コースが接待向き",
+    "curationNote": "京橋駅5b出口直結。黒毛和牛サーロインや本ズワイガニかにしゃぶの上位会席コースが会食向き",
     "source": "https://www.higashiyama.group/kyobashi/"
   },
   {
@@ -258,7 +258,7 @@
       "個室あり",
       "宴会にも"
     ],
-    "curationNote": "近江牛のしゃぶしゃぶ・すき焼きが名物。上位コース（近江・竜王）は接待にも使えるグレード",
+    "curationNote": "近江牛のしゃぶしゃぶ・すき焼きが名物。上位コース（近江・竜王）は会食にも使えるグレード",
     "source": "https://chiriri.co.jp/kyobashi/menu.php"
   },
   {
@@ -284,7 +284,7 @@
     "beerSourceUrl": null,
     "tags": [
       "個室充実",
-      "接待向き",
+      "会食向き",
       "隠れ家",
       "黒毛和牛A5"
     ],
@@ -344,10 +344,10 @@
     "beerSourceUrl": null,
     "tags": [
       "全席個室",
-      "接待向き",
+      "会食向き",
       "出汁しゃぶ"
     ],
-    "curationNote": "名物「出汁しゃぶ」の京都しゃぶしゃぶ店。全室個室で落ち着いて会食できる定番の接待先",
+    "curationNote": "名物「出汁しゃぶ」の京都しゃぶしゃぶ店。全室個室で落ち着いて会食できる定番の会食先",
     "source": "https://hyoki.jp/shop/yaesu/"
   },
   {
@@ -433,7 +433,7 @@
       "料亭",
       "個室5室",
       "記念日",
-      "接待向き",
+      "会食向き",
       "予約困難"
     ],
     "curationNote": "1867年創業・金沢の老舗料亭の東京店。加賀コース14,300円〜兼六36,300円まで格式に応じて選べる",
@@ -521,11 +521,11 @@
     "tags": [
       "老舗",
       "格式高い",
-      "接待向き",
+      "会食向き",
       "個室充実",
       "著名店"
     ],
-    "curationNote": "3代目当主がメディア出演でも知られる老舗割烹。格式と知名度で格上接待にも安心して使える",
+    "curationNote": "3代目当主がメディア出演でも知られる老舗割烹。格式と知名度で格上会食にも安心して使える",
     "source": "http://nihonbashi-yukari.com/"
   },
   {
@@ -550,7 +550,7 @@
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
     "tags": [
-      "接待向き",
+      "会食向き",
       "個室充実",
       "COREDO室町",
       "ワイン充実"
@@ -581,7 +581,7 @@
     "beerSourceUrl": "https://nihonbasshi-kitazumi.owst.jp/",
     "tags": [
       "黒毛和牛",
-      "接待向き",
+      "会食向き",
       "隠れ家"
     ],
     "curationNote": "A5黒毛和牛の鉄板焼きが主役。ビールはサントリー・マスターズドリームやギネス等を用意。個室はないがカウンター越しの臨場感で会話が弾む",
@@ -611,9 +611,9 @@
     "tags": [
       "三越直結",
       "個室充実",
-      "接待向き"
+      "会食向き"
     ],
-    "curationNote": "銀座アスター運営。三越本店内という立地で買い物ついでの接待にも便利",
+    "curationNote": "銀座アスター運営。三越本店内という立地で買い物ついでの会食にも便利",
     "source": "https://www.n-shion.jp/"
   },
   {
@@ -643,7 +643,7 @@
       "完全個室",
       "1日2組限定"
     ],
-    "curationNote": "1日2組限定という希少性が最大の強み。他の客と会いたくない重要な接待に最適",
+    "curationNote": "1日2組限定という希少性が最大の強み。他の客と会いたくない重要な会食に最適",
     "source": "https://nihonbashi-yuzukou-tokyo.gorp.jp/"
   },
   {
@@ -671,7 +671,7 @@
       "老舗",
       "うなぎ",
       "座敷個室",
-      "接待向き"
+      "会食向き"
     ],
     "curationNote": "昭和21年創業のうなぎ老舗。和の懐石とうなぎを組み合わせた「旬彩膳」は格式ある会食向け",
     "source": "https://www.idumoya.com/honten/"
@@ -700,7 +700,7 @@
     "tags": [
       "フレンチ",
       "ワイン充実",
-      "接待向き"
+      "会食向き"
     ],
     "curationNote": "室町エリアで数少ない本格フレンチ。三越前駅直結でアクセスも良い",
     "source": "https://www.yuito-nihonbashi.com/gourmet/pontdorinno_1F.html"
@@ -722,14 +722,14 @@
     "requiresReservation": true,
     "formalityGrade": "A",
     "privateRoomType": "完全個室",
-    "privateRoomNote": "掘りごたつの完全個室で接待・宴会向き",
+    "privateRoomNote": "掘りごたつの完全個室で会食・宴会向き",
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
     "tags": [
       "京料理",
       "個室充実",
-      "接待向き"
+      "会食向き"
     ],
     "curationNote": "おばんざい主体の京料理で、格式張りすぎず柔らかい雰囲気の会食に向く",
     "source": "https://www.hannariya.jp/"
@@ -751,7 +751,7 @@
     "requiresReservation": true,
     "formalityGrade": "B",
     "privateRoomType": "完全個室",
-    "privateRoomNote": "2〜4名/5〜8名/9〜32名の複数個室を用意し大人数の接待・宴会にも対応",
+    "privateRoomNote": "2〜4名/5〜8名/9〜32名の複数個室を用意し大人数の会食・宴会にも対応",
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
@@ -761,7 +761,7 @@
       "COREDO日本橋",
       "大人数対応"
     ],
-    "curationNote": "カジュアルながらA5黒毛和牛の高級焼肉。畏まりすぎない接待や若手同席の会食向け",
+    "curationNote": "カジュアルながらA5黒毛和牛の高級焼肉。畏まりすぎない会食や若手同席の会食向け",
     "source": "https://g181338.gorp.jp/"
   },
   {
@@ -781,7 +781,7 @@
     "requiresReservation": true,
     "formalityGrade": "B",
     "privateRoomType": "完全個室",
-    "privateRoomNote": "接待利用時は個室を案内。掘りごたつ席もあり",
+    "privateRoomNote": "会食利用時は個室を案内。掘りごたつ席もあり",
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,
@@ -810,7 +810,7 @@
     "requiresReservation": true,
     "formalityGrade": "A",
     "privateRoomType": "半個室",
-    "privateRoomNote": "カウンター2卓(8席・6席は個室)で少人数の個室接待向き",
+    "privateRoomNote": "カウンター2卓(8席・6席は個室)で少人数の個室会食向き",
     "beerAffiliation": "unknown",
     "beerConfidence": "unknown",
     "beerSourceUrl": null,

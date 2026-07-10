@@ -17,8 +17,8 @@ const notoSerifJP = Noto_Serif_JP({
 });
 
 export const metadata: Metadata = {
-  title: '接待ナビ',
-  description: '接待の店選びを、もっとスマートに',
+  title: '会食ナビ',
+  description: '会食の店選びを、もっとスマートに',
 };
 
 // DB/認証に依存するページは build 時 prerender せず request 時にレンダリング

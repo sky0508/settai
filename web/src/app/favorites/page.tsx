@@ -19,6 +19,7 @@ export default async function FavoritesPage() {
       tags: venues.tags,
       nearestStation: venues.nearestStation,
       walkMinutes: venues.walkMinutes,
+      photoUrl: venues.photoUrl,
     })
     .from(venues)
     .innerJoin(favorites, and(eq(venues.id, favorites.venueId), eq(favorites.userId, adminUser.id)))

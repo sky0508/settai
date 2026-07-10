@@ -103,7 +103,7 @@
           <!-- guest summary -->
           <div style="margin-top:12px;border:1px solid #ece6da;background:#faf7f0;border-radius:11px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:#55617a;">
             <div style="min-width:230px;flex:1;"><b style="color:#3a4661;">好み：</b>日本酒 / 落ち着いた雰囲気</div>
-            <div style="min-width:230px;flex:1;"><b style="color:#3a4661;">直近の接待：</b>2025年5月 銀座 しのはら ★4.5</div>
+            <div style="min-width:230px;flex:1;"><b style="color:#3a4661;">直近の会食：</b>2025年5月 銀座 しのはら ★4.5</div>
             <div style="min-width:230px;flex:1;"><b style="color:#3a4661;">NG：</b>貝類アレルギー</div>
             <div style="min-width:230px;flex:1;"><b style="color:#3a4661;">反省メモ：</b>個室がやや騒がしかった</div>
           </div>
@@ -178,7 +178,7 @@
             </div>
           </sc-for>
         </div>
-        <p style="text-align:center;font-size:12px;color:#9aa0ab;margin-top:22px;">※ フィット度はゲストの好み・NG・接待履歴・エリアの重複などを総合的にスコアリングした参考値です。</p>
+        <p style="text-align:center;font-size:12px;color:#9aa0ab;margin-top:22px;">※ フィット度はゲストの好み・NG・会食履歴・エリアの重複などを総合的にスコアリングした参考値です。</p>
       </div>
       </sc-if>
 
@@ -223,7 +223,7 @@
             <!-- おすすめ理由 -->
             <div style="margin-top:16px;background:#fff;border:1px solid #efe9dd;border-radius:14px;padding:18px 20px;">
               <div style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:16px;color:#17253f;margin-bottom:10px;">おすすめ理由</div>
-              <p style="font-size:14px;line-height:1.85;color:#4d5772;margin:0;text-wrap:pretty;">旬の魚がちょうど最盛期を迎えており、今の時期ならではの味わいをお楽しみいただけます。落ち着いた個室で静かに過ごせるため、日本酒がお好きな役員の方のご接待に最適です。</p>
+              <p style="font-size:14px;line-height:1.85;color:#4d5772;margin:0;text-wrap:pretty;">旬の魚がちょうど最盛期を迎えており、今の時期ならではの味わいをお楽しみいただけます。落ち着いた個室で静かに過ごせるため、日本酒がお好きな役員の方のご会食に最適です。</p>
             </div>
           </div>
 
@@ -384,7 +384,7 @@
               </div>
               <div style="display:flex;align-items:center;gap:14px;margin-left:auto;">
                 <div style="text-align:right;">
-                  <div style="font-size:11px;color:#9aa0ab;">直近の接待</div>
+                  <div style="font-size:11px;color:#9aa0ab;">直近の会食</div>
                   <div style="font-size:12.5px;color:#55617a;margin-top:3px;display:flex;align-items:center;gap:6px;justify-content:flex-end;">
                     {{ g.last }}
                     <sc-if value="{{ g.hasRating }}" hint-placeholder-val="{{ true }}">
@@ -452,7 +452,7 @@
             </div>
             <div style="display:flex;align-items:center;gap:14px;">
               <span class="ms" style="font-size:22px;color:#98a2b3;">calendar_month</span>
-              <span style="width:78px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">接待頻度</span>
+              <span style="width:78px;font-size:14px;font-weight:700;color:#3a4661;flex-shrink:0;">会食頻度</span>
               <span style="font-size:14.5px;color:#3a4661;">月1〜2回</span>
             </div>
 
@@ -465,7 +465,7 @@
           <div>
             <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px;">
               <span class="ms" style="font-size:22px;color:#14233f;">history</span>
-              <h2 style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:20px;margin:0;color:#17253f;">接待履歴</h2>
+              <h2 style="font-family:'Noto Serif JP',serif;font-weight:600;font-size:20px;margin:0;color:#17253f;">会食履歴</h2>
             </div>
             <div style="display:flex;flex-direction:column;gap:14px;">
               <sc-for list="{{ guest.history }}" as="h" hint-placeholder-count="3">
@@ -480,7 +480,7 @@
                 </div>
               </sc-for>
               <div onClick="{{ goRecord }}" style="border:1.5px dashed #d8bd78;border-radius:14px;padding:18px;text-align:center;color:#a37f2b;font-weight:700;font-size:14.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;background:#fdfaf2;" style-hover="background:#faf4e6;">
-                <span class="ms" style="font-size:20px;">add</span>接待履歴を追加
+                <span class="ms" style="font-size:20px;">add</span>会食履歴を追加
               </div>
             </div>
           </div>
@@ -488,10 +488,10 @@
       </div>
       </sc-if>
 
-      <!-- ============ SCREEN: 接待を記録する ============ -->
+      <!-- ============ SCREEN: 会食を記録する ============ -->
       <sc-if value="{{ isRecord }}" hint-placeholder-val="{{ true }}">
       <div style="max-width:880px;margin:0 auto;padding:clamp(16px,3vw,40px);">
-        <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 4px;color:#14233f;">接待を記録する</h1>
+        <h1 style="font-family:'Noto Serif JP',serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 4px;color:#14233f;">会食を記録する</h1>
         <div style="width:56px;height:3px;background:#bf9540;border-radius:2px;margin-bottom:26px;"></div>
 
         <div style="background:#fff;border-radius:18px;border:1px solid #efe9dd;box-shadow:0 10px 30px rgba(20,35,63,0.06);padding:clamp(18px,2.6vw,32px);display:flex;flex-direction:column;gap:20px;">
@@ -777,7 +777,7 @@ class Component extends DCLogic {
       { label: '氏名', placeholder: '例）山田 太郎' },
       { label: '役職', placeholder: '例）部長' },
       { label: '会社', placeholder: '例）株式会社セッタイ' },
-      { label: '好み（任意）', placeholder: '例）和食  接待向き  個室', tag: true, hint: true },
+      { label: '好み（任意）', placeholder: '例）和食  会食向き  個室', tag: true, hint: true },
       { label: 'NG・苦手（任意）', placeholder: '例）生もの  辛い料理  喫煙可', tag: true, hint: true },
       { label: '予算目安', placeholder: '例）10,000円〜15,000円' }
     ];
@@ -792,7 +792,7 @@ class Component extends DCLogic {
     var rawCompanies = [
       {
         name: '株式会社サンプル商事', industry: '総合商社', drink: 'サッポロ系',
-        memo: '接待に慣れた先方。銀座エリアを好み、格式を重視。年末の忘年会は特に重要度が高い。',
+        memo: '会食に慣れた先方。銀座エリアを好み、格式を重視。年末の忘年会は特に重要度が高い。',
         people: [
           { name: '山田 太郎', title: '取締役', likes: ['日本酒', '個室希望'], ng: '貝類アレルギー', last: '2025年5月 銀座 しのはら', rating: '4.5' },
           { name: '田中 次郎', title: '営業部長', likes: ['焼酎', '和食'], ng: 'なし', last: '2025年5月 銀座 しのはら', rating: '4.5' }
@@ -810,14 +810,14 @@ class Component extends DCLogic {
         memo: '女性役員が中心。カウンターの寿司店を好む。静かすぎる個室より活気のある店が好評。',
         people: [
           { name: '鈴木 花子', title: '常務', likes: ['寿司', 'カウンター'], ng: '辛い料理', last: '2025年6月 銀座 鮨 一心', rating: '5.0' },
-          { name: '伊藤 美咲', title: '経営企画室長', likes: ['イタリアン'], ng: 'なし', last: '接待履歴なし', rating: '' }
+          { name: '伊藤 美咲', title: '経営企画室長', likes: ['イタリアン'], ng: 'なし', last: '会食履歴なし', rating: '' }
         ]
       },
       {
         name: 'アサヒ商事株式会社', industry: '食品商社', drink: 'アサヒ',
         memo: '新規開拓中の先方。まだ好みを把握できていないため、無難で外さない店から関係を作りたい。',
         people: [
-          { name: '高橋 誠', title: '課長', likes: ['焼肉', '個室希望'], ng: 'なし', last: '接待履歴なし', rating: '' }
+          { name: '高橋 誠', title: '課長', likes: ['焼肉', '個室希望'], ng: 'なし', last: '会食履歴なし', rating: '' }
         ]
       }
     ];

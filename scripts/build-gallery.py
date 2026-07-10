@@ -131,7 +131,7 @@ def build(venues: list[dict], title: str) -> str:
   .foot a {{ color:var(--gold); text-decoration:none; font-weight:600; }}
 </style></head>
 <body>
-<header><h1>接待ナビ — 銀座＋京橋補完 レビュー用ギャラリー</h1><div class="sum">{esc(summary)}</div></header>
+<header><h1>会食ナビ — 銀座＋京橋補完 レビュー用ギャラリー</h1><div class="sum">{esc(summary)}</div></header>
 <main>
 {cards}
 </main>
@@ -143,7 +143,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", default="data/venues.ginza.seed.json")
     ap.add_argument("--out", default="data/review-gallery.html")
-    ap.add_argument("--title", default="接待ナビ — 銀座＋京橋 レビュー")
+    ap.add_argument("--title", default="会食ナビ — 銀座＋京橋 レビュー")
     args = ap.parse_args()
 
     input_path = (PROJECT_ROOT / args.input).resolve()

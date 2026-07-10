@@ -1,4 +1,4 @@
-# 接待ナビ — DB 型設計 v1（ロジック逆算）
+# 会食ナビ — DB 型設計 v1（ロジック逆算）
 
 > 作り方の順番: **データ構造から決めない**。まず「いい感じの店が出るロジック」を固定し、そのロジックが成り立つために**最小限必要なデータ構造を逆算**する。
 > 入力: [`data-availability-matrix.md`](./research/settai-venue-selection-research.md の隣) の「データベースに入れるか」列（Sora 判断）を反映。
@@ -54,7 +54,7 @@ Step4 ランキング: スコア降順。NG は理由付きで下部に残す（
 | **E 料理** | guest.ngFoods/allergies/pref/origin | `genre`（+拡大で食材）| 好み一致=加点／NG食材該当=減点/NG／出身地マッチ=加点 | venues.genre, guests |
 | **E×F ジャンル適性** | purpose | `genre` | (寿司/懐石×顔合わせ=◎)／(焼肉×フォーマル=✕)| venues.genre, (config)genre_scene_fit |
 | **G タブー** | company | `beer_affiliation`,`beer_confidence` | 競合系統&confirmed=確定NG／自社系統=加点／unknown=注意 | venues.beer_*, brand_rules |
-| **H 予約堅牢性** | （重要接待）| `settai_records`集計 | 過去に個室確保OK実績=加点／取れなかった=減点 | settai_records |
+| **H 予約堅牢性** | （重要会食）| `settai_records`集計 | 過去に個室確保OK実績=加点／取れなかった=減点 | settai_records |
 | **C 黒子力** | 常時 | `settai_records`集計（rating/申し送り）| 高評価店=加点／「騒がしい」等の反省=減点 | settai_records |
 | **I 粋・攻めすぎ** | guest.isTired / isFirstMeeting | （記録・手動）| 疲労/初回×過剰格式or予約困難=減点 | settai_records, config |
 | **重複回避** | guestId | `settai_records`(guest×venue) | 前回と同じ店=減点 | settai_records |
@@ -146,7 +146,7 @@ Step4 ランキング: スコア降順。NG は理由付きで下部に残す（
 - seed: ビール4社 = 各社 own→prefer / 競合3社→ng（16行）。
 - 拡大: `company` を companies マスタ化 ＋ affiliation を業界横断（要 社内ヒアリング）。
 
-### 3.4 `settai_records` — 接待履歴（＝蓄積。黒子力/堅牢性/重複回避/好み学習の唯一の源）
+### 3.4 `settai_records` — 会食履歴（＝蓄積。黒子力/堅牢性/重複回避/好み学習の唯一の源）
 
 > v1 の最小 `records`(id/venue_id/decided_at/rating?/note?) を、この型に**拡張**する。書き込みが発生した時点で Neon 昇格。
 

@@ -49,7 +49,7 @@ export default async function ParticipantPage({ params, searchParams }: Props) {
           <span className="w-8 h-9 flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(150deg,#e6c987,#b98f3f)', clipPath: 'polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)' }}>
             <span className="material-symbols-outlined text-[17px]" style={{ color: '#17253f', fontVariationSettings: "'FILL' 1" }}>temple_buddhist</span>
           </span>
-          <span className="font-serif font-bold text-[17px]" style={{ color: '#17253f' }}>接待ナビ</span>
+          <span className="font-serif font-bold text-[17px]" style={{ color: '#17253f' }}>会食ナビ</span>
         </div>
 
         <div className="bg-white rounded-2xl p-6 md:p-8" style={{ border: '1px solid #eee6d8', boxShadow: '0 6px 22px rgba(20,35,63,.06)' }}>
@@ -101,7 +101,7 @@ export default async function ParticipantPage({ params, searchParams }: Props) {
             </form>
           )}
         </div>
-        <p className="text-center text-[11px] mt-4" style={{ color: '#9aa0ab' }}>Powered by 接待ナビ ・ ログイン不要でご回答いただけます</p>
+        <p className="text-center text-[11px] mt-4" style={{ color: '#9aa0ab' }}>Powered by 会食ナビ ・ ログイン不要でご回答いただけます</p>
       </div>
     </div>
   );

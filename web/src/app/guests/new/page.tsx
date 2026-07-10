@@ -23,6 +23,17 @@ export default function NewGuestPage() {
           />
         </div>
 
+        <div>
+          <label className="block text-xs font-semibold text-navy/60 mb-1.5">本社所在地（任意）</label>
+          <input
+            type="text"
+            name="address"
+            placeholder="例: 東京都中野区中野4-10-2"
+            className="w-full border border-navy/20 rounded-lg px-3 py-2 text-sm text-navy focus:outline-none focus:ring-2 focus:ring-gold/40"
+          />
+          <p className="text-[10px] text-navy/40 mt-1">※お店探しの「相手の拠点（動線）」に自動で使われます</p>
+        </div>
+
         <div className="h-px bg-navy/5" />
 
         <h2 className="text-[13.5px] font-bold text-navy">初期登録の担当者情報</h2>

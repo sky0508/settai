@@ -29,6 +29,9 @@ type Props = {
   initialGenres?: string[];
   initialBase?: string;
   initialGuestId?: string;
+  initialPartySize?: number;
+  reservationId?: string;
+  reservationLabel?: string | null;
   allComps?: { id: string; name: string; slug: string }[];
   allGuests?: { id: string; name: string; title: string; companyId: string; ngFoods: string[]; preferences: string[]; origin: string | null }[];
 };
@@ -41,6 +44,9 @@ export default function SearchClient({
   initialGenres = [],
   initialBase = '',
   initialGuestId = '',
+  initialPartySize,
+  reservationId,
+  reservationLabel = null,
   allComps = [],
   allGuests = [],
 }: Props) {
@@ -64,10 +70,12 @@ export default function SearchClient({
       ...DEFAULT_SEARCH,
       companyName: initialCompany,
       roles: initialRole ? [initialRole] : [],
+      purposes: initialPurpose ? [initialPurpose] : [],
       genres: initialGenres,
       ngFoods: initialNgFoods,
       guestBase: initialBase,
       guestId: initialGuestId,
+      partySize: initialPartySize ?? DEFAULT_SEARCH.partySize,
     };
     setLoading(true);
     searchVenues(init).then((data) => {
@@ -81,8 +89,15 @@ export default function SearchClient({
     <div className="p-4 md:p-6 max-w-7xl mx-auto">
       <h1 className="font-serif text-2xl font-semibold text-navy mb-5">お店を探す</h1>
 
+      {reservationId && reservationLabel && (
+        <div className="flex items-center gap-2 rounded-xl px-4 py-3 mb-5 text-[13px]" style={{ background: '#fbf3df', border: '1px solid #ecd9a8', color: '#6a5320' }}>
+          <span className="material-symbols-outlined text-[19px]" style={{ color: '#b8944a' }}>event_available</span>
+          <span>この会食（<b>{reservationLabel}</b>）のお店を選んでいます。店を決めると、日時・人数はそのままに予定へ反映されます。</span>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-5">
-        <div className="md:sticky md:top-6 md:self-start">
+        <div className="md:sticky md:top-6 md:self-start md:max-h-[calc(100dvh-3rem)] md:overflow-y-auto md:pr-1">
           <FilterPanel
             onSearch={handleSearch}
             loading={loading}
@@ -93,9 +108,9 @@ export default function SearchClient({
             initialGenres={initialGenres}
             initialBase={initialBase}
             initialGuestId={initialGuestId}
+            initialPartySize={initialPartySize}
             allComps={allComps}
             allGuests={allGuests}
-
           />
         </div>
 
@@ -154,7 +169,7 @@ export default function SearchClient({
             <div className="space-y-4">
               <p className="text-sm text-navy/60">{results.length}件の候補</p>
               {results.map((v, i) => (
-                <VenueCard key={v.id} venue={v} rank={i + 1} />
+                <VenueCard key={v.id} venue={v} rank={i + 1} reservationId={reservationId} />
               ))}
             </div>
           )}

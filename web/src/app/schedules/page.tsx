@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { db } from '@/lib/db/client';
 import { schedulePolls, scheduleParticipants } from '@/lib/db/schema';
 import { desc, eq, count } from 'drizzle-orm';
+import DeleteButton from '@/components/ui/DeleteButton';
+import { deletePoll } from './actions';
 
 const STATUS_MAP: Record<string, { label: string; bg: string; color: string }> = {
   open:           { label: '日程調整中', bg: '#f6ecd2', color: '#a37f2b' },
@@ -50,22 +52,31 @@ export default async function SchedulesPage() {
               const st = STATUS_MAP[p.status] ?? STATUS_MAP.open;
               const n = countMap.get(p.id) ?? 0;
               return (
-                <Link
+                <div
                   key={p.id}
-                  href={`/host/${p.adminToken}`}
                   className="flex items-center gap-3 px-4 py-4 hover:bg-slate-50 transition-colors rounded-lg"
                   style={{ borderBottom: '1px solid #f2efe8' }}
                 >
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: '#f4ead4' }}>
-                    <span className="material-symbols-outlined text-[21px]" style={{ color: '#bf9540' }}>event</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[14.5px] font-bold truncate" style={{ color: '#22314f' }}>{p.title}</div>
-                    <div className="text-[11.5px]" style={{ color: '#9aa0ab' }}>回答 {n} 名{p.purpose ? ` ・ ${p.purpose}` : ''}</div>
-                  </div>
-                  <span className="text-[11.5px] font-bold rounded-full px-2.5 py-0.5 shrink-0" style={{ background: st.bg, color: st.color }}>{st.label}</span>
-                  <span className="material-symbols-outlined text-[18px]" style={{ color: '#c9cdd6' }}>chevron_right</span>
-                </Link>
+                  <Link href={`/host/${p.adminToken}`} className="flex items-center gap-3 flex-1 min-w-0 group">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: '#f4ead4' }}>
+                      <span className="material-symbols-outlined text-[21px]" style={{ color: '#bf9540' }}>event</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[14.5px] font-bold truncate group-hover:text-gold transition-colors" style={{ color: '#22314f' }}>{p.title}</div>
+                      <div className="text-[11.5px]" style={{ color: '#9aa0ab' }}>回答 {n} 名{p.purpose ? ` ・ ${p.purpose}` : ''}</div>
+                    </div>
+                    <span className="text-[11.5px] font-bold rounded-full px-2.5 py-0.5 shrink-0" style={{ background: st.bg, color: st.color }}>{st.label}</span>
+                  </Link>
+                  <form action={deletePoll.bind(null, p.id)} className="shrink-0">
+                    <DeleteButton
+                      message={`会食「${p.title}」を削除しますか？\n候補日・回答者・回答もすべて削除されます。`}
+                      className="w-8 h-8 rounded-md flex items-center justify-center text-navy/25 hover:text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                      title="会食を削除"
+                    >
+                      <span className="material-symbols-outlined text-[19px]">delete</span>
+                    </DeleteButton>
+                  </form>
+                </div>
               );
             })}
           </div>

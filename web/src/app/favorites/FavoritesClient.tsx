@@ -7,6 +7,7 @@ type Venue = {
   id: string; name: string; genre: string; area: string;
   budgetMin: number; budgetMax: number; formalityGrade: string;
   privateRoomType: string; tags: string[]; nearestStation: string; walkMinutes: number;
+  photoUrl: string | null;
 };
 
 const GRADES = ['S', 'A', 'B'] as const;
@@ -15,7 +16,7 @@ const GRADE_LABEL: Record<string, { icon: string; title: string }> = {
   A: { icon: 'meeting_room',      title: 'A — きちんとした個室店' },
   B: { icon: 'coffee',            title: 'B — カジュアル' },
 };
-const SCENE_TAGS = ['接待向き', '隠れ家', '個室完備', '静か', '華やか', '眺望', '日本酒充実'];
+const SCENE_TAGS = ['会食向き', '隠れ家', '個室完備', '静か', '華やか', '眺望', '日本酒充実'];
 const AREAS = ['すべて', '京橋', '八重洲', '日本橋'];
 const GENRES = ['すべて', '日本料理', '寿司', '鉄板焼き', 'フレンチ', '中華', 'イタリアン', '焼肉'];
 const SORTS = [
@@ -201,12 +202,17 @@ function VenueCard({ venue }: { venue: Venue }) {
           boxShadow: '0 5px 16px rgba(20,35,63,0.05)',
         }}
       >
-        {/* 左：写真スロット */}
+        {/* 左：写真 */}
         <div
-          className="w-24 shrink-0 flex items-center justify-center"
+          className="w-24 shrink-0 flex items-center justify-center overflow-hidden"
           style={{ background: 'linear-gradient(155deg,#3a2c1c,#1a130c)' }}
         >
-          <span className="material-symbols-outlined text-[26px]" style={{ color: 'rgba(230,201,135,0.3)' }}>restaurant</span>
+          {venue.photoUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={venue.photoUrl} alt={venue.name} className="w-full h-full object-cover" loading="lazy" />
+          ) : (
+            <span className="material-symbols-outlined text-[26px]" style={{ color: 'rgba(230,201,135,0.3)' }}>restaurant</span>
+          )}
         </div>
         {/* 右：情報 */}
         <div className="flex-1 min-w-0 p-3.5">

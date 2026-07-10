@@ -12,8 +12,8 @@ function fmtDate(d: Date) {
 }
 
 const MOCK_UPCOMING = [
-  { id: 'u1', date: '7/15', dow: '火', store: '個室会席 北大路 京橋茶寮', name: '田中 一郎 様', company: 'キリンビール', status: '確定' },
-  { id: 'u2', date: '7/22', dow: '火', store: '日本料理 日本橋ゆかり', name: '山本 太郎 様', company: 'アサヒグループ', status: '調整中' },
+  { id: 'u1', date: '7/15', dow: '火', store: '個室会席 北大路 京橋茶寮', venueId: 'mock', name: '田中 一郎 様', company: 'キリンビール', status: '確定' },
+  { id: 'u2', date: '7/22', dow: '火', store: '日本料理 日本橋ゆかり', venueId: 'mock', name: '山本 太郎 様', company: 'アサヒグループ', status: '調整中' },
 ];
 
 const MOCK_RECENT = [
@@ -88,12 +88,12 @@ export default async function DashboardPage() {
 
   const stats = isMock
     ? [
-      { icon: 'calendar_month', label: '今月の接待件数', val: 12, unit: '件', star: false, delta: '前月比 +2件' },
+      { icon: 'calendar_month', label: '今月の会食件数', val: 12, unit: '件', star: false, delta: '前月比 +2件' },
       { icon: 'star', label: '平均満足度', val: '4.3', unit: null, star: true, delta: '前月比 +0.2' },
       { icon: 'storefront', label: '登録店舗', val: venueCount[0]?.count ?? 0, unit: '件', star: false, delta: null },
     ]
     : [
-      { icon: 'calendar_month', label: '今月の接待件数', val: thisMonth.length, unit: '件', star: false, delta: null },
+      { icon: 'calendar_month', label: '今月の会食件数', val: thisMonth.length, unit: '件', star: false, delta: null },
       { icon: 'star', label: '平均満足度', val: avgRating ?? '—', unit: null, star: !!avgRating, delta: null },
       { icon: 'storefront', label: '登録店舗', val: venueCount[0]?.count ?? 0, unit: '件', star: false, delta: null },
     ];
@@ -215,6 +215,7 @@ export default async function DashboardPage() {
       date: fmtDate(d),
       dow: DOW_JA[d.getDay()],
       store: venue?.name ?? '—',
+      venueId: r.venueId,
       name: guest ? `${guest.name} 様` : '—',
       company: guest?.companyName ?? '—',
       status: r.status === 'confirmed' ? '確定' : r.status === 'pending' ? '調整中' : r.status
@@ -283,7 +284,7 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      {/* 接待アナリティクス */}
+      {/* 会食アナリティクス */}
       <div className="grid gap-4 mb-5" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(340px,1fr))' }}>
         {/* 商談成果の分布 (Pie Donut Chart) */}
         <div className="p-6 flex flex-col sm:flex-row items-center gap-6" style={cardStyle}>
@@ -437,12 +438,12 @@ export default async function DashboardPage() {
 
       {/* 2カラム：予定 + 最近の記録 */}
       <div className="grid gap-4 mb-5" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(340px,1fr))' }}>
-        {/* 今後の接待予定 */}
+        {/* 今後の会食予定 */}
         <div className="p-[22px]" style={cardStyle}>
           <div className="flex items-center justify-between gap-2 mb-4">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-[21px]" style={{ color: '#c2a15a' }}>event</span>
-              <span className="font-serif font-bold text-[16px]" style={{ color: '#17253f' }}>今後の接待予定</span>
+              <span className="font-serif font-bold text-[16px]" style={{ color: '#17253f' }}>今後の会食予定</span>
             </div>
             <Link
               href="/reservations/new"
@@ -478,7 +479,18 @@ export default async function DashboardPage() {
                   >
                     <span className="material-symbols-outlined text-[18px]" style={{ color: 'rgba(230,201,135,0.4)' }}>restaurant</span>
                   </div>
-                  <div className="text-[13px] shrink-0" style={{ color: '#3a4661' }}>{u.store}</div>
+                  {u.venueId ? (
+                    <div className="text-[13px] shrink-0" style={{ color: '#3a4661' }}>{u.store}</div>
+                  ) : (
+                    <Link
+                      href={`/search?reservationId=${u.id}`}
+                      className="flex items-center gap-1 text-[12.5px] font-bold rounded-lg px-2.5 py-1.5 shrink-0 transition-colors"
+                      style={{ background: '#fbf3df', border: '1px solid #ecd9a8', color: '#a37f2b' }}
+                    >
+                      <span className="material-symbols-outlined text-[16px]">search</span>
+                      お店を探す
+                    </Link>
+                  )}
                   <span
                     className="text-[11.5px] font-bold rounded-full px-2.5 py-0.5 shrink-0"
                     style={u.status === '確定'
@@ -493,11 +505,11 @@ export default async function DashboardPage() {
           )}
         </div>
 
-        {/* 最近の接待記録 */}
+        {/* 最近の会食記録 */}
         <div className="p-[22px]" style={cardStyle}>
           <div className="flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-[21px]" style={{ color: '#c2a15a' }}>history_edu</span>
-            <span className="font-serif font-bold text-[16px]" style={{ color: '#17253f' }}>最近の接待記録</span>
+            <span className="font-serif font-bold text-[16px]" style={{ color: '#17253f' }}>最近の会食記録</span>
           </div>
           {displayRecent.length === 0 ? (
             <p className="text-[14px] text-center py-4" style={{ color: '#9aa0ab' }}>まだ記録がありません</p>
@@ -551,7 +563,7 @@ export default async function DashboardPage() {
                     <form action={doDelete}>
                       <DeleteButton
                         className="text-navy/20 hover:text-ng transition-colors cursor-pointer mt-1"
-                        title="接待記録を削除"
+                        title="会食記録を削除"
                       >
                         <span className="material-symbols-outlined text-[18px]">delete</span>
                       </DeleteButton>
@@ -607,7 +619,7 @@ export default async function DashboardPage() {
         <div className="p-5" style={cardStyle}>
           <div className="flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-[20px]" style={{ color: '#c2a15a' }}>category</span>
-            <span className="font-serif font-bold text-[15.5px]" style={{ color: '#17253f' }}>接待の目的から探す</span>
+            <span className="font-serif font-bold text-[15.5px]" style={{ color: '#17253f' }}>会食の目的から探す</span>
           </div>
           <div className="flex flex-col gap-2">
             {[
@@ -709,7 +721,7 @@ export default async function DashboardPage() {
           className="flex-1 py-3 rounded-xl text-center font-semibold text-[14px] border"
           style={{ color: '#3a4661', borderColor: '#e2dccf' }}
         >
-          接待を記録する
+          会食を記録する
         </Link>
       </div>
     </div>

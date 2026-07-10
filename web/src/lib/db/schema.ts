@@ -30,6 +30,7 @@ export const companies = pgTable('companies', {
   industry: text('industry').notNull(),
   initial: text('initial').notNull(),
   drinkAffiliation: text('drink_affiliation').notNull().default('none'), // kirin/asahi/suntory/sapporo/none
+  address: text('address'),                       // 本社所在地。お店検索の「相手の拠点（動線）」に使う
   memo: text('memo'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
@@ -200,6 +201,7 @@ export const scheduleSlots = pgTable('schedule_slots', {
   startsAt: timestamp('starts_at').notNull(),     // スロット開始（JST wall-clock を保存）
   slotMinutes: integer('slot_minutes').notNull().default(30),
   sortIndex: integer('sort_index').notNull(),     // グリッド安定ソート
+  blocked: boolean('blocked').notNull().default(false), // 主催者が「不可枠」に指定（参加者選択不可・確定候補から除外）
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 

@@ -97,7 +97,7 @@ function RecordFormInner({ allVenues, allGuests, allComps }: Props) {
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: 880, margin: '0 auto', padding: 'clamp(16px,3vw,40px)' }}>
       <h1 className="font-serif font-bold text-[clamp(26px,3.6vw,38px)] m-0 mb-1" style={{ color: '#14233f' }}>
-        接待を記録する
+        会食を記録する
       </h1>
       <div className="w-14 h-[3px] rounded mb-7" style={{ background: '#c2a15a' }} />
 
@@ -111,7 +111,7 @@ function RecordFormInner({ allVenues, allGuests, allComps }: Props) {
         }}
       >
         {/* 店舗とゲスト選択 */}
-        <Row label="接待店舗">
+        <Row label="会食店舗">
           <select
             value={venueId}
             onChange={(e) => setVenueId(e.target.value)}
@@ -123,7 +123,7 @@ function RecordFormInner({ allVenues, allGuests, allComps }: Props) {
           </select>
         </Row>
 
-        <Row label="接待相手">
+        <Row label="会食相手">
           <select
             value={guestId}
             onChange={(e) => setGuestId(e.target.value)}
@@ -144,7 +144,7 @@ function RecordFormInner({ allVenues, allGuests, allComps }: Props) {
         </Row>
 
         {/* 日時選択 */}
-        <Row label="接待日時">
+        <Row label="会食日時">
           <div style={{ ...fieldStyle, padding: 0, overflow: 'hidden' }}>
             <span className="material-symbols-outlined text-[20px] ml-4" style={{ color: '#c2a15a' }}>calendar_today</span>
             <input

@@ -39,3 +39,18 @@ export async function updateReservationStatus(id: string, status: string) {
     await db.update(reservations).set({ status }).where(eq(reservations.id, id));
     revalidatePath('/dashboard');
 }
+
+// 確定済み会食（予約）に、選んだ店を紐づける。日時・人数・用途は既存のまま保持し、
+// 新しい予約は作らない（「また一から登録」を防ぐ）。
+export async function attachVenueToReservation(reservationId: string, venueId: string) {
+    const [existing] = await db.select().from(reservations).where(eq(reservations.id, reservationId));
+    if (!existing) throw new Error('対象の会食予定が見つかりません。');
+
+    await db
+        .update(reservations)
+        .set({ venueId, status: 'confirmed', updatedAt: new Date() })
+        .where(eq(reservations.id, reservationId));
+
+    revalidatePath('/dashboard');
+    redirect('/dashboard');
+}

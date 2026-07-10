@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 
 export async function addCompanyWithGuest(formData: FormData) {
     const companyName = formData.get('company') as string;
+    const address = (formData.get('address') as string)?.trim() || null;
     const name = formData.get('name') as string;
     const title = formData.get('title') as string;
     const memoText = formData.get('memo') as string;
@@ -40,6 +41,7 @@ export async function addCompanyWithGuest(formData: FormData) {
         industry: '一般企業',
         initial,
         drinkAffiliation,
+        address,
         memo: `自動作成された取引先マスタです。 ${memoText ? `メモ: ${memoText}` : ''}`,
     }).returning();
 

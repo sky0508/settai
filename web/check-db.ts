@@ -13,7 +13,7 @@ async function main() {
 
     console.log('--- DB Data Counts ---');
     console.log('Venues:', vCount[0].c);
-    console.log('Records (接待記録):', rCount[0].c);
+    console.log('Records (会食記録):', rCount[0].c);
     console.log('Guests (ゲスト):', gCount[0].c);
     console.log('Companies (企業):', cCount[0].c);
     console.log('Favorites (お気に入り):', fCount[0].c);

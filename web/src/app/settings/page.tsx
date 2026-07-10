@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
 const MENU = [
-  { icon: 'storefront', label: 'プレミアム店舗の追加', href: '/venues/new', desc: '接待店を新規に自社DBへ追加' },
+  { icon: 'storefront', label: 'プレミアム店舗の追加', href: '/venues/new', desc: '会食店を新規に自社DBへ追加' },
   { icon: 'business', label: '会社ルール・メーカー辞書', href: '/settings/rules', desc: 'ビール4社の競合ルールを管理' },
   { icon: 'sell', label: 'タグマスタ管理', href: '/settings/tags', desc: '店舗や好みの分析用タグ辞書を整備' },
   { icon: 'person', label: 'アカウント情報', href: '/settings/account', desc: 'プロフィール・パスワード変更' },
-  { icon: 'notifications', label: '通知設定', href: '/settings/notify', desc: '接待前リマインダーなど' },
+  { icon: 'notifications', label: '通知設定', href: '/settings/notify', desc: '会食前リマインダーなど' },
   { icon: 'help', label: 'ヘルプ・お問い合わせ', href: '/settings/help', desc: '使い方・要望送信' },
   { icon: 'logout', label: 'ログアウト', href: '/settings/logout', desc: null },
 ];
@@ -53,7 +53,7 @@ export default function SettingsPage() {
         <span className="material-symbols-outlined text-[22px]" style={{ color: '#cfa955' }}>chevron_right</span>
       </div>
 
-      <p className="text-[11px] text-center mt-4" style={{ color: '#9aa0ab' }}>接待ナビ v1.0.0</p>
+      <p className="text-[11px] text-center mt-4" style={{ color: '#9aa0ab' }}>会食ナビ v1.0.0</p>
     </div>
   );
 }

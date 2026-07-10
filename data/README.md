@@ -8,7 +8,7 @@
 | ファイル | 役割 |
 |---|---|
 | `schema.ts` | **型の単一ソース**（`Venue` / `BrandRule` / `DiningRecord`）。DB化する時はこの型を Drizzle schema に写す |
-| `venues.seed.json` | 京橋・八重洲・日本橋の接待向け店 30 件（2026-07-08 収集）|
+| `venues.seed.json` | 京橋・八重洲・日本橋の会食向け店 30 件（2026-07-08 収集）|
 | `brand-rules.seed.json` | ビール4社の競合ルール 16 行（キリン/アサヒ/サントリー/サッポロ × own=prefer / 競合=ng）|
 
 ## venues の内訳（30件）

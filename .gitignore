@@ -9,3 +9,6 @@ web/node_modules/
 web/.next/
 web/.env*
 web/tsconfig.tsbuildinfo
+
+# Claude Code のローカル設定（共有しない）
+.claude/settings.local.json

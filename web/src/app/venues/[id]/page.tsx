@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/Badge';
 import { ScoreDonut } from '@/components/ui/ScoreDonut';
 import { toggleFavorite, deleteVenue } from '../actions';
+import { attachVenueToReservation } from '@/app/reservations/actions';
 import DeleteButton from '@/components/ui/DeleteButton';
 import PhotoCarousel from '@/components/ui/PhotoCarousel';
 import Link from 'next/link';
@@ -29,10 +30,11 @@ export default async function VenueDetailPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ score?: string; badge?: string; bars?: string }>;
+  searchParams: Promise<{ score?: string; badge?: string; bars?: string; reservationId?: string }>;
 }) {
   const { id } = await params;
   const sp = await searchParams;
+  const reservationId = sp.reservationId;
 
   const rows = await db.select().from(venues).where(eq(venues.id, id)).limit(1);
   if (rows.length === 0) notFound();
@@ -44,7 +46,7 @@ export default async function VenueDetailPage({
     : [];
   const isFavorite = favRows.length > 0;
 
-  // この店舗に対する過去の接待記録 (社内ナレッジ)
+  // この店舗に対する過去の会食記録 (社内ナレッジ)
   const venueRecords = await db
     .select({
       id: records.id,
@@ -250,19 +252,32 @@ export default async function VenueDetailPage({
           )}
 
           {/* CTA */}
-          <Link
-            href={`/reservations/new?venueId=${v.id}`}
-            className="block w-full py-3 rounded-xl text-center text-white font-semibold text-sm"
-            style={{ background: 'linear-gradient(135deg, #c2a15a 0%, #b8944a 100%)', boxShadow: '0 4px 12px rgba(184,148,74,0.25)' }}
-          >
-            このお店で接待を予定する
-          </Link>
+          {reservationId ? (
+            // 確定済み会食から来た場合: 既存の予定にこの店を紐づける（再入力なし）
+            <form action={attachVenueToReservation.bind(null, reservationId, v.id)}>
+              <button
+                type="submit"
+                className="block w-full py-3 rounded-xl text-center text-white font-semibold text-sm cursor-pointer"
+                style={{ background: 'linear-gradient(135deg, #c2a15a 0%, #b8944a 100%)', boxShadow: '0 4px 12px rgba(184,148,74,0.25)' }}
+              >
+                この会食の店に決定する
+              </button>
+            </form>
+          ) : (
+            <Link
+              href={`/reservations/new?venueId=${v.id}`}
+              className="block w-full py-3 rounded-xl text-center text-white font-semibold text-sm"
+              style={{ background: 'linear-gradient(135deg, #c2a15a 0%, #b8944a 100%)', boxShadow: '0 4px 12px rgba(184,148,74,0.25)' }}
+            >
+              このお店で会食を予定する
+            </Link>
+          )}
 
           <Link
             href={`/record?venueId=${v.id}`}
             className="block w-full py-2.5 rounded-xl text-center text-navy font-semibold text-sm bg-navy/5 hover:bg-navy/10 transition-colors"
           >
-            過去の接待記録をつける
+            過去の会食記録をつける
           </Link>
 
           <Link
@@ -303,7 +318,7 @@ export default async function VenueDetailPage({
         </div>
         {venueRecords.length === 0 ? (
           <div className="p-8 text-center text-sm text-navy/50 bg-white rounded-xl border border-navy/10">
-            まだこの店舗での接待記録はありません。
+            まだこの店舗での会食記録はありません。
           </div>
         ) : (
           <div className="grid gap-4">

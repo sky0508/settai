@@ -10,7 +10,7 @@ const ROLES = ['役員・経営層', '部長', '課長'];
 const PURPOSES = ['新規開拓', '関係強化', '謝罪', '御礼', '慰労'];
 const GENRES = [
   { id: '日本料理', label: '日本料理', icon: 'set_meal' },
-  { id: '寿司', label: '寿司', icon: 'sushi' },
+  { id: '寿司', label: '寿司', icon: 'rice_bowl' },
   { id: '鉄板焼き', label: '鉄板焼き', icon: 'outdoor_grill' },
   { id: 'フレンチ', label: 'フレンチ', icon: 'restaurant' },
   { id: '中華', label: '中華', icon: 'ramen_dining' },
@@ -34,6 +34,7 @@ type Props = {
   initialGenres?: string[];
   initialBase?: string;
   initialGuestId?: string;
+  initialPartySize?: number;
   allComps?: { id: string; name: string; slug: string }[];
   allGuests?: { id: string; name: string; title: string; companyId: string; ngFoods: string[]; preferences: string[]; origin: string | null }[];
 
@@ -79,6 +80,7 @@ export function FilterPanel({
   initialGenres = [],
   initialBase = '',
   initialGuestId = '',
+  initialPartySize,
   allComps = [],
   allGuests = [],
 
@@ -94,7 +96,7 @@ export function FilterPanel({
   const [budgetMax, setBudgetMax] = useState(15000);
   const [privateRoom, setPrivate] = useState(false);
   const [quietRoom, setQuiet] = useState(false);
-  const [partySize, setPartySize] = useState<number>(4);
+  const [partySize, setPartySize] = useState<number>(initialPartySize ?? 4);
   const [guestBase, setGuestBase] = useState(initialBase);
   const [showBeerModal, setBeerModal] = useState(false);
   const [beerMode, setBeerMode] = useState<'exclude' | 'keep'>('exclude');
@@ -174,7 +176,7 @@ export function FilterPanel({
 
       {/* ゲスト（個人） */}
       <div>
-        <label className="block text-xs font-semibold text-navy/60 mb-2">接待相手（個人・履歴から）</label>
+        <label className="block text-xs font-semibold text-navy/60 mb-2">会食相手（個人・履歴から）</label>
         <Combobox
           placeholder="名前を入力して検索..."
           value={guestId}
@@ -212,7 +214,7 @@ export function FilterPanel({
 
       {/* 目的 */}
       <div>
-        <label className="block text-xs font-semibold text-navy/60 mb-2">接待の目的</label>
+        <label className="block text-xs font-semibold text-navy/60 mb-2">会食の目的</label>
         <ChipGroup options={PURPOSES} selected={purposes} onChange={setPurposes} />
       </div>
 
@@ -253,7 +255,7 @@ export function FilterPanel({
                 >
                   {g.icon}
                 </span>
-                <span className="text-[11.5px] font-bold">{g.label}</span>
+                <span className="text-[11.5px] font-bold whitespace-nowrap">{g.label}</span>
               </button>
             );
           })}

@@ -17,6 +17,11 @@ export async function updateCompanyMemo(id: string, memo: string, slug: string) 
     revalidatePath(`/guests/${slug}`);
 }
 
+export async function updateCompanyAddress(id: string, address: string, slug: string) {
+    await db.update(companies).set({ address: address.trim() || null }).where(eq(companies.id, id));
+    revalidatePath(`/guests/${slug}`);
+}
+
 export async function deleteCompany(id: string) {
     // guests の cascade delete がスキーマに設定済みなので company のみ消せばOK
     await db.delete(companies).where(eq(companies.id, id));

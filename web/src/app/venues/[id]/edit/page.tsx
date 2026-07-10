@@ -136,9 +136,9 @@ export default async function EditVenuePage({ params }: { params: Promise<{ id: 
                         <div className="flex flex-col gap-1.5">
                             <label className="text-[13px] font-bold text-navy/70">格式グレード <span className="text-red-500">*</span></label>
                             <select name="formalityGrade" required defaultValue={v.formalityGrade} className="w-full border border-[#dfe3ea] focus:border-[#c2a15a] rounded-xl px-4 py-2.5 text-[14px] outline-none bg-white">
-                                <option value="S">S（役員・社長接待向け極上店）</option>
-                                <option value="A">A（部長・課長接待向け上質店）</option>
-                                <option value="B">B（一般接待・カジュアル店）</option>
+                                <option value="S">S（役員・社長会食向け極上店）</option>
+                                <option value="A">A（部長・課長会食向け上質店）</option>
+                                <option value="B">B（一般会食・カジュアル店）</option>
                             </select>
                         </div>
                         <div className="flex flex-col gap-1.5">

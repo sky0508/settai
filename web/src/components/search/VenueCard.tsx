@@ -50,12 +50,12 @@ function ScoreBar({ label, val }: { label: string; val: number }) {
   );
 }
 
-type Props = { venue: RankedVenue; rank: number };
+type Props = { venue: RankedVenue; rank: number; reservationId?: string };
 
-export function VenueCard({ venue, rank }: Props) {
+export function VenueCard({ venue, rank, reservationId }: Props) {
   const featured = rank === 1;
   const { bg, text } = BADGE_COLOR[venue.badge] ?? BADGE_COLOR.OK;
-  const href = `/venues/${venue.id}?score=${venue.score}&badge=${encodeURIComponent(venue.badge)}&bars=${encodeURIComponent(JSON.stringify(venue.bars))}`;
+  const href = `/venues/${venue.id}?score=${venue.score}&badge=${encodeURIComponent(venue.badge)}&bars=${encodeURIComponent(JSON.stringify(venue.bars))}${reservationId ? `&reservationId=${reservationId}` : ''}`;
 
   const tagBg = '#f3ead2';
   const tagText = '#9a7a30';

@@ -28,7 +28,7 @@ export default async function NewReservationPage({ searchParams }: { searchParam
             </nav>
 
             <h1 className="font-serif text-xl font-semibold text-navy">
-                今後の接待予定を登録
+                今後の会食予定を登録
             </h1>
 
             <form action={createReservation} className="bg-white rounded-xl shadow-sm p-6 space-y-5">
@@ -43,7 +43,7 @@ export default async function NewReservationPage({ searchParams }: { searchParam
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold text-navy/60 mb-1.5">接待対象のゲスト <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-semibold text-navy/60 mb-1.5">会食対象のゲスト <span className="text-red-500">*</span></label>
                     <select name="guestId" required defaultValue={guestId ?? ''} className="w-full border border-navy/20 rounded-lg px-3 py-2 text-sm text-navy bg-white outline-none focus:ring-2 focus:ring-gold/40">
                         <option value="" disabled>ゲストを選択してください</option>
                         {guestListRows.map(g => (
@@ -65,7 +65,7 @@ export default async function NewReservationPage({ searchParams }: { searchParam
 
                 <div className="grid grid-cols-2 gap-4">
                     <div className="col-span-2">
-                        <label className="block text-xs font-semibold text-navy/60 mb-1.5">接待の目的・用途</label>
+                        <label className="block text-xs font-semibold text-navy/60 mb-1.5">会食の目的・用途</label>
                         <select name="purpose" className="w-full border border-navy/20 rounded-lg px-3 py-2 text-sm text-navy bg-white outline-none focus:ring-2 focus:ring-gold/40">
                             <option value="顔合わせ">顔合わせ・ご挨拶</option>
                             <option value="親睦">親睦・キックオフ</option>

@@ -29,7 +29,7 @@ export default async function PersonPage({
     .limit(1);
   if (!person || person.companyId !== company.id) notFound();
 
-  // 接待記録
+  // 会食記録
   const historyRows = await db
     .select({
       id: records.id,
@@ -157,7 +157,7 @@ export default async function PersonPage({
           </div>
           <div className="flex items-center gap-3.5">
             <span className="material-symbols-outlined text-[22px]" style={{ color: '#98a2b3' }}>calendar_month</span>
-            <span className="w-20 text-[14px] font-bold shrink-0" style={{ color: '#3a4661' }}>接待頻度</span>
+            <span className="w-20 text-[14px] font-bold shrink-0" style={{ color: '#3a4661' }}>会食頻度</span>
             <span className="text-[14.5px]" style={{ color: '#3a4661' }}>{person.freq ?? '未登録'}</span>
           </div>
 
@@ -172,11 +172,11 @@ export default async function PersonPage({
           </Link>
         </div>
 
-        {/* 右カラム：接待履歴 */}
+        {/* 右カラム：会食履歴 */}
         <div>
           <div className="flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-[22px]" style={{ color: '#14233f' }}>history</span>
-            <h2 className="font-serif font-bold text-[20px] m-0" style={{ color: '#17253f' }}>接待履歴</h2>
+            <h2 className="font-serif font-bold text-[20px] m-0" style={{ color: '#17253f' }}>会食履歴</h2>
           </div>
 
           <div className="flex flex-col gap-3.5">
@@ -235,7 +235,7 @@ export default async function PersonPage({
               style={{ border: '1.5px dashed #d8bd78', color: '#a37f2b', background: '#fdfaf2' }}
             >
               <span className="material-symbols-outlined text-[20px]">add</span>
-              接待履歴を追加
+              会食履歴を追加
             </Link>
           </div>
         </div>

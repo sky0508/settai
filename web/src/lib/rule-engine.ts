@@ -143,7 +143,7 @@ function beerScore(
           return { score: -20, percent: 30, badge: '注意', reason: `${rule.label}の可能性あり（要予約時確認）` };
         }
         if (rule.effect === 'prefer') {
-          return { score: 20, percent: 100, badge: 'OK', reason: `${rule.label}取扱い：${input.companyName}様接待に適合` };
+          return { score: 20, percent: 100, badge: 'OK', reason: `${rule.label}取扱い：${input.companyName}様会食に適合` };
         }
       }
     }
@@ -268,8 +268,8 @@ function sceneScore(
     if (venue.tags.includes('隠れ家') || venue.tags.includes('少人数向き')) {
       return { score: 15, percent: 95, reason: '隠れ家的な店舗：プライベートな会話が弾みやすく関係性の融和に有効です' };
     }
-    if (venue.tags.includes('接待向き')) {
-      return { score: 10, percent: 90, reason: '店舗の品格：接待向きと定評のある行き届いたサービスが期待できます' };
+    if (venue.tags.includes('会食向き')) {
+      return { score: 10, percent: 90, reason: '店舗の品格：会食向きと定評のある行き届いたサービスが期待できます' };
     }
   }
 
@@ -283,7 +283,7 @@ function sceneScore(
   return { score: 10, percent: 70, reason: '定番のビジネス会食に適したジャンルと店舗雰囲気です' };
 }
 
-// 過去の接待履歴・フィードバック連携（C軸/H軸/I軸 重複回避と社内評判）
+// 過去の会食履歴・フィードバック連携（C軸/H軸/I軸 重複回避と社内評判）
 function historyScore(
   venue: DbVenue,
   input: SearchInput,
@@ -305,7 +305,7 @@ function historyScore(
     if (guestRecords.length > 0) {
       finalScore -= 30;
       finalPercent = Math.max(10, finalPercent - 50);
-      reasons.push(`重複回避（本人）：対象ゲストご本人が過去にこの店舗で接待を受けています`);
+      reasons.push(`重複回避（本人）：対象ゲストご本人が過去にこの店舗で会食を受けています`);
     }
   }
 

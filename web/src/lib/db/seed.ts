@@ -331,7 +331,7 @@ async function main() {
             venueId: vRows[0].id, // きたおおじ
             guestId: tanaka.id,
             ownerId: boss.id, // 鈴木部長(自社)が同席
-            purpose: '接待',
+            purpose: '会食',
             partySize: 4,
             rating: 5,
             wentWell: '完全個室で密談ができた。日本酒の銘柄に大満足されていた。',

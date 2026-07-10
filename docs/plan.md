@@ -1,4 +1,4 @@
-# 接待ナビ — 実装計画（plan.md）
+# 会食ナビ — 実装計画（plan.md）
 
 > 前提: `spec.md`（何を・なぜ）/ `design.md`（どう動くか）/ `design/handoff/project/Settai Navi.dc.html`（UI の正）
 > デプロイ先: Vercel / DB: Neon(Postgres) + Drizzle ORM / フレームワーク: Next.js 16 App Router + Tailwind
@@ -13,7 +13,7 @@ handoff HTML には 10 画面すべてが含まれている。v1（thin slice）
 |---|---|---|
 | お店を探す（条件から探す）| **v1** | ★★★ |
 | 店舗詳細 | **v1** | ★★★ |
-| 接待を記録する | **v1** | ★★★ |
+| 会食を記録する | **v1** | ★★★ |
 | ダッシュボード | 拡大 | ★★ |
 | お気に入り | 拡大 | ★★ |
 | ゲスト管理（4画面） | 拡大 | ★★ |
@@ -172,7 +172,7 @@ src/
 **左パネル（フィルタカード）**:
 - エリア select
 - ゲストの役職 chips（役員・経営層 / 部長 / 課長 / + カスタム）
-- 接待の目的 chips（新規開拓 / 関係強化 / 謝罪 / 御礼 / 慰労）
+- 会食の目的 chips（新規開拓 / 関係強化 / 謝罪 / 御礼 / 慰労）
 - ジャンル chips（和食 / 寿司 / 鉄板焼き / フレンチ / 中華 / イタリアン / 焼肉）
 - ご予算 range input（min〜max 円/人）
 - 格式自動判定ピル（`background: #faf3e2` の情報表示）
@@ -274,8 +274,8 @@ export async function searchVenues(input: SearchInput): Promise<RankedVenue[]>
 ### `/dashboard` ページ
 
 - 統計カード3枚（今月件数 / 平均評価 / 登録店舗数）— DB 集計
-- 今後の接待予定リスト（records から upcoming 相当を表示）
-- 最近の接待記録（records LIMIT 4 desc）
+- 今後の会食予定リスト（records から upcoming 相当を表示）
+- 最近の会食記録（records LIMIT 4 desc）
 - よく使われる店 TOP5（records GROUP BY venue_id LIMIT 5）
 
 ---
@@ -299,7 +299,7 @@ export async function searchVenues(input: SearchInput): Promise<RankedVenue[]>
 |---|---|
 | `/guests` | 会社一覧（4社カード + 担当者数）|
 | `/guests/[companyId]` | 会社詳細（会社メモ + 担当者リスト）|
-| `/guests/[companyId]/[personId]` | 担当者カルテ（好み/NG + 接待履歴）|
+| `/guests/[companyId]/[personId]` | 担当者カルテ（好み/NG + 会食履歴）|
 | `/guests/new` | 新しいゲストを追加フォーム |
 
 v1 では guests/companies テーブルを作らず、静的データで画面を作る。

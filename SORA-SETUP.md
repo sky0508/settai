@@ -1,4 +1,4 @@
-# Sora の手作業チェックリスト — 接待ナビ「50店を地図に出す＋写真取込」
+# Sora の手作業チェックリスト — 会食ナビ「50店を地図に出す＋写真取込」
 
 貼り先はすべて **`/Users/sorasasaki/work-os/02_projects/settai-navi/web/.env`**（1ファイル）。
 値は念のため **シングルクォートで囲む**（`KEY='値'`）。※`$` を含む値が展開される事故防止。
@@ -9,7 +9,7 @@
 
 ### ☐ Step 1. Neon のパスワードをローテ（🔴 漏洩対応・必須）
 1. https://console.neon.tech を開いてログイン
-2. 接待ナビの Neon プロジェクトを選択（DB名 `neondb` / ホスト `ep-silent-sea-aotovmx5...`）
+2. 会食ナビの Neon プロジェクトを選択（DB名 `neondb` / ホスト `ep-silent-sea-aotovmx5...`）
 3. 左メニュー **Roles**（または Dashboard の "Connection Details"）→ ロール **`neondb_owner`**
 4. **Reset password**（パスワード再生成）を実行
 5. 画面に出る **接続文字列（`postgresql://neondb_owner:...@ep-silent-sea-...neon.tech/neondb?sslmode=require...`）** をコピー
@@ -27,7 +27,7 @@ DATABASE_URL='ここに Step1 でコピーした接続文字列'
 ## 段階2：写真(B)を自動取込 ← 地図が出た後でOK
 
 ### ☐ Step 3. Google Places API キー
-1. https://console.cloud.google.com を開く（接待ナビ用の GCP プロジェクト。無ければ新規作成）
+1. https://console.cloud.google.com を開く（会食ナビ用の GCP プロジェクト。無ければ新規作成）
 2. 上部でプロジェクトを選択 → 「APIとサービス」→「ライブラリ」
 3. **「Places API (New)」** を検索して **有効にする**
 4. そのプロジェクトに **お支払い（Billing）アカウントが紐づいている**ことを確認（未設定なら紐付け）

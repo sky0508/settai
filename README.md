@@ -1,6 +1,6 @@
-# 接待ナビ（settai-navi）
+# 会食ナビ（settai-navi）
 
-接待の店選び支援ツール。相手企業ごとの制約（例: キリン → 競合ビール専売の店は NG）と、新人のセンス不足による失礼を、**NG 理由付きのおすすめランキング**で防ぐ。接待記録を評価・シチュエーション付きで蓄積し、社内ナレッジ基盤へ育てる。
+会食の店選び支援ツール。相手企業ごとの制約（例: キリン → 競合ビール専売の店は NG）と、新人のセンス不足による失礼を、**NG 理由付きのおすすめランキング**で防ぐ。会食記録を評価・シチュエーション付きで蓄積し、社内ナレッジ基盤へ育てる。
 
 > 位置づけ: 将来 SaaS 化を見据えた売り物候補。ただし v1 は「外部 API ゼロ・手キュレーション・確定的ルール」で核仮説を検証する thin slice。
 
@@ -17,7 +17,7 @@
 | [`docs/design.md`](./docs/design.md) | 設計仕様（構成・データモデル・判定ロジック・UI） |
 | [`docs/recommendation-logic.md`](./docs/recommendation-logic.md) | **おすすめロジック（判定フロー）** — フロー図付き。まず読むならここ |
 | [`docs/db-schema.md`](./docs/db-schema.md) | DB 型設計 v1（ロジック逆算。venues / guests / brand_rules / settai_records）|
-| [`docs/research/settai-venue-selection-research.md`](./docs/research/settai-venue-selection-research.md) | 接待の店選びリサーチ（9軸マッピング・ヒアリング設問への反映提案） |
+| [`docs/research/settai-venue-selection-research.md`](./docs/research/settai-venue-selection-research.md) | 会食の店選びリサーチ（9軸マッピング・ヒアリング設問への反映提案） |
 | [`docs/research/data-availability-matrix.md`](./docs/research/data-availability-matrix.md) | 要件 × データ可用性マトリクス（取れる/取れない仕分け）|
 | [`docs/feedback-20260708.md`](./docs/feedback-20260708.md) | 忖度なしレビュー |
 | [`design/ui-spec.md`](./design/ui-spec.md) | UI 仕様書（実装手渡し用） |
@@ -27,6 +27,6 @@
 
 ## 判定の骨格（9軸）
 
-A. 格式の釣り合い ／ B. 個室の"質" ／ C. 接待オペ適性（黒子力）／ D. 立地・動線 ／ E. 料理・酒 × 相手適合 ／ F. シーン適合 ／ G. 相手企業・業界タブー ／ H. 予約の堅牢性 ／ I. 粋・加点
+A. 格式の釣り合い ／ B. 個室の"質" ／ C. 会食オペ適性（黒子力）／ D. 立地・動線 ／ E. 料理・酒 × 相手適合 ／ F. シーン適合 ／ G. 相手企業・業界タブー ／ H. 予約の堅牢性 ／ I. 粋・加点
 
 高価値な軸（A / B / C / I）ほど Google Places に構造化データが無く、人手タグ・相手プロフィール・社内記録でしか埋まらない（＝ moat）。
