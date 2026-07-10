@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { FilterPanel } from '@/components/search/FilterPanel';
 import { VenueCard } from '@/components/search/VenueCard';
 import { searchVenues } from './actions';
@@ -79,7 +80,17 @@ export default function SearchClient({
 
   return (
     <div className="p-4 md:p-6 max-w-7xl mx-auto">
-      <h1 className="font-serif text-2xl font-semibold text-navy mb-5">お店を探す</h1>
+      <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
+        <h1 className="font-serif text-2xl font-semibold text-navy m-0">お店を探す</h1>
+        <Link
+          href="/search/optimal"
+          className="flex items-center gap-1 text-[12.5px] font-medium hover:text-gold transition-colors"
+          style={{ color: '#8a93a4' }}
+        >
+          <span className="material-symbols-outlined text-[16px]">groups</span>
+          参加者から最適な場所を探す
+        </Link>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-5">
         <div className="md:sticky md:top-6 md:self-start">

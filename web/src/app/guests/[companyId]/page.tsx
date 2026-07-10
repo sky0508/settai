@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { db } from '@/lib/db/client';
 import { companies, guests, records, venues, users } from '@/lib/db/schema';
 import { eq, desc, inArray } from 'drizzle-orm';
-import { deleteGuest, updateCompanyMemo, deleteCompany } from './actions';
+import { deleteGuest, updateCompanyMemo, updateCompanyStation, deleteCompany } from './actions';
 import DeleteButton from '@/components/ui/DeleteButton';
 
 export default async function CompanyPage({ params }: { params: Promise<{ companyId: string }> }) {
@@ -150,6 +150,64 @@ export default async function CompanyPage({ params }: { params: Promise<{ compan
             >
               <span className="material-symbols-outlined text-[16px]">save</span>
               メモを保存
+            </button>
+          </form>
+        </div>
+
+        {/* 拠点情報編集フォーム（最適店検索・移動コスト計算に使用） */}
+        <div className="mt-5">
+          <div className="flex items-center gap-1.5 mb-2">
+            <span className="material-symbols-outlined text-[19px]" style={{ color: '#c2a15a' }}>location_on</span>
+            <span className="text-[14px] font-bold" style={{ color: '#3a4661' }}>拠点情報（移動コスト計算に使用）</span>
+          </div>
+          <form
+            action={async (formData: FormData) => {
+              'use server';
+              await updateCompanyStation(company.id, formData, company.slug);
+            }}
+            className="grid grid-cols-2 gap-3"
+          >
+            <div className="col-span-2">
+              <input
+                name="address"
+                type="text"
+                defaultValue={company.address ?? ''}
+                placeholder="住所（任意）"
+                className="w-full border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+              />
+            </div>
+            <div className="col-span-2">
+              <input
+                name="nearestStation"
+                type="text"
+                defaultValue={company.nearestStation ?? ''}
+                placeholder="最寄駅（例: 東京）"
+                className="w-full border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+              />
+            </div>
+            <input
+              name="lat"
+              type="number"
+              step="0.0000001"
+              defaultValue={company.lat ?? ''}
+              placeholder="緯度"
+              className="border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+            />
+            <input
+              name="lng"
+              type="number"
+              step="0.0000001"
+              defaultValue={company.lng ?? ''}
+              placeholder="経度"
+              className="border border-[#dfe3ea] rounded-xl px-3 py-2 text-[14px] outline-none"
+            />
+            <button
+              type="submit"
+              className="col-span-2 self-start flex items-center gap-1.5 px-4 py-2 rounded-xl text-[12.5px] font-bold cursor-pointer"
+              style={{ background: '#14233f', color: '#fff' }}
+            >
+              <span className="material-symbols-outlined text-[16px]">save</span>
+              拠点情報を保存
             </button>
           </form>
         </div>

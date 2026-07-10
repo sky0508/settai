@@ -15,6 +15,13 @@
       "when": 1783648487980,
       "tag": "0001_cultured_killmonger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783653209886,
+      "tag": "0002_breezy_the_stranger",
+      "breakpoints": true
     }
   ]
 }
