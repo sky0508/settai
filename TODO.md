@@ -17,8 +17,8 @@
 
 ## 🟡 ローカル復帰（キーローテ後）
 
-- [ ] `cd web && npm install`（node_modules はバックアップから除外済み＝再生成が必要）
-- [ ] `npm run dev` で `localhost:3000` 起動確認（`/map` に 57 ピン、`/venues/<id>` で写真表示）
+- [x] `cd web && npm install` ＋ `npm run build` 通過確認（2026-07-10 Claude 実施・全ルート OK）
+- [ ] `npm run dev` で `localhost:3000` 起動確認（`/map` に 57 ピン、`/venues/<id>` で写真表示）← **新 DATABASE_URL 投入後**
 - [ ] 必要なら seed 再投入: `npx tsx scripts/seed.ts` →（座標）`backfill-venue-coords.ts` →（写真）`backfill-venue-photos.ts`
   - ※ 実 DB は Neon に seed 済みのため、通常は再投入不要
 
@@ -26,7 +26,7 @@
 
 ## 🟢 リポ整理（Sora の判断待ち）
 
-- [ ] **統合 commit `7d4cf0e` を GitHub に push するか判断**（現状ローカルのみ）
+- [x] **統合 commit を GitHub に push**（2026-07-10 済み `21e78df`・Sora 許可）
 - [ ] **旧 `sk2410yu/okinawa-2026-be-v1` の GitHub repo を archive / 削除するか判断**
   - 漏洩履歴が残るため、**キーローテ後の削除を推奨**
 - [ ] `05_archives/settai-okinawa-impl-backup/`（旧 impl のバックアップ）を、統合に問題ないと確認できたら削除
